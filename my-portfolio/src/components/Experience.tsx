@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import './Experience.css'
 
 interface Experience {
@@ -11,6 +12,34 @@ interface Experience {
 }
 
 const Experience = () => {
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in')
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px'
+      }
+    )
+
+    itemRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref)
+    })
+
+    return () => {
+      itemRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref)
+      })
+    }
+  }, [])
+
   const experiences: Experience[] = [
     {
       title: "Software Engineering Intern",
@@ -77,10 +106,14 @@ const Experience = () => {
   return (
     <section id="experience" className="experience">
       <div className="container">
-        <h2 className="section-title">Work Experience</h2>
+        <h2 className="section-title">Professional Experience</h2>
         <div className="experience-timeline">
           {experiences.map((exp, index) => (
-            <div key={index} className="experience-item">
+            <div 
+              key={index} 
+              className={`experience-item ${index % 2 === 0 ? 'left' : 'right'}`}
+              ref={(el) => { itemRefs.current[index] = el }}
+            >
               <div className="experience-marker" style={{ background: getTypeColor(exp.type) }}>
                 <div className="marker-dot"></div>
               </div>
@@ -114,27 +147,6 @@ const Experience = () => {
               </div>
             </div>
           ))}
-        </div>
-        
-        <div className="experience-summary">
-          <div className="summary-stats">
-            <div className="stat-item">
-              <h3>3+</h3>
-              <p>Years of Experience</p>
-            </div>
-            <div className="stat-item">
-              <h3>4</h3>
-              <p>Different Roles</p>
-            </div>
-            <div className="stat-item">
-              <h3>3</h3>
-              <p>Companies</p>
-            </div>
-            <div className="stat-item">
-              <h3>$45K+</h3>
-              <p>Value Delivered</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
