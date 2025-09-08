@@ -1,6 +1,18 @@
+import { useState } from 'react'
+import ResumeModal from './ResumeModal'
 import './Hero.css'
 
 const Hero = () => {
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState<boolean>(false)
+
+  const openResumeModal = () => {
+    setIsResumeModalOpen(true)
+  }
+
+  const closeResumeModal = () => {
+    setIsResumeModalOpen(false)
+  }
+
   return (
     <section id="home" className="hero">
       <div className="hero-content">
@@ -17,6 +29,12 @@ const Hero = () => {
           <div className="hero-buttons">
             <a href="#contact" className="btn-primary">Get In Touch</a>
             <a href="#projects" className="btn-secondary">View My Work</a>
+            <button 
+              onClick={openResumeModal}
+              className="btn-resume"
+            >
+              📄 View Resume
+            </button>
           </div>
         </div>
         <div className="hero-image">
@@ -52,6 +70,14 @@ const Hero = () => {
           <p>Internships</p>
         </div>
       </div>
+
+      {/* Resume Modal */}
+      <ResumeModal
+        isOpen={isResumeModalOpen}
+        onClose={closeResumeModal}
+        resumeUrl="/THINH_VO_RESUME.pdf"
+        fileName="Thinh_Vo_Resume.pdf"
+      />
     </section>
   )
 }
