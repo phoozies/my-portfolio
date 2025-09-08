@@ -2,7 +2,8 @@ import './Skills.css'
 
 interface Skill {
   name: string
-  level: number
+  logo?: string
+  proficiency: 'Expert' | 'Advanced' | 'Intermediate' | 'Beginner'
 }
 
 interface SkillCategory {
@@ -15,67 +16,43 @@ const Skills = () => {
     {
       title: "Programming Languages",
       skills: [
-        { name: "TypeScript", level: 90 },
-        { name: "JavaScript", level: 90 },
-        { name: "C#", level: 85 },
-        { name: "Python", level: 85 },
-        { name: "Java", level: 80 },
-        { name: "C++", level: 75 },
-        { name: "SQL", level: 85 },
-        { name: "PHP", level: 70 }
+        { name: "TypeScript", logo: "/typescript-logo.svg", proficiency: "Expert" },
+        { name: "JavaScript", logo: "/javascript-logo.svg", proficiency: "Expert" },
+        { name: "C#", logo: "/csharp-logo.svg", proficiency: "Advanced" },
+        { name: "Python", logo: "/python-logo.svg", proficiency: "Advanced" },
+        { name: "SQL", logo: "/sql-logo.svg", proficiency: "Advanced" },
+        { name: "PHP", logo: "/php-logo.svg", proficiency: "Intermediate" }
       ]
     },
     {
       title: "Frameworks & Libraries",
       skills: [
-        { name: "React", level: 90 },
-        { name: "Next.js", level: 85 },
-        { name: "ASP.NET Core", level: 85 },
-        { name: "Vue.js", level: 75 },
-        { name: "FastAPI", level: 80 },
-        { name: "Nest.js", level: 75 }
+        { name: "React", logo: "/react-logo.svg", proficiency: "Expert" },
+        { name: "Next.js", logo: "/nextjs-logo.svg", proficiency: "Advanced" },
+        { name: "Node.js", logo: "/nodejs-logo.svg", proficiency: "Advanced" },
+        { name: ".NET", logo: "/dotnet-logo.svg", proficiency: "Advanced" }
       ]
     },
     {
-      title: "Technologies & Tools",
+      title: "Cloud & DevOps",
       skills: [
-        { name: "AWS", level: 80 },
-        { name: "Azure DevOps", level: 75 },
-        { name: "Docker", level: 80 },
-        { name: "Kubernetes", level: 70 },
-        { name: "GitHub", level: 90 },
-        { name: "Microsoft 365", level: 85 },
-        { name: "Neo4J", level: 70 },
-        { name: "MSSQL", level: 80 }
+        { name: "AWS", logo: "/aws-logo.svg", proficiency: "Advanced" },
+        { name: "Docker", logo: "/docker-logo.svg", proficiency: "Advanced" },
+        { name: "Kubernetes", logo: "/kubernetes-logo.svg", proficiency: "Intermediate" }
       ]
     },
     {
       title: "Data & Analytics",
       skills: [
-        { name: "PowerBI", level: 85 },
-        { name: "Alteryx", level: 80 },
-        { name: "DataDog", level: 75 },
-        { name: "DAX", level: 80 },
-        { name: "Data Visualization", level: 85 }
+        { name: "DataDog", logo: "/datadog-logo.svg", proficiency: "Advanced" }
       ]
     },
     {
-      title: "DevOps & Deployment",
+      title: "Design & Tools",
       skills: [
-        { name: "ArgoCD", level: 70 },
-        { name: "Kong", level: 65 },
-        { name: "CI/CD", level: 80 },
-        { name: "Event-Driven Architecture", level: 75 },
-        { name: "Microservices", level: 75 }
-      ]
-    },
-    {
-      title: "Design & UI/UX",
-      skills: [
-        { name: "Figma", level: 75 },
-        { name: "Responsive Design", level: 85 },
-        { name: "UI/UX Design", level: 70 },
-        { name: "Component Libraries", level: 80 }
+        { name: "HTML", logo: "/html-logo.svg", proficiency: "Expert" },
+        { name: "CSS", logo: "/css-logo.svg", proficiency: "Expert" },
+        { name: "Figma", logo: "/figma-logo.svg", proficiency: "Advanced" }
       ]
     }
   ]
@@ -88,18 +65,16 @@ const Skills = () => {
           {skillCategories.map((category, index) => (
             <div key={index} className="skill-category">
               <h3 className="category-title">{category.title}</h3>
-              <div className="skills-list">
+              <div className="skills-cards">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="skill-item">
-                    <div className="skill-info">
-                      <span className="skill-name">{skill.name}</span>
-                      <span className="skill-percentage">{skill.level}%</span>
-                    </div>
-                    <div className="skill-bar">
-                      <div 
-                        className="skill-progress" 
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
+                  <div key={skillIndex} className="skill-card">
+                    {skill.logo && (
+                      <div className="skill-logo">
+                        <img src={skill.logo} alt={`${skill.name} logo`} />
+                      </div>
+                    )}
+                    <div className="skill-content">
+                      <h4 className="skill-name">{skill.name}</h4>
                     </div>
                   </div>
                 ))}
