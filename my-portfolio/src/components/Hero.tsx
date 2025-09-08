@@ -20,13 +20,17 @@ const Hero = () => {
           </div>
         </div>
         <div className="hero-image">
-          <div className="profile-placeholder">
-            <div className="code-animation">
-              <div className="code-line"></div>
-              <div className="code-line"></div>
-              <div className="code-line"></div>
-              <div className="code-line"></div>
-            </div>
+          <div className="profile-image">
+            <img 
+              src="./thinh_vo_headshot.jpg" 
+              alt="Thinh Vo - Professional Headshot" 
+              className="headshot"
+              onError={() => {
+                console.error('Failed to load headshot image');
+                console.log('Trying fallback...');
+              }}
+              onLoad={() => console.log('Headshot image loaded successfully')}
+            />
           </div>
         </div>
       </div>

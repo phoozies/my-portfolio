@@ -109,40 +109,28 @@
   align-items: center;
 }
 
-.profile-placeholder {
+.profile-image {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
   position: relative;
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.code-animation {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.profile-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-.code-line {
-  height: 4px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 2px;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.code-line:nth-child(1) { width: 80px; animation-delay: 0s; }
-.code-line:nth-child(2) { width: 60px; animation-delay: 0.5s; }
-.code-line:nth-child(3) { width: 90px; animation-delay: 1s; }
-.code-line:nth-child(4) { width: 70px; animation-delay: 1.5s; }
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+.headshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .hero-stats {
