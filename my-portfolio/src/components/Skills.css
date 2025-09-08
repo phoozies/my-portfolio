@@ -1,6 +1,6 @@
 .skills {
   background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-  padding: 100px 0;
+  padding: 100px 20px;
 }
 
 .skills-grid {
@@ -8,6 +8,9 @@
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .skill-category {
@@ -153,6 +156,10 @@
 }
 
 @media (max-width: 768px) {
+  .skills {
+    padding: 80px 15px;
+  }
+
   .skills-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;

@@ -1,11 +1,11 @@
 .experience {
   background: white;
-  padding: 100px 0;
+  padding: 100px 20px;
 }
 
 .experience-timeline {
   position: relative;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -266,6 +266,10 @@
 }
 
 @media (max-width: 768px) {
+  .experience {
+    padding: 80px 15px;
+  }
+
   .experience-timeline::before {
     left: 30px;
     transform: none;
