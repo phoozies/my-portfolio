@@ -13,14 +13,26 @@ interface NavItem {
 
 const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
 
   useEffect(() => {
     const handleScroll = (): void => {
-      setIsScrolled(window.scrollY > 50)
+      const heroSection = document.getElementById('home')
+      if (heroSection) {
+        const heroHeight = heroSection.offsetHeight
+        const scrollPosition = window.scrollY
+        
+        // Show header when user scrolls past the hero section
+        setIsVisible(scrollPosition > heroHeight - 100)
+        setIsScrolled(scrollPosition > heroHeight + 50)
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
+    // Check initial scroll position
+    handleScroll()
+    
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -43,15 +55,17 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
     { id: 'contact', label: 'Contact' }
   ]
 
+  if (!isVisible) return null
+
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         <div className="logo">
-          <span onClick={() => scrollToSection('home')}>Thinh Vo</span>
+          <span onClick={() => scrollToSection('home')}>TV</span>
         </div>
         
         <nav className={`nav ${isMobileMenuOpen ? 'nav-open' : ''}`}>
-          {navItems.map((item) => (
+          {navItems.slice(1).map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
