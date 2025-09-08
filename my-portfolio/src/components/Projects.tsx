@@ -178,29 +178,6 @@ const Projects = () => {
           ))}
         </div>
         
-        <div className="projects-summary">
-          <div className="summary-content">
-            <h3>Project Highlights</h3>
-            <div className="highlight-stats">
-              <div className="highlight-item">
-                <h4>$45K+</h4>
-                <p>Total Value Delivered</p>
-              </div>
-              <div className="highlight-item">
-                <h4>5+</h4>
-                <p>Major Projects</p>
-              </div>
-              <div className="highlight-item">
-                <h4>Multiple</h4>
-                <p>Tech Stacks</p>
-              </div>
-              <div className="highlight-item">
-                <h4>Enterprise</h4>
-                <p>Scale Solutions</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )
