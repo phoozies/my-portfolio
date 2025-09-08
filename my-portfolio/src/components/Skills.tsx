@@ -82,20 +82,6 @@ const Skills = () => {
             </div>
           ))}
         </div>
-        
-        <div className="skills-summary">
-          <div className="summary-card">
-            <h3>Core Competencies</h3>
-            <ul>
-              <li>Full-Stack Web Development</li>
-              <li>Cloud Architecture & DevOps</li>
-              <li>Data Analytics & Visualization</li>
-              <li>GenAI & Machine Learning Integration</li>
-              <li>Enterprise Software Development</li>
-              <li>Event-Driven Architecture</li>
-            </ul>
-          </div>
-        </div>
       </div>
     </section>
   )
