@@ -1,6 +1,6 @@
 .skills {
   background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-  padding: 100px 20px;
+  padding: 100px 0;
 }
 
 /* Carousel Container */
@@ -8,9 +8,9 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 /* Carousel Scroll Area */
@@ -20,8 +20,8 @@
   overflow-x: hidden;
   scroll-behavior: smooth;
   width: 100%;
-  /* Show exactly 3 cards: 3 * 320px + 2 * 20px gap = 1000px */
-  max-width: 1000px;
+  /* Show exactly 3 cards: 3 * 500px + 2 * 32px gap = 1564px */
+  max-width: 1564px;
 }
 
 /* Individual Category Cards */
@@ -32,8 +32,8 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
-  flex: 0 0 300px; /* Fixed width cards */
-  min-height: 350px;
+  flex: 0 0 500px; /* Wider fixed width cards */
+  min-height: 400px;
   display: flex;
   flex-direction: column;
 }
@@ -55,8 +55,8 @@
 
 /* Skills within each category */
 .category-skills {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
   flex: 1;
 }
@@ -162,12 +162,12 @@
 /* Mobile Responsiveness */
 @media (max-width: 1024px) {
   .skills-carousel {
-    /* Show 2 cards on tablets */
-    max-width: 660px;
+    /* Show 1 card on tablets */
+    max-width: 500px;
   }
   
   .skill-category-card {
-    flex: 0 0 280px;
+    flex: 0 0 450px;
   }
 }
 
@@ -182,13 +182,18 @@
   
   .skills-carousel {
     /* Show 1 card on mobile */
-    max-width: 320px;
+    max-width: 350px;
   }
   
   .skill-category-card {
-    flex: 0 0 300px;
+    flex: 0 0 320px;
     padding: 1.5rem;
-    min-height: 300px;
+    min-height: 350px;
+  }
+  
+  /* Switch to single column on mobile */
+  .category-skills {
+    grid-template-columns: 1fr;
   }
   
   .carousel-button {
@@ -224,6 +229,10 @@
     gap: 0.5rem;
   }
   
+  .skills-carousel {
+    max-width: 280px;
+  }
+  
   .carousel-button {
     width: 35px;
     height: 35px;
@@ -231,7 +240,7 @@
   }
   
   .skill-category-card {
-    flex: 0 0 280px;
+    flex: 0 0 260px;
     padding: 1.25rem;
   }
 }

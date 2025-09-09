@@ -17,14 +17,14 @@ const Skills = () => {
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      const cardWidth = 320 // Card width + gap
+      const cardWidth = 532 // Card width (500px) + gap (32px)
       scrollContainerRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' })
     }
   }
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      const cardWidth = 320 // Card width + gap
+      const cardWidth = 532 // Card width (500px) + gap (32px)
       scrollContainerRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' })
     }
   }
