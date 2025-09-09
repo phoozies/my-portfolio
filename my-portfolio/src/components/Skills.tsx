@@ -4,7 +4,6 @@ import './Skills.css'
 interface Skill {
   name: string
   logo?: string
-  proficiency: 'Expert' | 'Advanced' | 'Intermediate' | 'Beginner'
 }
 
 interface SkillCategory {
@@ -33,45 +32,45 @@ const Skills = () => {
     {
       title: "Programming Languages",
       skills: [
-        { name: "TypeScript", logo: "/typescript-logo.svg", proficiency: "Expert" },
-        { name: "JavaScript", logo: "/javascript-logo.svg", proficiency: "Expert" },
-        { name: "C#", logo: "/csharp-logo.svg", proficiency: "Advanced" },
-        { name: "Python", logo: "/python-logo.svg", proficiency: "Advanced" },
-        { name: "SQL", logo: "/sql-logo.svg", proficiency: "Advanced" },
-        { name: "PHP", logo: "/php-logo.svg", proficiency: "Intermediate" }
+        { name: "TypeScript", logo: "/typescript-logo.svg" },
+        { name: "JavaScript", logo: "/javascript-logo.svg" },
+        { name: "C#", logo: "/csharp-logo.svg" },
+        { name: "Python", logo: "/python-logo.svg" },
+        { name: "SQL", logo: "/sql-logo.svg" },
+        { name: "PHP", logo: "/php-logo.svg" }
       ]
     },
     {
       title: "Frameworks & Libraries",
       skills: [
-        { name: "React", logo: "/react-logo.svg", proficiency: "Expert" },
-        { name: "Next.js", logo: "/nextjs-logo.svg", proficiency: "Advanced" },
-        { name: "Node.js", logo: "/nodejs-logo.svg", proficiency: "Advanced" },
-        { name: ".NET", logo: "/dotnet-logo.svg", proficiency: "Advanced" }
+        { name: "React", logo: "/react-logo.svg" },
+        { name: "Next.js", logo: "/nextjs-logo.svg" },
+        { name: "Node.js", logo: "/nodejs-logo.svg" },
+        { name: ".NET", logo: "/dotnet-logo.svg" }
       ]
     },
     {
       title: "Cloud & DevOps",
       skills: [
-        { name: "AWS", logo: "/aws-logo.svg", proficiency: "Advanced" },
-        { name: "Docker", logo: "/docker-logo.svg", proficiency: "Advanced" },
-        { name: "Kubernetes", logo: "/kubernetes-logo.svg", proficiency: "Intermediate" }
+        { name: "AWS", logo: "/aws-logo.svg" },
+        { name: "Docker", logo: "/docker-logo.svg" },
+        { name: "Kubernetes", logo: "/kubernetes-logo.svg" }
       ]
     },
     {
       title: "Data & Analytics",
       skills: [
-        { name: "DataDog", logo: "/datadog-logo.svg", proficiency: "Advanced" },
-        { name: "PowerBI", logo: "/powerbi-logo.svg", proficiency: "Advanced" },
-        { name: "Alteryx", logo: "/alteryx-logo.svg", proficiency: "Advanced" }
+        { name: "DataDog", logo: "/datadog-logo.svg" },
+        { name: "PowerBI", logo: "/powerbi-logo.svg" },
+        { name: "Alteryx", logo: "/alteryx-logo.svg" }
       ]
     },
     {
       title: "Design & Tools",
       skills: [
-        { name: "HTML", logo: "/html-logo.svg", proficiency: "Expert" },
-        { name: "CSS", logo: "/css-logo.svg", proficiency: "Expert" },
-        { name: "Figma", logo: "/figma-logo.svg", proficiency: "Advanced" }
+        { name: "HTML", logo: "/html-logo.svg" },
+        { name: "CSS", logo: "/css-logo.svg" },
+        { name: "Figma", logo: "/figma-logo.svg" }
       ]
     }
   ]
@@ -102,7 +101,6 @@ const Skills = () => {
                       )}
                       <div className="skill-info">
                         <span className="skill-name">{skill.name}</span>
-                        <span className="skill-proficiency">{skill.proficiency}</span>
                       </div>
                     </div>
                   ))}

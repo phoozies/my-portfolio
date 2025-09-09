@@ -112,15 +112,7 @@
   color: white;
 }
 
-.skill-proficiency {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #667eea;
-}
 
-.skill-item:hover .skill-proficiency {
-  color: rgba(255, 255, 255, 0.9);
-}
 
 /* Carousel Navigation Buttons */
 .carousel-button {
