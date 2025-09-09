@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import './Skills.css'
 
 interface Skill {
@@ -12,6 +13,22 @@ interface SkillCategory {
 }
 
 const Skills = () => {
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null)
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 320 // Card width + gap
+      scrollContainerRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 320 // Card width + gap
+      scrollContainerRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' })
+    }
+  }
+
   const skillCategories: SkillCategory[] = [
     {
       title: "Programming Languages",
@@ -44,7 +61,9 @@ const Skills = () => {
     {
       title: "Data & Analytics",
       skills: [
-        { name: "DataDog", logo: "/datadog-logo.svg", proficiency: "Advanced" }
+        { name: "DataDog", logo: "/datadog-logo.svg", proficiency: "Advanced" },
+        { name: "PowerBI", logo: "/powerbi-logo.svg", proficiency: "Advanced" },
+        { name: "Alteryx", logo: "/alteryx-logo.svg", proficiency: "Advanced" }
       ]
     },
     {
@@ -61,26 +80,43 @@ const Skills = () => {
     <section id="skills" className="skills">
       <div className="container-fullwidth">
         <h2 className="section-title">Skills & Technologies</h2>
-        <div className="skills-grid">
-          {skillCategories.map((category, index) => (
-            <div key={index} className="skill-category">
-              <h3 className="category-title">{category.title}</h3>
-              <div className="skills-cards">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="skill-card">
-                    {skill.logo && (
-                      <div className="skill-logo">
-                        <img src={skill.logo} alt={`${skill.name} logo`} />
+        <div className="skills-carousel-container">
+          <button 
+            className="carousel-button carousel-left"
+            onClick={scrollLeft}
+            aria-label="Scroll left"
+          >
+            ←
+          </button>
+          <div className="skills-carousel" ref={scrollContainerRef}>
+            {skillCategories.map((category, categoryIndex) => (
+              <div key={categoryIndex} className="skill-category-card">
+                <h3 className="category-title">{category.title}</h3>
+                <div className="category-skills">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div key={skillIndex} className="skill-item">
+                      {skill.logo && (
+                        <div className="skill-logo">
+                          <img src={skill.logo} alt={`${skill.name} logo`} />
+                        </div>
+                      )}
+                      <div className="skill-info">
+                        <span className="skill-name">{skill.name}</span>
+                        <span className="skill-proficiency">{skill.proficiency}</span>
                       </div>
-                    )}
-                    <div className="skill-content">
-                      <h4 className="skill-name">{skill.name}</h4>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <button 
+            className="carousel-button carousel-right"
+            onClick={scrollRight}
+            aria-label="Scroll right"
+          >
+            →
+          </button>
         </div>
       </div>
     </section>
