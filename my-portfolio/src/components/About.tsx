@@ -1,5 +1,4 @@
 import './About.css'
-import './Landing.css'
 
 const About = () => {
   return (
