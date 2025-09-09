@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Header from './components/Header.tsx'
-import Hero from './components/Hero.tsx'
+import Landing from './components/Landing.tsx'
 import About from './components/About.tsx'
 import Skills from './components/Skills.tsx'
 import Experience from './components/Experience.tsx'
@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
       <main>
-        <Hero />
+        <Landing />
         <About />
         <Skills />
         <Experience />

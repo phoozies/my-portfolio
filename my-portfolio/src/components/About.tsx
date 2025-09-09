@@ -1,5 +1,5 @@
 import './About.css'
-import './Hero.css'
+import './Landing.css'
 
 const About = () => {
   return (
