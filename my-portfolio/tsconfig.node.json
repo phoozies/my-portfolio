@@ -6,7 +6,8 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    "strict": true
+    "strict": true,
+    "outDir": "dist-node"
   },
   "include": ["vite.config.js"]
 }
