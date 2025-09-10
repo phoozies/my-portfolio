@@ -10,11 +10,23 @@ interface Particle {
   opacity: number
 }
 
+interface MouseTrail {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  size: number
+  opacity: number
+  life: number
+  maxLife: number
+}
+
 const Landing = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number | null>(null)
   const mouseRef = useRef({ x: 0, y: 0 })
   const particlesRef = useRef<Particle[]>([])
+  const mouseTrailRef = useRef<MouseTrail[]>([])
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
@@ -65,8 +77,25 @@ const Landing = () => {
     // Mouse move handler
     const handleMouseMove = (e: MouseEvent) => {
       const rect = heroSection.getBoundingClientRect()
-      mouseRef.current.x = e.clientX - rect.left
-      mouseRef.current.y = e.clientY - rect.top
+      const newX = e.clientX - rect.left
+      const newY = e.clientY - rect.top
+      
+      // Create mouse trail particles
+      if (mouseRef.current.x !== 0 && mouseRef.current.y !== 0) {
+        mouseTrailRef.current.push({
+          x: newX + (Math.random() - 0.5) * 5,
+          y: newY + (Math.random() - 0.5) * 5,
+          vx: (Math.random() - 0.5) * 1,
+          vy: (Math.random() - 0.5) * 1,
+          size: Math.random() * 2 + 1,
+          opacity: 1,
+          life: 0,
+          maxLife: 40 + Math.random() * 20
+        })
+      }
+      
+      mouseRef.current.x = newX
+      mouseRef.current.y = newY
     }
 
     // Animation loop
@@ -78,7 +107,7 @@ const Landing = () => {
         const dx = mouseRef.current.x - particle.x
         const dy = mouseRef.current.y - particle.y
         const distance = Math.sqrt(dx * dx + dy * dy)
-        const maxDistance = 300
+        const maxDistance = 150
 
         // Apply mouse influence
         if (distance < maxDistance) {
@@ -138,6 +167,36 @@ const Landing = () => {
             ctx.restore()
           }
         })
+      })
+
+      // Update and draw mouse trail particles
+      mouseTrailRef.current = mouseTrailRef.current.filter((trail) => {
+        trail.life++
+        trail.x += trail.vx
+        trail.y += trail.vy
+        trail.vx *= 0.98
+        trail.vy *= 0.98
+        trail.opacity = 1 - (trail.life / trail.maxLife)
+
+        if (trail.life < trail.maxLife) {
+          // Draw trail particle (same style as constellation stars)
+          ctx.save()
+          ctx.globalAlpha = trail.opacity
+          
+          // Create star-like particles with purple glow (matching constellation style)
+          const gradient = ctx.createRadialGradient(trail.x, trail.y, 0, trail.x, trail.y, trail.size * 2)
+          gradient.addColorStop(0, 'rgba(232, 121, 249, 1)')
+          gradient.addColorStop(0.5, 'rgba(168, 85, 247, 0.8)')
+          gradient.addColorStop(1, 'rgba(168, 85, 247, 0)')
+          ctx.fillStyle = gradient
+          ctx.beginPath()
+          ctx.arc(trail.x, trail.y, trail.size, 0, Math.PI * 2)
+          ctx.fill()
+          
+          ctx.restore()
+          return true
+        }
+        return false
       })
 
       animationRef.current = requestAnimationFrame(animate)
