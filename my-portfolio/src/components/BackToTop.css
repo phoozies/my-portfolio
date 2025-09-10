@@ -1,0 +1,148 @@
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #a855f7 0%, #e879f9 100%);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: floatIn 0.5s ease-out;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.back-to-top:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.back-to-top:active {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.constellation-icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.back-to-top:hover .constellation-icon {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+.star:nth-child(1) {
+  top: 5px;
+  left: 10px;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.star:nth-child(2) {
+  top: 15px;
+  right: 8px;
+  animation: twinkle 2s ease-in-out infinite 0.5s;
+}
+
+.star:nth-child(3) {
+  bottom: 8px;
+  left: 15px;
+  animation: twinkle 2s ease-in-out infinite 1s;
+}
+
+.constellation-lines {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  transform: rotate(45deg);
+  opacity: 0.5;
+}
+
+.back-to-top-text {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 600;
+  z-index: 2;
+  position: relative;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Pulse animation on page load */
+.back-to-top {
+  animation: floatIn 0.5s ease-out, pulse 2s ease-in-out 1s;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.6), 0 0 30px rgba(168, 85, 247, 0.4);
+  }
+  100% {
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+  }
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .back-to-top-text {
+    font-size: 1.2rem;
+  }
+  
+  .constellation-icon {
+    width: 25px;
+    height: 25px;
+  }
+}
