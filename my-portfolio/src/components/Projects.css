@@ -9,12 +9,13 @@
   max-width: 1200px;
   margin: 0 auto;
   overflow: hidden;
+  padding: 0 2rem;
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 2rem;
+  width: 100%;
 }
 
 .carousel-controls {
@@ -94,10 +95,11 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: 350px 1fr;
-  min-width: 100%;
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
   min-height: 500px;
+  flex-shrink: 0;
 }
 
 .project-card:hover {
@@ -352,15 +354,30 @@
   font-weight: 500;
 }
 
+@media (max-width: 1024px) {
+  .projects-carousel {
+    padding: 0 1rem;
+  }
+  
+  .project-card {
+    max-width: 900px;
+  }
+}
+
 @media (max-width: 768px) {
   .projects {
     padding: 80px 15px;
   }
 
+  .projects-carousel {
+    padding: 0 0.5rem;
+  }
+
   .project-card {
     grid-template-columns: 1fr;
     min-height: auto;
-    margin: 0 1rem;
+    max-width: 100%;
+    margin: 0;
   }
 
   .project-image-section {
@@ -398,6 +415,10 @@
 @media (max-width: 480px) {
   .projects {
     padding: 60px 10px;
+  }
+
+  .projects-carousel {
+    padding: 0;
   }
 
   .project-card {
