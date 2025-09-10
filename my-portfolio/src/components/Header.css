@@ -102,7 +102,7 @@
 .mobile-menu-btn span {
   width: 25px;
   height: 3px;
-  background: #4a5568;
+  background: #e5e7eb;
   transition: all 0.3s ease;
   border-radius: 2px;
 }
@@ -121,11 +121,12 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a0f2e 100%);
     flex-direction: column;
     padding: 2rem;
     gap: 1rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(168, 85, 247, 0.3);
+    border: 1px solid rgba(168, 85, 247, 0.2);
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
