@@ -52,6 +52,16 @@
   transform: none;
 }
 
+.carousel-btn:focus {
+  outline: none;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3), 0 0 0 3px rgba(168, 85, 247, 0.4);
+}
+
+.indicator:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.4);
+}
+
 .carousel-indicators {
   display: flex;
   gap: 0.75rem;
