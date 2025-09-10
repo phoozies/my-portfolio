@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './Landing.css'
 
 interface Particle {
@@ -27,6 +27,9 @@ const Landing = () => {
   const mouseRef = useRef({ x: 0, y: 0 })
   const particlesRef = useRef<Particle[]>([])
   const mouseTrailRef = useRef<MouseTrail[]>([])
+  const [displayedName, setDisplayedName] = useState('')
+  const [displayedTitle, setDisplayedTitle] = useState('')
+  const [showCursor, setShowCursor] = useState(true)
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
@@ -34,6 +37,43 @@ const Landing = () => {
       aboutSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Typing animation effect
+  useEffect(() => {
+    const name = "Thinh Vo!"
+    const title = "I'm a full-stack developer."
+    let nameIndex = 0
+    let titleIndex = 0
+    let isTypingName = true
+
+    const typeText = () => {
+      if (isTypingName && nameIndex < name.length) {
+        setDisplayedName(name.slice(0, nameIndex + 1))
+        nameIndex++
+        setTimeout(typeText, 100)
+      } else if (isTypingName && nameIndex >= name.length) {
+        isTypingName = false
+        setTimeout(typeText, 500) // Pause before typing title
+      } else if (!isTypingName && titleIndex < title.length) {
+        setDisplayedTitle(title.slice(0, titleIndex + 1))
+        titleIndex++
+        setTimeout(typeText, 50)
+      } else {
+        // Typing complete, stop cursor blinking after a delay
+        setTimeout(() => setShowCursor(false), 2000)
+      }
+    }
+
+    // Start typing after a short delay
+    setTimeout(typeText, 500)
+
+    // Cursor blinking effect
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 500)
+
+    return () => clearInterval(cursorInterval)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -226,9 +266,13 @@ const Landing = () => {
       <div className="hero-content">
         <div className="hero-text">
           <h1 className="hero-title">
-            Hi, I'm <span className="highlight">Thinh Vo!</span>
+            Hi, I'm <span className="highlight">{displayedName}</span>
+            {showCursor && displayedTitle === '' && <span className="typing-cursor">|</span>}
           </h1>
-          <h2 className="hero-subtitle">I'm a full-stack developer.</h2>
+          <h2 className="hero-subtitle">
+            {displayedTitle}
+            {showCursor && displayedTitle !== '' && <span className="typing-cursor">|</span>}
+          </h2>
           <div className="hero-buttons">
             <button onClick={scrollToAbout} className="btn-view-work">
               <span>View My Work</span>

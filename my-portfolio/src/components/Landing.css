@@ -79,6 +79,20 @@
   text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
 }
 
+.typing-cursor {
+  background: linear-gradient(135deg, #e879f9 0%, #a855f7 50%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cursorBlink 1s infinite;
+  font-weight: 300;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
 .hero-subtitle {
   font-size: 1.5rem;
   font-weight: 400;
@@ -147,6 +161,15 @@
 
 .btn-view-work:hover .down-arrow {
   transform: translateY(3px);
+}
+
+.btn-view-work:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.btn-view-work:focus {
+  outline: none;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(168, 85, 247, 0.4);
 }
 
 
