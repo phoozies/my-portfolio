@@ -148,7 +148,8 @@
 
 
 
-.btn-view-work {
+.btn-view-work,
+.btn-resume {
   padding: 1rem 2.5rem;
   border: none;
   border-radius: 50px;
@@ -172,7 +173,8 @@
   overflow: hidden;
 }
 
-.btn-view-work::before {
+.btn-view-work::before,
+.btn-resume::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -190,7 +192,8 @@
   opacity: 0;
 }
 
-.btn-view-work::after {
+.btn-view-work::after,
+.btn-resume::after {
   content: '';
   position: absolute;
   top: 0;
@@ -211,17 +214,20 @@
   animation: gradientShift 3s ease-in-out infinite;
 }
 
-.btn-view-work:hover::before {
+.btn-view-work:hover::before,
+.btn-resume:hover::before {
   width: 200%;
   height: 200%;
   opacity: 1;
 }
 
-.btn-view-work:hover::after {
+.btn-view-work:hover::after,
+.btn-resume:hover::after {
   opacity: 1;
 }
 
-.btn-view-work:hover {
+.btn-view-work:hover,
+.btn-resume:hover {
   transform: translateY(-3px);
   background: transparent;
   color: rgba(255, 255, 255, 1);
@@ -234,11 +240,13 @@
   animation: buttonPulse 2s ease-in-out infinite;
 }
 
-.btn-view-work:active {
+.btn-view-work:active,
+.btn-resume:active {
   transform: translateY(-1px);
 }
 
-.down-arrow {
+.down-arrow,
+.resume-icon {
   width: 20px;
   height: 20px;
   transition: transform 0.3s ease;
@@ -248,11 +256,17 @@
   transform: translateY(3px);
 }
 
-.btn-view-work:active {
+.btn-resume:hover .resume-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.btn-view-work:active,
+.btn-resume:active {
   transform: translateY(-1px) scale(0.98);
 }
 
-.btn-view-work:focus {
+.btn-view-work:focus,
+.btn-resume:focus {
   outline: none;
   background: radial-gradient(circle at center, 
     rgba(232, 121, 249, 0.7) 0%, 

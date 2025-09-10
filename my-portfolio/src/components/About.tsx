@@ -10,7 +10,7 @@ const About = () => {
             <p className="about-intro">
               Driven by the belief that technology should make life better, I'm a full-stack developer committed to building solutions that matter.
               I'm constantly exploring new technologies and methodologies, always asking "how can we do this better?" 
-              Beyond development, I like to unwind through playing video games such as Valorant and Roblox, and spending quality time with friends.
+              Beyond development, I like to unwind through playing video games such as Valorant and Roblox as well as spending quality time with friends!
             </p>
           </div>
           <div className="hero-image">
