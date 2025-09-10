@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './Projects.css'
 
 interface Project {
@@ -10,9 +11,12 @@ interface Project {
   type: 'Academic Project' | 'Professional Project' | 'Personal Project'
   github: string
   live: string
+  image?: string
 }
 
 const Projects = () => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  
   const projects: Project[] = [
     {
       title: "WSU Senior Design Project - Electromech Technologies",
@@ -28,7 +32,8 @@ const Projects = () => {
       status: "In Progress",
       type: "Academic Project",
       github: "#", // You can add actual links later
-      live: "#"
+      live: "#",
+      image: "" // Add image URL when available
     },
     {
       title: "INVISTA Assistant GenAI Platform",
@@ -44,7 +49,8 @@ const Projects = () => {
       status: "Completed",
       type: "Professional Project",
       github: "#",
-      live: "#"
+      live: "#",
+      image: "" // Add image URL when available
     },
     {
       title: "Event-Driven Architecture Pipeline",
@@ -60,7 +66,8 @@ const Projects = () => {
       status: "Completed",
       type: "Professional Project",
       github: "#",
-      live: "#"
+      live: "#",
+      image: "" // Add image URL when available
     },
     {
       title: "NIAR Legacy Application Replacement",
@@ -76,7 +83,8 @@ const Projects = () => {
       status: "Completed",
       type: "Professional Project",
       github: "#",
-      live: "#"
+      live: "#",
+      image: "" // Add image URL when available
     },
     {
       title: "Microsoft Teams Notification System",
@@ -92,7 +100,8 @@ const Projects = () => {
       status: "Completed",
       type: "Professional Project",
       github: "#",
-      live: "#"
+      live: "#",
+      image: "" // Add image URL when available
     }
   ]
 
@@ -110,74 +119,125 @@ const Projects = () => {
   const getTypeColor = (type: Project['type']): string => {
     switch (type) {
       case 'Academic Project':
-        return '#667eea'
+        return 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
       case 'Professional Project':
-        return '#764ba2'
+        return 'linear-gradient(135deg, #a855f7 0%, #e879f9 100%)'
       default:
-        return '#4a5568'
+        return 'linear-gradient(135deg, #4a5568 0%, #6b7280 100%)'
     }
+  }
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % projects.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)
+  }
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index)
   }
 
   return (
     <section id="projects" className="projects">
       <div className="container">
         <h2 className="section-title">Featured Projects</h2>
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <div key={index} className="project-card">
-              <div className="project-header">
-                <div className="project-meta">
-                  <span 
-                    className="project-type" 
-                    style={{ background: getTypeColor(project.type) }}
-                  >
-                    {project.type}
-                  </span>
-                  <span 
-                    className="project-status" 
-                    style={{ background: getStatusColor(project.status) }}
-                  >
-                    {project.status}
-                  </span>
+        <div className="projects-carousel">
+          <div 
+            className="carousel-track"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`
+            }}
+          >
+            {projects.map((project, index) => (
+              <div key={index} className="project-card">
+                <div className="project-image-section">
+                  <div className="project-image-container">
+                    {project.image ? (
+                      <img src={project.image} alt={project.title} className="project-image" />
+                    ) : (
+                      <div className="project-image-placeholder">
+                        <div className="placeholder-icon">💻</div>
+                        <span>Project Screenshot</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="project-header">
+                    <div className="project-meta">
+                      <span 
+                        className="project-type" 
+                        style={{ background: getTypeColor(project.type) }}
+                      >
+                        {project.type}
+                      </span>
+                      <span 
+                        className="project-status" 
+                        style={{ background: getStatusColor(project.status) }}
+                      >
+                        {project.status}
+                      </span>
+                    </div>
+                    <span className="project-period">{project.period}</span>
+                  </div>
                 </div>
-                <span className="project-period">{project.period}</span>
-              </div>
-              
-              <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
                 
-                <div className="project-achievements">
-                  <h4>Key Achievements:</h4>
-                  <ul>
-                    {project.achievements.map((achievement, achievementIndex) => (
-                      <li key={achievementIndex}>{achievement}</li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="project-technologies">
-                  <h4>Technologies:</h4>
-                  <div className="tech-tags">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className="tech-tag">{tech}</span>
-                    ))}
+                <div className="project-content">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+                  
+                  <div className="project-achievements">
+                    <h4>Key Achievements:</h4>
+                    <ul>
+                      {project.achievements.map((achievement, achievementIndex) => (
+                        <li key={achievementIndex}>{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="project-technologies">
+                    <h4>Technologies:</h4>
+                    <div className="tech-tags">
+                      {project.technologies.map((tech, techIndex) => (
+                        <span key={techIndex} className="tech-tag">{tech}</span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="project-links">
+                    <a href={project.github} className="project-link github-link">
+                      <span>GitHub</span>
+                    </a>
+                    <a href={project.live} className="project-link live-link">
+                      <span>Live Demo</span>
+                    </a>
                   </div>
                 </div>
               </div>
-              
-              <div className="project-links">
-                <a href={project.github} className="project-link github-link">
-                  <span>GitHub</span>
-                </a>
-                <a href={project.live} className="project-link live-link">
-                  <span>Live Demo</span>
-                </a>
-              </div>
+            ))}
+          </div>
+          
+          <div className="carousel-controls">
+            <button className="carousel-btn" onClick={prevSlide} disabled={currentIndex === 0}>
+              ←
+            </button>
+            
+            <div className="carousel-indicators">
+              {projects.map((_, index) => (
+                <div
+                  key={index}
+                  className={`indicator ${index === currentIndex ? 'active' : ''}`}
+                  onClick={() => goToSlide(index)}
+                />
+              ))}
             </div>
-          ))}
+            
+            <button className="carousel-btn" onClick={nextSlide} disabled={currentIndex === projects.length - 1}>
+              →
+            </button>
+          </div>
         </div>
-        
       </div>
     </section>
   )
