@@ -15,6 +15,7 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
+  const [scrollProgress, setScrollProgress] = useState<number>(0)
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -26,6 +27,11 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
         // Show header when user scrolls past the hero section
         setIsVisible(scrollPosition > heroHeight - 100)
         setIsScrolled(scrollPosition > heroHeight + 50)
+        
+        // Calculate scroll progress
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight
+        const progress = Math.min((scrollPosition / totalHeight) * 100, 100)
+        setScrollProgress(progress)
       }
     }
 
@@ -58,6 +64,7 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
       <div className="header-container">
         <div className="logo">
           <span onClick={() => scrollToSection('home')}>TV</span>
