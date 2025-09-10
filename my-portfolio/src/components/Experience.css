@@ -1,6 +1,7 @@
 .experience {
-  background: white;
+  background: linear-gradient(180deg, #1a0f2e 0%, #0f0f0f 100%);
   padding: 100px 20px;
+  color: white;
 }
 
 .experience-timeline {
@@ -18,8 +19,9 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(180deg, #a855f7 0%, #e879f9 100%);
   border-radius: 2px;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
 }
 
 .experience-item {

@@ -1,6 +1,7 @@
 .skills {
-  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #0f0f0f 100%);
   padding: 100px 0;
+  color: white;
 }
 
 /* Carousel Container */
@@ -26,11 +27,12 @@
 
 /* Individual Category Cards */
 .skill-category-card {
-  background: white;
+  background: linear-gradient(145deg, rgba(15, 15, 15, 0.8), rgba(45, 27, 78, 0.8));
+  backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.3);
   transition: all 0.3s ease;
   flex: 0 0 500px; /* Wider fixed width cards */
   min-height: 400px;
@@ -40,17 +42,18 @@
 
 .skill-category-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 16px 48px rgba(168, 85, 247, 0.4), 0 0 30px rgba(232, 121, 249, 0.2);
 }
 
 .category-title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #2d3748;
+  color: #e879f9;
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
-  border-bottom: 3px solid #667eea;
+  border-bottom: 3px solid #a855f7;
   text-align: center;
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
 }
 
 /* Skills within each category */
@@ -74,10 +77,10 @@
 }
 
 .skill-item:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #a855f7 0%, #e879f9 100%);
   color: white;
   transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
 }
 
 .skill-logo {
@@ -105,18 +108,18 @@
 .skill-name {
   font-size: 1rem;
   font-weight: 600;
-  color: #2d3748;
+  color: #e5e7eb;
 }
 
 .skill-item:hover .skill-name {
-  color: white;
+  color: #e879f9;
 }
 
 
 
 /* Carousel Navigation Buttons */
 .carousel-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #a855f7 0%, #e879f9 100%);
   color: white;
   border: none;
   border-radius: 50%;
@@ -129,14 +132,14 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
   z-index: 10;
   flex-shrink: 0;
 }
 
 .carousel-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.6), 0 0 20px rgba(232, 121, 249, 0.3);
 }
 
 .carousel-button:active {
