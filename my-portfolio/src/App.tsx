@@ -8,6 +8,7 @@ import Experience from './components/Experience.tsx'
 import Projects from './components/Projects.tsx'
 import Contact from './components/Contact.tsx'
 import Footer from './components/Footer.tsx'
+import BackToTop from './components/BackToTop.tsx'
 
 function App() {
   const [activeSection, setActiveSection] = useState<string>('home')
@@ -24,6 +25,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   )
 }
