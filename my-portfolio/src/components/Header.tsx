@@ -67,7 +67,7 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
       <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
       <div className="header-container">
         <div className="logo">
-          <span onClick={() => scrollToSection('home')}>TV</span>
+          <span onClick={() => scrollToSection('home')}>Thinh Vo</span>
         </div>
         
         <nav className={`nav ${isMobileMenuOpen ? 'nav-open' : ''}`}>
