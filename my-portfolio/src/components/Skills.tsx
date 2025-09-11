@@ -22,7 +22,7 @@ const Skills = () => {
     setCurrentSlide((prev) => (prev - 1 + skillCategories.length) % skillCategories.length)
   }
 
-  const goToSlide = (index: number) => {
+  const goToSlide = (index: number) => {-
     setCurrentSlide(index)
   }
 
@@ -78,15 +78,6 @@ const Skills = () => {
       <div className="container-fullwidth">
         <h2 className="section-title" style={{ margin: '0rem' }}>Skills & Technologies</h2>
         <div className="skills-carousel-container">
-          <div className="carousel-button-container">
-            <button 
-              className="carousel-button"
-              onClick={prevSlide}
-              aria-label="Previous slide"
-            >
-              ←
-            </button>
-          </div>
           <div className="skills-carousel">
             <div 
               className="skills-carousel-track"
@@ -113,24 +104,34 @@ const Skills = () => {
               ))}
             </div>
           </div>
-          <div className="carousel-button-container">
+          
+          <div className="carousel-controls">
             <button 
-              className="carousel-button"
+              className="carousel-btn"
+              onClick={prevSlide}
+              aria-label="Previous slide"
+            >
+              ←
+            </button>
+            
+            <div className="carousel-indicators">
+              {skillCategories.map((_, index) => (
+                <button
+                  key={index}
+                  className={`carousel-indicator ${index === currentSlide ? 'active' : ''}`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+            
+            <button 
+              className="carousel-btn"
               onClick={nextSlide}
               aria-label="Next slide"
             >
               →
             </button>
-          </div>
-          <div className="carousel-indicators">
-            {skillCategories.map((_, index) => (
-              <button
-                key={index}
-                className={`carousel-indicator ${index === currentSlide ? 'active' : ''}`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
           </div>
         </div>
       </div>
