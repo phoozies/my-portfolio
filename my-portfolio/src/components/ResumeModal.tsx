@@ -51,7 +51,7 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
-      maxWidth="lg"
+      maxWidth="md"
       fullWidth
       fullScreen={fullScreen}
       className="resume-dialog"
@@ -65,8 +65,13 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
             '0 25px 50px rgba(0, 0, 0, 0.5)',
             '0 0 30px rgba(168, 85, 247, 0.2)'
           ].join(', '),
-          minHeight: '80vh',
-          maxHeight: '90vh'
+          height: '95vh',
+          minHeight: '95vh',
+          maxHeight: '95vh',
+          width: '85vw',
+          maxWidth: '900px',
+          display: 'flex',
+          flexDirection: 'column'
         }
       }}
       BackdropProps={{
@@ -82,13 +87,14 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '1.5rem 2rem',
+          padding: '1rem 1.5rem',
           borderBottom: '1px solid rgba(168, 85, 247, 0.3)',
           background: 'rgba(26, 15, 46, 0.8)',
           color: '#e879f9',
-          fontSize: '1.5rem',
+          fontSize: '1.3rem',
           fontWeight: 600,
-          textShadow: '0 0 10px rgba(168, 85, 247, 0.3)'
+          textShadow: '0 0 10px rgba(168, 85, 247, 0.3)',
+          flexShrink: 0
         }}
       >
         <Typography variant="h6" component="h2" sx={{ 
@@ -123,7 +129,7 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
           display: 'flex',
           flexDirection: 'column',
           flex: 1,
-          padding: '2rem',
+          padding: '1rem',
           overflow: 'hidden'
         }}
       >
@@ -141,9 +147,9 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
             background: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(10px)',
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'stretch',
             justifyContent: 'center',
-            minHeight: '500px',
+            minHeight: 0,
             border: '1px solid rgba(168, 85, 247, 0.15)'
           }}
         >
@@ -157,7 +163,7 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
               border: 'none',
               borderRadius: '8px',
               background: 'white',
-              minHeight: '500px',
+              minHeight: '600px',
               boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
             }}
             loading="lazy"
@@ -171,8 +177,9 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
           display: 'flex',
           gap: '1rem',
           justifyContent: 'center',
-          padding: '1.5rem 2rem',
-          borderTop: '1px solid rgba(168, 85, 247, 0.2)'
+          padding: '1rem 1.5rem',
+          borderTop: '1px solid rgba(168, 85, 247, 0.2)',
+          flexShrink: 0
         }}
       >
         <Button
