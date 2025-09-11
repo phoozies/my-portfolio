@@ -7,17 +7,17 @@ const Footer = () => {
     {
       name: 'GitHub',
       url: 'https://github.com/phoozies',
-      logo: '/github-logo.svg'
+      logo: './github-logo.svg'
     },
     {
       name: 'LinkedIn',
       url: 'https://linkedin.com/in/thinh-vo-1736062bb',
-      logo: '/linkedin-bw-logo.svg'
+      logo: './linkedin-bw-logo.svg'
     },
     {
       name: 'Email',
       url: 'mailto:tpvo.business@gmail.com',
-      logo: '/email-logo.svg'
+      logo: './email-logo.svg'
     }
   ]
 

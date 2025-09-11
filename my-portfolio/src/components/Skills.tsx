@@ -30,45 +30,45 @@ const Skills = () => {
     {
       title: "Programming Languages",
       skills: [
-        { name: "TypeScript", logo: "/typescript-logo.svg" },
-        { name: "JavaScript", logo: "/javascript-logo.svg" },
-        { name: "C#", logo: "/csharp-logo.svg" },
-        { name: "Python", logo: "/python-logo.svg" },
-        { name: "SQL", logo: "/sql-logo.svg" },
-        { name: "PHP", logo: "/php-logo.svg" }
+        { name: "TypeScript", logo: "./typescript-logo.svg" },
+        { name: "JavaScript", logo: "./javascript-logo.svg" },
+        { name: "C#", logo: "./csharp-logo.svg" },
+        { name: "Python", logo: "./python-logo.svg" },
+        { name: "SQL", logo: "./sql-logo.svg" },
+        { name: "PHP", logo: "./php-logo.svg" }
       ]
     },
     {
       title: "Frameworks & Libraries",
       skills: [
-        { name: "React", logo: "/react-logo.svg" },
-        { name: "Next.js", logo: "/nextjs-logo.svg" },
-        { name: "Node.js", logo: "/nodejs-logo.svg" },
-        { name: ".NET", logo: "/dotnet-logo.svg" }
+        { name: "React", logo: "./react-logo.svg" },
+        { name: "Next.js", logo: "./nextjs-logo.svg" },
+        { name: "Node.js", logo: "./nodejs-logo.svg" },
+        { name: ".NET", logo: "./dotnet-logo.svg" }
       ]
     },
     {
       title: "Cloud & DevOps",
       skills: [
-        { name: "AWS", logo: "/aws-logo.svg" },
-        { name: "Docker", logo: "/docker-logo.svg" },
-        { name: "Kubernetes", logo: "/kubernetes-logo.svg" }
+        { name: "AWS", logo: "./aws-logo.svg" },
+        { name: "Docker", logo: "./docker-logo.svg" },
+        { name: "Kubernetes", logo: "./kubernetes-logo.svg" }
       ]
     },
     {
       title: "Data & Analytics",
       skills: [
-        { name: "DataDog", logo: "/datadog-logo.svg" },
-        { name: "PowerBI", logo: "/powerbi-logo.svg" },
-        { name: "Alteryx", logo: "/alteryx-logo.svg" }
+        { name: "DataDog", logo: "./datadog-logo.svg" },
+        { name: "PowerBI", logo: "./powerbi-logo.svg" },
+        { name: "Alteryx", logo: "./alteryx-logo.svg" }
       ]
     },
     {
       title: "Design & Tools",
       skills: [
-        { name: "HTML", logo: "/html-logo.svg" },
-        { name: "CSS", logo: "/css-logo.svg" },
-        { name: "Figma", logo: "/figma-logo.svg" }
+        { name: "HTML", logo: "./html-logo.svg" },
+        { name: "CSS", logo: "./css-logo.svg" },
+        { name: "Figma", logo: "./figma-logo.svg" }
       ]
     }
   ]
