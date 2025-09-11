@@ -6,17 +6,17 @@
 
 .projects-carousel {
   position: relative;
-  max-width: 1300px;
+  max-width: 900px;
   width: 100%;
   overflow: hidden;
-  padding: 3rem;
-  margin: 2rem;
+  padding: 2rem;
+  margin: 2rem auto;
   justify-self: center;
 }
 
 .carousel-track {
   display: flex;
-  gap: 5rem;
+  gap: 6rem;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
 }
@@ -96,13 +96,12 @@
   border: 1px solid rgba(168, 85, 247, 0.3);
   transition: all 0.3s ease;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 350px 1fr;
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0;
-  min-height: 500px;
+  min-height: 400px;
   flex-shrink: 0;
+  padding: 2rem;
 }
 
 .project-card:hover {

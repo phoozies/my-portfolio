@@ -7,11 +7,6 @@ interface Project {
   description: string
   achievements: string[]
   technologies: string[]
-  status: 'In Progress' | 'Completed' | 'On Hold'
-  type: 'Academic Project' | 'Professional Project' | 'Personal Project'
-  github: string
-  live: string
-  image?: string
 }
 
 const Projects = () => {
@@ -24,16 +19,11 @@ const Projects = () => {
       description: "Full-stack project management application sponsored by Electromech Technologies, featuring task management, security, and team collaboration capabilities.",
       achievements: [
         "Collaborated on full-stack development of an internal project management application",
-        "Developed and refactored application to utilize ASP.NET backend framework and Next.js frontend",
+        "Developed and refactored application to utilize ASP.NET backend framework and React.js frontend",
         "Implemented containerized architecture for modular and expandable codebase",
         "Focused on task management, security, and team collaboration features"
       ],
-      technologies: ["ASP.NET Core", "Next.js", "Docker", "Full-Stack Development", "Project Management"],
-      status: "In Progress",
-      type: "Academic Project",
-      github: "#", // You can add actual links later
-      live: "#",
-      image: "" // Add image URL when available
+      technologies: ["ASP.NET Core", "React.js", "Docker", "Full-Stack Development", "Project Management"]
     },
     {
       title: "INVISTA Assistant GenAI Platform",
@@ -45,12 +35,7 @@ const Projects = () => {
         "Integrated AI agents for improved functionality",
         "Focused on user-centric design and feature development"
       ],
-      technologies: ["GenAI", "AI Agents", "Next.js", "Machine Learning", "User Experience"],
-      status: "Completed",
-      type: "Professional Project",
-      github: "#",
-      live: "#",
-      image: "" // Add image URL when available
+      technologies: ["GenAI", "AI Agents", "Next.js", "Machine Learning", "User Experience"]
     },
     {
       title: "Event-Driven Architecture Pipeline",
@@ -62,12 +47,7 @@ const Projects = () => {
         "Integrated existing APIs for local diagnostics and recovery",
         "Supporting $5M value proposition for Butachimie Project"
       ],
-      technologies: ["AWS S3", "Event-Driven Architecture", "Next.js", "PI Systems", "API Integration"],
-      status: "Completed",
-      type: "Professional Project",
-      github: "#",
-      live: "#",
-      image: "" // Add image URL when available
+      technologies: ["AWS S3", "Event-Driven Architecture", "Next.js", "PI Systems", "API Integration"]
     },
     {
       title: "NIAR Legacy Application Replacement",
@@ -79,12 +59,7 @@ const Projects = () => {
         "Optimized business processes for data management",
         "Focused on specimen tracking and inventory management"
       ],
-      technologies: ["Full-Stack Development", "NIST 800-171", "Authentication", "Data Management"],
-      status: "Completed",
-      type: "Professional Project",
-      github: "#",
-      live: "#",
-      image: "" // Add image URL when available
+      technologies: ["Full-Stack Development", "NIST 800-171", "Authentication", "Data Management"]
     },
     {
       title: "Microsoft Teams Notification System",
@@ -96,36 +71,9 @@ const Projects = () => {
         "Added 4XX/5XX level error response handling",
         "Reduced incident response time for business processes"
       ],
-      technologies: ["Microsoft Teams API", "Event Handling", "Multi-channel Routing", "Error Handling"],
-      status: "Completed",
-      type: "Professional Project",
-      github: "#",
-      live: "#",
-      image: "" // Add image URL when available
+      technologies: ["Microsoft Teams API", "Event Handling", "Multi-channel Routing", "Error Handling"]
     }
   ]
-
-  const getStatusColor = (status: Project['status']): string => {
-    switch (status) {
-      case 'Completed':
-        return '#48bb78'
-      case 'In Progress':
-        return '#ed8936'
-      default:
-        return '#4a5568'
-    }
-  }
-
-  const getTypeColor = (type: Project['type']): string => {
-    switch (type) {
-      case 'Academic Project':
-        return 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-      case 'Professional Project':
-        return 'linear-gradient(135deg, #a855f7 0%, #e879f9 100%)'
-      default:
-        return 'linear-gradient(135deg, #4a5568 0%, #6b7280 100%)'
-    }
-  }
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % projects.length)
@@ -147,44 +95,14 @@ const Projects = () => {
           <div 
             className="carousel-track"
             style={{
-              transform: `translateX(-${currentIndex * (1064 + 32 + 48)}px)`
+              transform: `translateX(calc(-${currentIndex * 100}% - ${currentIndex * 3}rem))`
             }}
           >
             {projects.map((project, index) => (
               <div key={index} className="project-card">
-                <div className="project-image-section">
-                  <div className="project-image-container">
-                    {project.image ? (
-                      <img src={project.image} alt={project.title} className="project-image" />
-                    ) : (
-                      <div className="project-image-placeholder">
-                        <div className="placeholder-icon">💻</div>
-                        <span>Project Screenshot</span>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="project-header">
-                    <div className="project-meta">
-                      <span 
-                        className="project-type" 
-                        style={{ background: getTypeColor(project.type) }}
-                      >
-                        {project.type}
-                      </span>
-                      <span 
-                        className="project-status" 
-                        style={{ background: getStatusColor(project.status) }}
-                      >
-                        {project.status}
-                      </span>
-                    </div>
-                    <span className="project-period">{project.period}</span>
-                  </div>
-                </div>
-                
                 <div className="project-content">
                   <h3 className="project-title">{project.title}</h3>
+                  <span className="project-period">{project.period}</span>
                   <p className="project-description">{project.description}</p>
                   
                   <div className="project-achievements">
@@ -204,22 +122,13 @@ const Projects = () => {
                       ))}
                     </div>
                   </div>
-                  
-                  <div className="project-links">
-                    <a href={project.github} className="project-link github-link">
-                      <span>GitHub</span>
-                    </a>
-                    <a href={project.live} className="project-link live-link">
-                      <span>Live Demo</span>
-                    </a>
-                  </div>
                 </div>
               </div>
             ))}
           </div>
           
           <div className="carousel-controls">
-            <button className="carousel-btn" onClick={prevSlide} disabled={currentIndex === 0}>
+            <button className="carousel-btn" onClick={prevSlide}>
               ←
             </button>
             
@@ -233,7 +142,7 @@ const Projects = () => {
               ))}
             </div>
             
-            <button className="carousel-btn" onClick={nextSlide} disabled={currentIndex === projects.length - 1}>
+            <button className="carousel-btn" onClick={nextSlide}>
               →
             </button>
           </div>
