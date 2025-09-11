@@ -1,386 +1,236 @@
-/* Resume Modal Overlay */
-.resume-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  animation: fadeIn 0.3s ease-out;
-  padding: 1rem;
-}
-
-/* Resume Modal Container */
-.resume-modal-container {
-  background: linear-gradient(145deg, #1a0f2e, #0f0f0f);
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 16px;
+/* Resume Modal with MUI Dialog Support */
+.resume-dialog .MuiDialog-paper {
+  position: relative !important;
+  background: linear-gradient(145deg, #1a0f2e, #0f0f0f) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  border-radius: 16px !important;
   box-shadow: 
     0 25px 50px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(168, 85, 247, 0.2);
-  width: 100%;
-  height: 100%;
-  max-width: 1000px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  animation: slideIn 0.3s ease-out;
-  overflow: hidden;
+    0 0 30px rgba(168, 85, 247, 0.2) !important;
+  min-height: 80vh !important;
+  max-height: 90vh !important;
+  width: 95vw !important;
+  max-width: 1200px !important;
+  margin: auto !important;
+  z-index: 9999 !important;
 }
 
-/* Resume Modal Header */
-.resume-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid rgba(168, 85, 247, 0.3);
-  background: rgba(26, 15, 46, 0.8);
-  border-radius: 16px 16px 0 0;
+/* Dialog Title */
+.resume-dialog-title {
+  background: rgba(26, 15, 46, 0.8) !important;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.3) !important;
 }
 
-.resume-modal-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #e879f9;
-  margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  text-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+.resume-dialog-title h2 {
+  color: #e879f9 !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.3) !important;
 }
 
-.resume-modal-close {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #e5e7eb;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  line-height: 1;
+.resume-dialog-close svg {
+  color: #e5e7eb !important;
+  transition: all 0.3s ease !important;
 }
 
-.resume-modal-close:hover {
-  background: rgba(168, 85, 247, 0.2);
-  color: #e879f9;
-  transform: scale(1.1);
+.resume-dialog-close:hover svg {
+  color: #e879f9 !important;
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.5)) !important;
 }
 
-.resume-modal-close:focus {
-  outline: 2px solid #a855f7;
-  outline-offset: 2px;
+/* Dialog Content */
+.resume-dialog-content {
+  background: rgba(0, 0, 0, 0.1) !important;
+  padding: 2rem !important;
 }
 
-/* Resume Modal Content */
-.resume-modal-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 1.5rem;
-  padding: 2rem;
-  overflow: hidden;
-}
-
-/* Resume Viewer */
 .resume-viewer {
-  flex: 1;
-  border-radius: 12px;
-  overflow: hidden;
+  border-radius: 12px !important;
+  overflow: hidden !important;
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.3),
     0 0 20px rgba(168, 85, 247, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 500px;
-  border: 1px solid rgba(168, 85, 247, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(168, 85, 247, 0.15) !important;
 }
 
 .resume-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 8px;
-  background: white;
-  min-height: 500px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: white !important;
+  min-height: 500px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Loading state for iframe */
-.resume-iframe[src=""] {
-  background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Dialog Actions */
+.resume-dialog-actions {
+  border-top: 1px solid rgba(168, 85, 247, 0.2) !important;
+  background: rgba(26, 15, 46, 0.4) !important;
+  padding: 1.5rem 2rem !important;
 }
 
-.resume-iframe[src=""]:after {
-  content: "Loading resume...";
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1.1rem;
-}
-
-/* Resume Actions */
-.resume-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(168, 85, 247, 0.2);
-}
-
+/* Action Buttons - Constellation Theme Glass Morphism */
 .btn-action {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  min-width: 160px;
-  justify-content: center;
-  font-family: inherit;
-  position: relative;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(180%) brightness(110%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(110%);
-  color: rgba(255, 255, 255, 1);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  position: relative !important;
+  padding: 1rem 2.5rem !important;
+  border-radius: 50px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) saturate(180%) brightness(110%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(110%) !important;
+  color: rgba(255, 255, 255, 1) !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   box-shadow: 
     0 4px 30px rgba(0, 0, 0, 0.1),
     0 0 20px rgba(168, 85, 247, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  border: none !important;
+  min-width: 160px !important;
+  cursor: pointer !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  overflow: hidden !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
 }
 
-.btn-icon {
-  font-size: 1.2rem;
+.btn-action::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 85, 247, 0.3),
+    transparent
+  ) !important;
+  transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 }
 
-/* Download Button - Green Theme */
-.btn-download::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0%;
-  height: 0%;
-  background: radial-gradient(circle at center, 
-    rgba(34, 197, 94, 0.8) 0%, 
-    rgba(16, 185, 129, 0.7) 50%, 
-    rgba(5, 150, 105, 0.9) 100%
-  );
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.4s ease;
-  opacity: 0;
-}
-
-.btn-download:hover::before {
-  width: 200%;
-  height: 200%;
-  opacity: 1;
-}
-
-.btn-download:hover {
-  transform: translateY(-3px);
-  background: transparent;
+.btn-action:hover {
+  transform: translateY(-3px) !important;
+  background: transparent !important;
   box-shadow: 
     0 8px 25px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(34, 197, 94, 0.5),
-    0 0 50px rgba(16, 185, 129, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    0 0 30px rgba(168, 85, 247, 0.5),
+    0 0 50px rgba(232, 121, 249, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  color: rgba(255, 255, 255, 1) !important;
 }
 
-.btn-download:active {
-  transform: translateY(-1px);
+.btn-action:hover::before {
+  left: 100% !important;
 }
 
-/* Open Button - Blue Theme */
-.btn-open::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0%;
-  height: 0%;
-  background: radial-gradient(circle at center, 
-    rgba(59, 130, 246, 0.8) 0%, 
-    rgba(37, 99, 235, 0.7) 50%, 
-    rgba(29, 78, 216, 0.9) 100%
-  );
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.4s ease;
-  opacity: 0;
+.btn-action:active {
+  transform: translateY(-1px) !important;
 }
 
-.btn-open:hover::before {
-  width: 200%;
-  height: 200%;
-  opacity: 1;
-}
-
-.btn-open:hover {
-  transform: translateY(-3px);
-  background: transparent;
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(59, 130, 246, 0.5),
-    0 0 50px rgba(37, 99, 235, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.btn-open:active {
-  transform: translateY(-1px);
-}
-
-/* Focus states for accessibility */
-.btn-action:focus {
-  outline: none;
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(168, 85, 247, 0.4),
-    0 0 0 3px rgba(168, 85, 247, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95) translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+/* Icon styling for MUI icons */
+.btn-action .MuiSvgIcon-root {
+  color: inherit !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) !important;
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .resume-modal-overlay {
-    padding: 0.5rem;
+  .resume-dialog .MuiDialog-paper {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
   }
-  
-  .resume-modal-container {
-    max-width: 100%;
-    max-height: 95vh;
-    border-radius: 12px;
+
+  .resume-dialog-title {
+    padding: 1rem 1.5rem !important;
   }
-  
-  .resume-modal-header {
-    padding: 1rem 1.5rem;
-    border-radius: 12px 12px 0 0;
+
+  .resume-dialog-title h2 {
+    font-size: 1.25rem !important;
   }
-  
-  .resume-modal-title {
-    font-size: 1.25rem;
+
+  .resume-dialog-content {
+    padding: 1rem !important;
   }
-  
-  .resume-modal-close {
-    width: 36px;
-    height: 36px;
-    font-size: 1.25rem;
+
+  .resume-dialog-actions {
+    padding: 1rem 1.5rem !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
   }
-  
-  .resume-modal-content {
-    padding: 1.5rem;
-    gap: 1rem;
-  }
-  
-  .resume-viewer {
-    min-height: 400px;
-    border-radius: 10px;
-  }
-  
-  .resume-iframe {
-    min-height: 400px;
-  }
-  
-  .resume-actions {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
+
   .btn-action {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 40px;
+    width: 100% !important;
+    min-width: unset !important;
+    padding: 0.875rem 2rem !important;
+    font-size: 1rem !important;
+  }
+
+  .resume-iframe {
+    min-height: 400px !important;
   }
 }
 
 @media (max-width: 480px) {
-  .resume-modal-overlay {
-    padding: 0.25rem;
+  .resume-dialog-title h2 {
+    font-size: 1.1rem !important;
   }
-  
-  .resume-modal-container {
-    max-height: 98vh;
-    border-radius: 8px;
-  }
-  
-  .resume-modal-header {
-    padding: 0.75rem 1rem;
-    border-radius: 8px 8px 0 0;
-  }
-  
-  .resume-modal-title {
-    font-size: 1.1rem;
-  }
-  
-  .resume-modal-content {
-    padding: 1rem;
-  }
-  
-  .resume-viewer {
-    min-height: 350px;
-    border-radius: 8px;
-  }
-  
-  .resume-iframe {
-    min-height: 350px;
-    border-radius: 6px;
-  }
-  
+
   .btn-action {
-    padding: 0.875rem 1.25rem;
-    border-radius: 30px;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  .resume-iframe {
+    min-height: 350px !important;
   }
 }
 
-/* Print-friendly styles */
-@media print {
-  .resume-modal-content {
-    display: none;
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn-action {
+    border: 2px solid rgba(168, 85, 247, 0.8) !important;
+    background: rgba(168, 85, 247, 0.2) !important;
+  }
+
+  .resume-dialog .MuiDialog-paper {
+    border: 2px solid rgba(168, 85, 247, 0.8) !important;
   }
 }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .btn-action,
+  .btn-action::before,
+  .resume-dialog-close svg {
+    transition: none !important;
+  }
+
+  .btn-action:hover {
+    transform: none !important;
+  }
+}
+
+/* Focus indicators for accessibility */
+.btn-action:focus-visible {
+  outline: 3px solid rgba(168, 85, 247, 0.8) !important;
+  outline-offset: 2px !important;
+}
+
+.resume-dialog-close:focus-visible {
+  outline: 3px solid rgba(168, 85, 247, 0.8) !important;
+  outline-offset: 2px !important;
+}
+
+

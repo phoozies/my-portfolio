@@ -1,4 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  IconButton,
+  Button,
+  Box,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material'
+import {
+  Close as CloseIcon,
+  Download as DownloadIcon,
+  OpenInNew as OpenInNewIcon
+} from '@mui/icons-material'
 import './ResumeModal.css'
 
 interface ResumeModalProps {
@@ -14,24 +31,8 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
   resumeUrl,
   fileName = 'Thinh_Vo_Resume.pdf'
 }) => {
-  // Handle ESC key press and body scroll
-  useEffect(() => {
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose()
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscapeKey)
-      document.body.style.overflow = 'hidden'
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey)
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen, onClose])
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   const handleDownload = () => {
     const link = document.createElement('a')
@@ -46,63 +47,217 @@ const ResumeModal: React.FC<ResumeModalProps> = ({
     window.open(resumeUrl, '_blank', 'noopener,noreferrer')
   }
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose()
-    }
-  }
-
-  if (!isOpen) return null
-
   return (
-    <div className="resume-modal-overlay" onClick={handleBackdropClick}>
-      <div 
-        className="resume-modal-container"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="resume-modal-title"
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      maxWidth="lg"
+      fullWidth
+      fullScreen={fullScreen}
+      className="resume-dialog"
+      PaperProps={{
+        className: 'resume-dialog-paper',
+        sx: {
+          background: 'linear-gradient(145deg, #1a0f2e, #0f0f0f)',
+          border: '1px solid rgba(168, 85, 247, 0.3)',
+          borderRadius: '16px',
+          boxShadow: [
+            '0 25px 50px rgba(0, 0, 0, 0.5)',
+            '0 0 30px rgba(168, 85, 247, 0.2)'
+          ].join(', '),
+          minHeight: '80vh',
+          maxHeight: '90vh'
+        }
+      }}
+      BackdropProps={{
+        sx: {
+          backdropFilter: 'blur(8px)',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)'
+        }
+      }}
+    >
+      <DialogTitle
+        className="resume-dialog-title"
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '1.5rem 2rem',
+          borderBottom: '1px solid rgba(168, 85, 247, 0.3)',
+          background: 'rgba(26, 15, 46, 0.8)',
+          color: '#e879f9',
+          fontSize: '1.5rem',
+          fontWeight: 600,
+          textShadow: '0 0 10px rgba(168, 85, 247, 0.3)'
+        }}
       >
-        <div className="resume-modal-header">
-          <h2 id="resume-modal-title" className="resume-modal-title">Resume - Thinh Vo</h2>
-          <button 
-            className="resume-modal-close"
-            onClick={onClose}
-            aria-label="Close modal"
-          >
-            ✕
-          </button>
-        </div>
+        <Typography variant="h6" component="h2" sx={{ 
+          color: 'inherit', 
+          fontSize: 'inherit',
+          fontWeight: 'inherit',
+          textShadow: 'inherit'
+        }}>
+          Resume - Thinh Vo
+        </Typography>
+        <IconButton
+          onClick={onClose}
+          className="resume-dialog-close"
+          sx={{
+            color: '#e5e7eb',
+            width: '40px',
+            height: '40px',
+            '&:hover': {
+              background: 'rgba(168, 85, 247, 0.2)',
+              color: '#e879f9',
+              transform: 'scale(1.1)'
+            }
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+
+      <DialogContent
+        className="resume-dialog-content"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flex: 1,
+          padding: '2rem',
+          overflow: 'hidden'
+        }}
+      >
+        <Box
+          className="resume-viewer"
+          sx={{
+            flex: 1,
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: [
+              '0 8px 32px rgba(0, 0, 0, 0.3)',
+              '0 0 20px rgba(168, 85, 247, 0.1)',
+              'inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            ].join(', '),
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(10px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '500px',
+            border: '1px solid rgba(168, 85, 247, 0.15)'
+          }}
+        >
+          <iframe
+            src={resumeUrl}
+            title="Thinh Vo Resume"
+            className="resume-iframe"
+            style={{
+              width: '100%',
+              height: '100%',
+              border: 'none',
+              borderRadius: '8px',
+              background: 'white',
+              minHeight: '500px',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
+            }}
+            loading="lazy"
+          />
+        </Box>
+      </DialogContent>
+
+      <DialogActions
+        className="resume-dialog-actions"
+        sx={{
+          display: 'flex',
+          gap: '1rem',
+          justifyContent: 'center',
+          padding: '1.5rem 2rem',
+          borderTop: '1px solid rgba(168, 85, 247, 0.2)'
+        }}
+      >
+        <Button
+          onClick={handleDownload}
+          startIcon={<DownloadIcon />}
+          className="btn-action btn-download"
+          variant="contained"
+          sx={{
+            padding: '1rem 2.5rem',
+            borderRadius: '50px',
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(20px) saturate(180%) brightness(110%)',
+            color: 'rgba(255, 255, 255, 1)',
+            fontWeight: 600,
+            fontSize: '1.1rem',
+            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+            boxShadow: [
+              '0 4px 30px rgba(0, 0, 0, 0.1)',
+              '0 0 20px rgba(168, 85, 247, 0.05)',
+              'inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+            ].join(', '),
+            border: 'none',
+            minWidth: '160px',
+            position: 'relative',
+            overflow: 'hidden',
+            '&:hover': {
+              transform: 'translateY(-3px)',
+              background: 'transparent',
+              boxShadow: [
+                '0 8px 25px rgba(0, 0, 0, 0.3)',
+                '0 0 30px rgba(168, 85, 247, 0.5)',
+                '0 0 50px rgba(232, 121, 249, 0.3)',
+                'inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+              ].join(', ')
+            },
+            '&:active': {
+              transform: 'translateY(-1px)'
+            }
+          }}
+        >
+          Download PDF
+        </Button>
         
-        <div className="resume-modal-content">
-          <div className="resume-viewer">
-            <iframe
-              src={resumeUrl}
-              title="Thinh Vo Resume"
-              className="resume-iframe"
-              loading="lazy"
-            />
-          </div>
-          <div className="resume-actions">
-            <button 
-              className="btn-action btn-download"
-              onClick={handleDownload}
-              aria-label="Download resume PDF"
-            >
-              <span className="btn-icon">📥</span>
-              Download PDF
-            </button>
-            <button 
-              className="btn-action btn-open"
-              onClick={handleOpenNewTab}
-              aria-label="Open resume in new tab"
-            >
-              <span className="btn-icon">🔗</span>
-              Open in New Tab
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+        <Button
+          onClick={handleOpenNewTab}
+          startIcon={<OpenInNewIcon />}
+          className="btn-action btn-open"
+          variant="contained"
+          sx={{
+            padding: '1rem 2.5rem',
+            borderRadius: '50px',
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(20px) saturate(180%) brightness(110%)',
+            color: 'rgba(255, 255, 255, 1)',
+            fontWeight: 600,
+            fontSize: '1.1rem',
+            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+            boxShadow: [
+              '0 4px 30px rgba(0, 0, 0, 0.1)',
+              '0 0 20px rgba(168, 85, 247, 0.05)',
+              'inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+            ].join(', '),
+            border: 'none',
+            minWidth: '160px',
+            position: 'relative',
+            overflow: 'hidden',
+            '&:hover': {
+              transform: 'translateY(-3px)',
+              background: 'transparent',
+              boxShadow: [
+                '0 8px 25px rgba(0, 0, 0, 0.3)',
+                '0 0 30px rgba(168, 85, 247, 0.5)',
+                '0 0 50px rgba(232, 121, 249, 0.3)',
+                'inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+              ].join(', ')
+            },
+            '&:active': {
+              transform: 'translateY(-1px)'
+            }
+          }}
+        >
+          Open in New Tab
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 }
 
