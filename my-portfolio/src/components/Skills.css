@@ -1,33 +1,44 @@
 .skills {
   background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #0f0f0f 100%);
-  padding: 100px 0;
   color: white;
+  padding: 0px;
 }
 
 /* Carousel Container */
 .skills-carousel-container {
   position: relative;
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
+  align-items: center;
+  justify-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Button Containers */
+.carousel-button-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
   width: 100%;
-  max-width: 1400px; /* Increased from 1200px */
-  margin: 0 auto;
-  padding: 0 2rem;
 }
 
 /* Carousel Scroll Area */
 .skills-carousel {
-  display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  padding: 3rem;
-  scroll-behavior: smooth;
+  position: relative;
   width: 100%;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  padding: 3rem;
+  max-width: 600px;
+  overflow: hidden;
+  justify-self: center;
+  padding: 2rem 0;
+}
+
+.skills-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
 }
 
 .skills-carousel::-webkit-scrollbar {
@@ -38,13 +49,14 @@
 .skill-category-card {
   background: linear-gradient(145deg, rgba(15, 15, 15, 0.8), rgba(45, 27, 78, 0.8));
   backdrop-filter: blur(10px);
-  padding: 2rem;
+  padding: 3rem;
+  margin: 3rem 4rem;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2);
   transition: all 0.3s ease;
-  flex: 0 0 calc(33.333% - 1.33rem); /* Show 3 cards with gap */
-  min-width: 300px;
-  min-height: 400px;
+  flex: 0 0 calc(100% - 8rem);
+  width: calc(100% - 8rem);
+  min-height: 450px;
   display: flex;
   flex-direction: column;
 }
@@ -181,12 +193,33 @@
   transform: scale(0.95);
 }
 
-.carousel-left {
-  margin-right: 1rem;
+/* Carousel Indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+  grid-column: 1 / -1;
 }
 
-.carousel-right {
-  margin-left: 1rem;
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+  background: linear-gradient(135deg, #a855f7 0%, #e879f9 100%);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.carousel-indicator:hover {
+  background: rgba(168, 85, 247, 0.6);
 }
 
 /* Mobile Responsiveness */
@@ -203,15 +236,21 @@
   }
   
   .skills-carousel-container {
-    gap: 1rem;
+    grid-template-columns: 80px 1fr 80px;
+    gap: 0.5rem;
     padding: 0 1rem;
   }
   
-  .skill-category-card {
-    flex: 0 0 calc(100% - 2rem); /* Show 1 card on mobile */
-    min-width: 280px;
+  .skills-carousel {
+    max-width: 400px;
     padding: 1.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  .skill-category-card {
+    padding: 2rem;
     min-height: 350px;
+    margin: 2rem 3rem;
   }
   
   /* Switch to single column on mobile */
@@ -254,8 +293,15 @@
 
 @media (max-width: 480px) {
   .skills-carousel-container {
-    gap: 0.5rem;
+    grid-template-columns: 60px 1fr 60px;
+    gap: 0.25rem;
     padding: 0 0.5rem;
+  }
+  
+  .skills-carousel {
+    max-width: 320px;
+    padding: 1rem;
+    margin: 0.25rem 0;
   }
   
   .carousel-button {
@@ -265,9 +311,8 @@
   }
   
   .skill-category-card {
-    flex: 0 0 calc(100% - 1rem);
-    min-width: 260px;
-    padding: 1rem;
+    padding: 1.5rem;
+    margin: 1.5rem 2rem;
   }
   
   .category-skills {

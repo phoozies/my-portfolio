@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 import './Skills.css'
 
 interface Skill {
@@ -12,20 +12,18 @@ interface SkillCategory {
 }
 
 const Skills = () => {
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth = 532 // Card width (500px) + gap (32px)
-      scrollContainerRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' })
-    }
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % skillCategories.length)
   }
 
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth = 532 // Card width (500px) + gap (32px)
-      scrollContainerRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' })
-    }
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + skillCategories.length) % skillCategories.length)
+  }
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index)
   }
 
   const skillCategories: SkillCategory[] = [
@@ -78,43 +76,62 @@ const Skills = () => {
   return (
     <section id="skills" className="skills">
       <div className="container-fullwidth">
-        <h2 className="section-title">Skills & Technologies</h2>
+        <h2 className="section-title" style={{ margin: '0rem' }}>Skills & Technologies</h2>
         <div className="skills-carousel-container">
-          <button 
-            className="carousel-button carousel-left"
-            onClick={scrollLeft}
-            aria-label="Scroll left"
-          >
-            ←
-          </button>
-          <div className="skills-carousel" ref={scrollContainerRef}>
-            {skillCategories.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="skill-category-card">
-                <h3 className="category-title">{category.title}</h3>
-                <div className="category-skills">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="skill-item">
-                      {skill.logo && (
-                        <div className="skill-logo">
-                          <img src={skill.logo} alt={`${skill.name} logo`} />
+          <div className="carousel-button-container">
+            <button 
+              className="carousel-button"
+              onClick={prevSlide}
+              aria-label="Previous slide"
+            >
+              ←
+            </button>
+          </div>
+          <div className="skills-carousel">
+            <div 
+              className="skills-carousel-track"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {skillCategories.map((category, categoryIndex) => (
+                <div key={categoryIndex} className="skill-category-card">
+                  <h3 className="category-title">{category.title}</h3>
+                  <div className="category-skills">
+                    {category.skills.map((skill, skillIndex) => (
+                      <div key={skillIndex} className="skill-item">
+                        {skill.logo && (
+                          <div className="skill-logo">
+                            <img src={skill.logo} alt={`${skill.name} logo`} />
+                          </div>
+                        )}
+                        <div className="skill-info">
+                          <span className="skill-name">{skill.name}</span>
                         </div>
-                      )}
-                      <div className="skill-info">
-                        <span className="skill-name">{skill.name}</span>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
+          <div className="carousel-button-container">
+            <button 
+              className="carousel-button"
+              onClick={nextSlide}
+              aria-label="Next slide"
+            >
+              →
+            </button>
+          </div>
+          <div className="carousel-indicators">
+            {skillCategories.map((_, index) => (
+              <button
+                key={index}
+                className={`carousel-indicator ${index === currentSlide ? 'active' : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
             ))}
           </div>
-          <button 
-            className="carousel-button carousel-right"
-            onClick={scrollRight}
-            aria-label="Scroll right"
-          >
-            →
-          </button>
         </div>
       </div>
     </section>

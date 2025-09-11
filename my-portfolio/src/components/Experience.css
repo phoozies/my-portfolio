@@ -239,23 +239,6 @@
   margin-bottom: 0.75rem;
 }
 
-.tech-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tech-tag {
-  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-  color: #111827;
-  padding: 0.25rem 0.75rem;
-  border-radius: 16px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
 .tech-tag:hover {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
