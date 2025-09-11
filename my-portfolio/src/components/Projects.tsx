@@ -118,7 +118,7 @@ const Projects = () => {
                     <h4>Technologies:</h4>
                     <div className="tech-tags">
                       {project.technologies.map((tech, techIndex) => (
-                        <span key={techIndex} className="tech-tag">{tech}</span>
+                        <span key={techIndex} className="project-tech-tag">{tech}</span>
                       ))}
                     </div>
                   </div>
