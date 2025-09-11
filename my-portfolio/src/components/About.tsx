@@ -6,7 +6,7 @@ const About = () => {
   const [isVisible, setIsVisible] = useState(false)
   const aboutRef = useRef<HTMLDivElement>(null)
 
-  const aboutText = "Driven by the belief that technology should make life better, I'm a full-stack developer committed to building solutions that matter. I'm constantly exploring new technologies and methodologies, always asking \"how can we do this better?\" Beyond development, I like to unwind through playing video games such as Valorant and Roblox as well as spending quality time with friends!"
+  const aboutText = "Driven by the belief that technology should make life better, I'm a full-stack developer committed to building solutions that matter. I'm constantly exploring new technologies and methodologies; I'm always asking myself, \"how can we do this better?\" Beyond development, I like to unwind through playing video games such as Valorant and Roblox as well as spending quality time with friends!"
 
   const { displayedText, isTyping } = useTypingAnimation({
     text: isVisible ? aboutText : '',
