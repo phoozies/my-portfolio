@@ -11,7 +11,7 @@ const Footer = () => {
     },
     {
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/thinh-vo-1736062bb',
+      url: 'https://www.linkedin.com/in/thinhpvo/',
       logo: './linkedin-bw-logo.svg'
     },
     {

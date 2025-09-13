@@ -19,8 +19,8 @@ const Contact = () => {
     {
       icon: '💼',
       label: 'LinkedIn',
-      value: 'linkedin.com/in/thinh-vo-1736062bb',
-      link: 'https://linkedin.com/in/thinh-vo-1736062bb'
+      value: 'linkedin.com/in/thinhpvo',
+      link: 'https://www.linkedin.com/in/thinhpvo/'
     },
     {
       icon: '💻',
