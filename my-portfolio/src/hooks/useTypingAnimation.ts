@@ -17,6 +17,20 @@ export const useTypingAnimation = ({
   const intervalRef = useRef<number | null>(null)
   const timeoutRef = useRef<number | null>(null)
 
+  const fastComplete = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+    setDisplayedText(text)
+    setIsTyping(false)
+    setIsComplete(true)
+  }
+
   useEffect(() => {
     if (!text) return
 
@@ -75,5 +89,5 @@ export const useTypingAnimation = ({
     }
   }, [text, speed, startDelay])
 
-  return { displayedText, isTyping, isComplete }
+  return { displayedText, isTyping, isComplete, fastComplete }
 }

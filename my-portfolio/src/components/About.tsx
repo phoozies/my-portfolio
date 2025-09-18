@@ -8,11 +8,17 @@ const About = () => {
 
   const aboutText = "Driven by the belief that technology should make life better, I'm a full-stack developer committed to building solutions that matter. I'm constantly exploring new technologies and methodologies; I'm always asking myself, \"how can we do this better?\" Beyond development, I like to unwind through playing video games such as Valorant and Roblox as well as spending quality time with friends!"
 
-  const { displayedText, isTyping } = useTypingAnimation({
+  const { displayedText, isTyping, fastComplete } = useTypingAnimation({
     text: isVisible ? aboutText : '',
     speed: 30,
     startDelay: 500
   })
+
+  const handleDoubleClick = () => {
+    if (isTyping) {
+      fastComplete()
+    }
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,7 +52,12 @@ const About = () => {
         <h2 className="section-title">About Me</h2>
         <div className="about-content">
           <div className="about-text">
-            <p className="about-intro">
+            <p 
+              className="about-intro"
+              onDoubleClick={handleDoubleClick}
+              style={{ cursor: isTyping ? 'pointer' : 'default' }}
+              title={isTyping ? 'Double-click to fast-track' : ''}
+            >
               {displayedText}
               <span className={`typing-cursor ${isTyping ? 'blinking' : 'hidden'}`}>|</span>
             </p>
