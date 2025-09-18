@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import ResumeModal from './ResumeModal'
 import './Landing.css'
+import { detectDeviceCapabilities, throttle, PerformanceSettings } from '../hooks/usePerformance'
 
 interface Particle {
   x: number
@@ -32,6 +33,8 @@ const Landing = () => {
   const [displayedTitle, setDisplayedTitle] = useState('')
   const [showCursor, setShowCursor] = useState(true)
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false)
+  const [performanceSettings] = useState<PerformanceSettings>(() => detectDeviceCapabilities())
+  const lastFrameTime = useRef<number>(0)
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
@@ -100,7 +103,7 @@ const Landing = () => {
     // Initialize particles
     const initParticles = () => {
       particlesRef.current = []
-      const particleCount = 150
+      const particleCount = performanceSettings.particleCount
       
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push({
@@ -116,33 +119,50 @@ const Landing = () => {
 
     initParticles()
 
-    // Mouse move handler
-    const handleMouseMove = (e: MouseEvent) => {
+    // Mouse move handler - throttled for performance
+    const handleMouseMove = throttle((e: MouseEvent) => {
       const rect = heroSection.getBoundingClientRect()
       const newX = e.clientX - rect.left
       const newY = e.clientY - rect.top
       
-      // Create mouse trail particles
-      if (mouseRef.current.x !== 0 && mouseRef.current.y !== 0) {
-        mouseTrailRef.current.push({
-          x: newX + (Math.random() - 0.5) * 5,
-          y: newY + (Math.random() - 0.5) * 5,
-          vx: (Math.random() - 0.5) * 1,
-          vy: (Math.random() - 0.5) * 1,
-          size: Math.random() * 2 + 1,
-          opacity: 1,
-          life: 0,
-          maxLife: 40 + Math.random() * 20
-        })
+      // Create mouse trail particles only if enabled
+      if (performanceSettings.enableTrailParticles && mouseRef.current.x !== 0 && mouseRef.current.y !== 0) {
+        // Limit trail particles
+        if (mouseTrailRef.current.length < 20) {
+          mouseTrailRef.current.push({
+            x: newX + (Math.random() - 0.5) * 5,
+            y: newY + (Math.random() - 0.5) * 5,
+            vx: (Math.random() - 0.5) * 1,
+            vy: (Math.random() - 0.5) * 1,
+            size: Math.random() * 2 + 1,
+            opacity: 1,
+            life: 0,
+            maxLife: 40 + Math.random() * 20
+          })
+        }
       }
       
       mouseRef.current.x = newX
       mouseRef.current.y = newY
-    }
+    }, 16) // ~60fps throttle
 
-    // Animation loop
-    const animate = () => {
+    // Animation loop with FPS control
+    const animate = (currentTime: number) => {
+      // FPS throttling
+      const fpsInterval = 1000 / performanceSettings.animationFPS
+      if (currentTime - lastFrameTime.current < fpsInterval) {
+        animationRef.current = requestAnimationFrame(animate)
+        return
+      }
+      lastFrameTime.current = currentTime
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      // Skip animation if no particles (reduced motion)
+      if (performanceSettings.particleCount === 0) {
+        animationRef.current = requestAnimationFrame(animate)
+        return
+      }
 
       particlesRef.current.forEach((particle) => {
         // Calculate distance to mouse
@@ -172,80 +192,97 @@ const Landing = () => {
         if (particle.y < 0) particle.y = canvas.height
         if (particle.y > canvas.height) particle.y = 0
 
-        // Draw particle
+        // Draw particle with performance optimizations
         ctx.save()
         ctx.globalAlpha = particle.opacity
-        // Create star-like particles with purple/golden glow
-        const gradient = ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.size * 2)
-        gradient.addColorStop(0, 'rgba(232, 121, 249, 1)')
-        gradient.addColorStop(0.5, 'rgba(168, 85, 247, 0.8)')
-        gradient.addColorStop(1, 'rgba(168, 85, 247, 0)')
-        ctx.fillStyle = gradient
+        
+        if (performanceSettings.enableGradients) {
+          // Create star-like particles with purple/golden glow
+          const gradient = ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.size * 2)
+          gradient.addColorStop(0, 'rgba(232, 121, 249, 1)')
+          gradient.addColorStop(0.5, 'rgba(168, 85, 247, 0.8)')
+          gradient.addColorStop(1, 'rgba(168, 85, 247, 0)')
+          ctx.fillStyle = gradient
+        } else {
+          // Simple solid color for low-performance devices
+          ctx.fillStyle = 'rgba(232, 121, 249, 0.8)'
+        }
+        
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
         ctx.fill()
         ctx.restore()
       })
 
-      // Draw connections between nearby particles
-      particlesRef.current.forEach((particle, i) => {
-        particlesRef.current.slice(i + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+      // Draw connections between nearby particles (performance-gated)
+      if (performanceSettings.enableConnections) {
+        particlesRef.current.forEach((particle, i) => {
+          particlesRef.current.slice(i + 1).forEach((otherParticle) => {
+            const dx = particle.x - otherParticle.x
+            const dy = particle.y - otherParticle.y
+            const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 100) {
-            ctx.save()
-            ctx.globalAlpha = (100 - distance) / 100 * 0.4
-            // Create constellation-like connections with purple glow
-            ctx.strokeStyle = 'rgba(168, 85, 247, 0.8)'
-            ctx.lineWidth = 1.5
-            ctx.shadowColor = 'rgba(168, 85, 247, 0.5)'
-            ctx.shadowBlur = 3
-            ctx.beginPath()
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
-            ctx.stroke()
-            ctx.restore()
-          }
+            if (distance < 100) {
+              ctx.save()
+              ctx.globalAlpha = (100 - distance) / 100 * 0.4
+              ctx.strokeStyle = 'rgba(168, 85, 247, 0.8)'
+              ctx.lineWidth = 1.5
+              
+              if (performanceSettings.enableShadows) {
+                ctx.shadowColor = 'rgba(168, 85, 247, 0.5)'
+                ctx.shadowBlur = 3
+              }
+              
+              ctx.beginPath()
+              ctx.moveTo(particle.x, particle.y)
+              ctx.lineTo(otherParticle.x, otherParticle.y)
+              ctx.stroke()
+              ctx.restore()
+            }
+          })
         })
-      })
+      }
 
-      // Update and draw mouse trail particles
-      mouseTrailRef.current = mouseTrailRef.current.filter((trail) => {
-        trail.life++
-        trail.x += trail.vx
-        trail.y += trail.vy
-        trail.vx *= 0.98
-        trail.vy *= 0.98
-        trail.opacity = 1 - (trail.life / trail.maxLife)
+      // Update and draw mouse trail particles (if enabled)
+      if (performanceSettings.enableTrailParticles) {
+        mouseTrailRef.current = mouseTrailRef.current.filter((trail) => {
+          trail.life++
+          trail.x += trail.vx
+          trail.y += trail.vy
+          trail.vx *= 0.98
+          trail.vy *= 0.98
+          trail.opacity = 1 - (trail.life / trail.maxLife)
 
-        if (trail.life < trail.maxLife) {
-          // Draw trail particle (same style as constellation stars)
-          ctx.save()
-          ctx.globalAlpha = trail.opacity
-          
-          // Create star-like particles with purple glow (matching constellation style)
-          const gradient = ctx.createRadialGradient(trail.x, trail.y, 0, trail.x, trail.y, trail.size * 2)
-          gradient.addColorStop(0, 'rgba(232, 121, 249, 1)')
-          gradient.addColorStop(0.5, 'rgba(168, 85, 247, 0.8)')
-          gradient.addColorStop(1, 'rgba(168, 85, 247, 0)')
-          ctx.fillStyle = gradient
-          ctx.beginPath()
-          ctx.arc(trail.x, trail.y, trail.size, 0, Math.PI * 2)
-          ctx.fill()
-          
-          ctx.restore()
-          return true
-        }
-        return false
-      })
+          if (trail.life < trail.maxLife) {
+            // Draw trail particle
+            ctx.save()
+            ctx.globalAlpha = trail.opacity
+            
+            if (performanceSettings.enableGradients) {
+              const gradient = ctx.createRadialGradient(trail.x, trail.y, 0, trail.x, trail.y, trail.size * 2)
+              gradient.addColorStop(0, 'rgba(232, 121, 249, 1)')
+              gradient.addColorStop(0.5, 'rgba(168, 85, 247, 0.8)')
+              gradient.addColorStop(1, 'rgba(168, 85, 247, 0)')
+              ctx.fillStyle = gradient
+            } else {
+              ctx.fillStyle = 'rgba(232, 121, 249, 0.8)'
+            }
+            
+            ctx.beginPath()
+            ctx.arc(trail.x, trail.y, trail.size, 0, Math.PI * 2)
+            ctx.fill()
+            ctx.restore()
+            return true
+          }
+          return false
+        })
+      }
 
       animationRef.current = requestAnimationFrame(animate)
     }
 
     // Start animation
-    animate()
+    animationRef.current = requestAnimationFrame(animate)
 
     // Event listeners
     heroSection.addEventListener('mousemove', handleMouseMove)

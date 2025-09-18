@@ -15,6 +15,19 @@ const Experience = () => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    
+    if (prefersReducedMotion) {
+      // Skip animations if user prefers reduced motion
+      itemRefs.current.forEach((ref) => {
+        if (ref) {
+          ref.classList.add('animate-in')
+        }
+      })
+      return
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -38,9 +51,7 @@ const Experience = () => {
     })
 
     return () => {
-      itemRefs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref)
-      })
+      observer.disconnect()
     }
   }, [])
 

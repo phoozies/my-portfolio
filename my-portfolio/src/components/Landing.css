@@ -1,3 +1,25 @@
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .hero-content,
+  .hero-title,
+  .hero-subtitle,
+  .hero-buttons,
+  .btn-view-work,
+  .btn-resume {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .typing-cursor {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  
+  .hero::after {
+    animation: none !important;
+  }
+}
+
 .hero {
   min-height: 100vh;
   display: flex;
@@ -9,6 +31,8 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  /* Performance hints */
+  will-change: auto;
 }
 
 .hero::after {
@@ -160,7 +184,7 @@
   font-weight: 600;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   display: inline-flex;
   align-items: center;
@@ -171,6 +195,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   position: relative;
   overflow: hidden;
+  /* Performance hint */
+  will-change: transform;
 }
 
 .btn-view-work::before,

@@ -1,3 +1,27 @@
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .back-to-top:hover {
+    transform: none !important;
+  }
+  
+  .constellation-icon {
+    transition: none !important;
+  }
+  
+  .back-to-top:hover .constellation-icon {
+    transform: none !important;
+  }
+  
+  .star {
+    animation: none !important;
+  }
+}
+
 .back-to-top {
   position: fixed;
   bottom: 2rem;
@@ -13,10 +37,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
   animation: floatIn 0.5s ease-out;
   overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.1);
+  /* Performance hint */
+  will-change: transform;
 }
 
 .back-to-top:hover {

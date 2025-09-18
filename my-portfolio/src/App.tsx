@@ -1,14 +1,36 @@
-import { useState } from 'react'
+import { useState, Suspense, lazy } from 'react'
 import './App.css'
 import Header from './components/Header.tsx'
 import Landing from './components/Landing.tsx'
-import About from './components/About.tsx'
-import Skills from './components/Skills.tsx'
-import Experience from './components/Experience.tsx'
-import Projects from './components/Projects.tsx'
-import Contact from './components/Contact.tsx'
-import Footer from './components/Footer.tsx'
-import BackToTop from './components/BackToTop.tsx'
+
+// Lazy load components that are not immediately visible
+const About = lazy(() => import('./components/About.tsx'))
+const Skills = lazy(() => import('./components/Skills.tsx'))
+const Experience = lazy(() => import('./components/Experience.tsx'))
+const Projects = lazy(() => import('./components/Projects.tsx'))
+const Contact = lazy(() => import('./components/Contact.tsx'))
+const Footer = lazy(() => import('./components/Footer.tsx'))
+const BackToTop = lazy(() => import('./components/BackToTop.tsx'))
+
+// Loading component for Suspense fallback
+const SectionLoader = () => (
+  <div style={{
+    minHeight: '200px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#e879f9'
+  }}>
+    <div style={{
+      width: '40px',
+      height: '40px',
+      border: '4px solid rgba(168, 85, 247, 0.3)',
+      borderTop: '4px solid #e879f9',
+      borderRadius: '50%',
+      animation: 'spin 1s linear infinite'
+    }} />
+  </div>
+)
 
 function App() {
   const [activeSection, setActiveSection] = useState<string>('home')
@@ -18,14 +40,28 @@ function App() {
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
       <main>
         <Landing />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Contact />
+        <Suspense fallback={<SectionLoader />}>
+          <About />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Skills />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Experience />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Projects />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
-      <BackToTop />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
+      <Suspense fallback={null}>
+        <BackToTop />
+      </Suspense>
     </div>
   )
 }
