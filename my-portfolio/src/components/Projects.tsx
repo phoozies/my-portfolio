@@ -69,8 +69,6 @@ const Projects = () => {
           slidesPerView={1}
           pagination={{
             clickable: true,
-            bulletClass: 'custom-project-bullet',
-            bulletActiveClass: 'custom-project-bullet-active',
           }}
           loop={true}
           breakpoints={{

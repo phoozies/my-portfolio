@@ -86,8 +86,6 @@ const Skills = () => {
           slidesPerView={1}
           pagination={{
             clickable: true,
-            bulletClass: 'custom-skill-bullet',
-            bulletActiveClass: 'custom-skill-bullet-active',
           }}
           loop={true}
           breakpoints={{
