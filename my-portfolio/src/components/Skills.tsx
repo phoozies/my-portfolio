@@ -97,7 +97,7 @@ const Skills = () => {
             className="skills-carousel" 
             sx={{ 
               overflow: 'hidden',
-              px: { xs: 6, sm: 8, md: 12 },
+              px: { xs: 4, sm: 8, md: 16 },
               py: 4
             }}
           >
@@ -106,8 +106,12 @@ const Skills = () => {
               sx={{
                 display: 'flex',
                 transition: 'transform 0.5s ease-in-out',
-                transform: `translateX(calc(-${currentSlide * 100}% - ${currentSlide * 8}rem))`,
-                gap: '8rem'
+                transform: { 
+                  xs: `translateX(calc(-${currentSlide * 90}% - ${currentSlide * 6}rem))`,
+                  sm: `translateX(calc(-${currentSlide * 100}% - ${currentSlide * 10}rem))`,
+                  md: `translateX(calc(-${currentSlide * 100}% - ${currentSlide * 12}rem))`
+                },
+                gap: { xs: '6rem', sm: '10rem', md: '12rem' }
               }}
             >
               {skillCategories.map((category, categoryIndex) => (
@@ -115,10 +119,12 @@ const Skills = () => {
                   key={categoryIndex}
                   className="skill-category-card"
                   sx={{
-                    minWidth: '100%',
+                    minWidth: { xs: '90%', sm: '100%', md: '100%' },
+                    maxWidth: { xs: '90%', sm: '100%', md: '100%' },
                     flexShrink: 0,
-                    px: { xs: 3, md: 4 },
-                    py: { xs: 3, md: 4 }
+                    px: { xs: 2, sm: 3, md: 4 },
+                    py: { xs: 2, sm: 3, md: 4 },
+                    mx: { xs: 'auto', sm: 0, md: 0 }
                   }}
                 >
                   <Typography 

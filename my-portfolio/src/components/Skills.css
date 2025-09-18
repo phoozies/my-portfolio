@@ -34,6 +34,17 @@
   will-change: transform;
 }
 
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .skill-category-card {
+    padding: 2rem;
+    min-height: 60vh;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 90%;
+  }
+}
+
 .skill-category-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 16px 48px rgba(168, 85, 247, 0.4), 0 0 30px rgba(232, 121, 249, 0.2);
