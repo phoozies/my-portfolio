@@ -1,4 +1,4 @@
-/* Skills Section */
+/* Skills Section with Swiper */
 .skills {
   background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #0f0f0f 100%);
   color: white;
@@ -7,47 +7,39 @@
   align-items: center;
 }
 
-/* Carousel Container - simplified for MUI */
-.skills-carousel-container {
-  position: relative;
-  width: 100%;
+/* Swiper Container */
+.skills-swiper {
+  padding: 2rem 0;
 }
 
-/* Carousel Track - simplified */
-.skills-carousel-track {
-  display: flex;
-  width: 100%;
-}
-
-/* Individual Category Cards - updated for MUI */
+/* Individual Category Cards */
 .skill-category-card {
-  background: linear-gradient(145deg, rgba(15, 15, 15, 0.8), rgba(45, 27, 78, 0.8));
-  backdrop-filter: blur(10px);
-  padding: 3rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2);
-  border: 2px solid rgba(168, 85, 247, 0.3);
-  transition: all 0.3s ease;
+  background: linear-gradient(145deg, rgba(20, 12, 32, 0.85), rgba(60, 32, 92, 0.8));
+  backdrop-filter: blur(8px);
+  padding: 2.5rem 2.75rem;
+  border-radius: 22px;
+  box-shadow: 0 6px 22px rgba(168, 85, 247, 0.15), 0 2px 10px rgba(232, 121, 249, 0.1), 0 0 0 1px rgba(168,85,247,0.2) inset;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
   will-change: transform;
+  margin: 0 auto;
+  max-width: 900px;
 }
 
 /* Mobile responsive adjustments */
-@media (max-width: 768px) {
-  .skill-category-card {
-    padding: 2rem;
-    min-height: 60vh;
-    margin: 0 auto;
-    width: 90%;
-    max-width: 90%;
-  }
+@media (max-width: 599px) { 
+  .skill-category-card { 
+    padding: 2rem 1.75rem; 
+    min-height: 60vh; 
+  } 
 }
 
 .skill-category-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(168, 85, 247, 0.4), 0 0 30px rgba(232, 121, 249, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 34px rgba(168, 85, 247, 0.25), 0 6px 18px rgba(232, 121, 249, 0.15), 0 0 0 1px rgba(168,85,247,0.25) inset;
 }
 
 .category-title {
@@ -61,7 +53,7 @@
   text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
 }
 
-/* Skills Grid - updated for MUI Grid */
+/* Skills Grid */
 .category-skills {
   flex: 1;
   display: flex;
@@ -145,9 +137,54 @@
   100% { transform: translateY(-3px) scale(1.02); }
 }
 
+/* Swiper Pagination Styles - Purple Gradient Theme */
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 2rem !important;
+  bottom: auto !important;
+}
+
+.custom-skill-bullet {
+  width: 14px !important;
+  height: 14px !important;
+  background: rgba(168, 85, 247, 0.3) !important;
+  border-radius: 50% !important;
+  margin: 0 6px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  opacity: 1 !important;
+  border: 2px solid rgba(168, 85, 247, 0.5) !important;
+}
+
+.custom-skill-bullet-active {
+  background: linear-gradient(135deg, #a855f7 0%, #e879f9 100%) !important;
+  transform: scale(1.3) !important;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.8) !important;
+  border: 2px solid #e879f9 !important;
+}
+
+.custom-skill-bullet:hover {
+  background: rgba(168, 85, 247, 0.7) !important;
+  transform: scale(1.1) !important;
+  border: 2px solid rgba(168, 85, 247, 0.8) !important;
+}
+
+/* Mobile adjustments for pagination */
+@media (max-width: 768px) {
+  .custom-skill-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    margin: 0 4px !important;
+  }
+  
+  .custom-skill-bullet-active {
+    transform: scale(1.2) !important;
+  }
+}
+
 /* Performance optimizations */
 @media (prefers-reduced-motion: reduce) {
-  .skills-carousel-track {
+  .skills-swiper .swiper-wrapper {
     transition: none !important;
   }
   
@@ -157,6 +194,12 @@
   }
   
   .skill-item:hover {
+    transform: none !important;
+  }
+  
+  .custom-skill-bullet,
+  .custom-skill-bullet-active {
+    transition: none !important;
     transform: none !important;
   }
 }
