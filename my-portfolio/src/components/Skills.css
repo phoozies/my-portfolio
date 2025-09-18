@@ -1,4 +1,3 @@
-/* Skills Section with Swiper */
 .skills {
   background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #0f0f0f 100%);
   color: white;
@@ -7,12 +6,10 @@
   align-items: center;
 }
 
-/* Swiper Container */
 .skills-swiper {
   padding: 2rem 0;
 }
 
-/* Individual Category Cards */
 .skill-category-card {
   background: linear-gradient(145deg, rgba(20, 12, 32, 0.85), rgba(60, 32, 92, 0.8));
   backdrop-filter: blur(8px);
@@ -29,7 +26,6 @@
   max-width: 900px;
 }
 
-/* Mobile responsive adjustments */
 @media (max-width: 599px) { 
   .skill-category-card { 
     padding: 2rem 1.75rem; 
@@ -53,7 +49,6 @@
   text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
 }
 
-/* Skills Grid */
 .category-skills {
   flex: 1;
   display: flex;
@@ -61,7 +56,6 @@
   gap: 1rem;
 }
 
-/* Individual Skill Items */
 .skill-item {
   display: flex;
   align-items: center;
@@ -137,7 +131,6 @@
   100% { transform: translateY(-3px) scale(1.02); }
 }
 
-/* Swiper Pagination Styles - Purple Gradient Theme */
 .swiper-pagination {
   position: relative !important;
   margin-top: 2rem !important;
@@ -169,7 +162,6 @@
   border: 2px solid rgba(168, 85, 247, 0.8) !important;
 }
 
-/* Mobile adjustments for pagination */
 @media (max-width: 768px) {
   .swiper-pagination-bullet {
     width: 12px !important;
@@ -182,7 +174,6 @@
   }
 }
 
-/* Performance optimizations */
 @media (prefers-reduced-motion: reduce) {
   .skills-swiper .swiper-wrapper {
     transition: none !important;

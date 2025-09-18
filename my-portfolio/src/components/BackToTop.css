@@ -1,4 +1,3 @@
-/* Performance optimizations */
 @media (prefers-reduced-motion: reduce) {
   .back-to-top {
     animation: none !important;

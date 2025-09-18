@@ -146,16 +146,7 @@ const Projects = () => {
                     >
                       Technologies:
                     </Typography>
-                    <Box 
-                      className="tech-tags" 
-                      sx={{ 
-                        display: 'flex', 
-                        flexWrap: 'wrap', 
-                        gap: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                      }}
-                    >
+                    <Box className="tech-tags">
                       {project.technologies.map((tech, techIndex) => (
                         <Chip
                           key={techIndex}

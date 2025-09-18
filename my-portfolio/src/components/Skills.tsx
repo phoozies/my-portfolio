@@ -140,18 +140,16 @@ const Skills = () => {
                   }}
                 >
                   {category.skills.map((skill, skillIndex) => (
-                    <Box key={skillIndex}>
-                      <Box className="skill-item">
-                        {skill.logo && (
-                          <Box className="skill-logo">
-                            <img src={skill.logo} alt={`${skill.name} logo`} />
-                          </Box>
-                        )}
-                        <Box className="skill-info">
-                          <Typography component="span" className="skill-name">
-                            {skill.name}
-                          </Typography>
+                    <Box key={skillIndex} className="skill-item">
+                      {skill.logo && (
+                        <Box className="skill-logo">
+                          <img src={skill.logo} alt={`${skill.name} logo`} />
                         </Box>
+                      )}
+                      <Box className="skill-info">
+                        <Typography component="span" className="skill-name">
+                          {skill.name}
+                        </Typography>
                       </Box>
                     </Box>
                   ))}
