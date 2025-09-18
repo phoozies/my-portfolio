@@ -15,9 +15,7 @@ import {
   Close as CloseIcon,
   Download as DownloadIcon,
   OpenInNew as OpenInNewIcon,
-  PhoneAndroid,
-  Phone as PhoneIcon
-} from '@mui/icons-material'
+  PhoneAndroid} from '@mui/icons-material'
 import './ResumeModal.css'
 
 interface ResumeModalProps {
