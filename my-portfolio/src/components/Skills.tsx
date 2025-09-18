@@ -107,9 +107,9 @@ const Skills = () => {
               <Box
                 className="skill-category-card"
                 sx={{
-                  minWidth: { xs: 'var(--skill-card-width)', sm: '100%', md: '100%' },
-                  maxWidth: { xs: 'var(--skill-card-width)', sm: '100%', md: '100%' },
                   flexShrink: 0,
+                  margin: '0 auto',
+                  maxWidth: '900px',
                   px: { xs: 2, sm: 3, md: 4 },
                   py: { xs: 2, sm: 3, md: 4 }
                 }}

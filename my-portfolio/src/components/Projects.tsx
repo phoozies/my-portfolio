@@ -1,8 +1,7 @@
 import { Container, Box, Typography, Chip } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper/modules'
+import { Pagination } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import './Projects.css'
 
@@ -65,17 +64,13 @@ const Projects = () => {
         </Typography>
         
         <Swiper
-          modules={[Navigation, Pagination]}
+          modules={[Pagination]}
           spaceBetween={48}
           slidesPerView={1}
-          navigation={{
-            nextEl: '.custom-nav-button.swiper-button-next',
-            prevEl: '.custom-nav-button.swiper-button-prev',
-          }}
           pagination={{
             clickable: true,
-            bulletClass: 'custom-bullet',
-            bulletActiveClass: 'custom-bullet-active',
+            bulletClass: 'custom-project-bullet',
+            bulletActiveClass: 'custom-project-bullet-active',
           }}
           loop={true}
           breakpoints={{
@@ -96,8 +91,10 @@ const Projects = () => {
                 className="project-card"
                 sx={{
                   flexShrink: 0,
-                  px: { xs: 1, sm: 3, md: 4 },
-                  py: { xs: 1, sm: 3, md: 4 }
+                  margin: '0 auto',
+                  maxWidth: '900px',
+                  px: { xs: 2, sm: 3, md: 4 },
+                  py: { xs: 2, sm: 3, md: 4 }
                 }}
               >
                 <Box className="project-content">
@@ -186,10 +183,6 @@ const Projects = () => {
               </Box>
             </SwiperSlide>
           ))}
-
-          {/* Custom Navigation Buttons */}
-          <div className="custom-nav-button swiper-button-prev"></div>
-          <div className="custom-nav-button swiper-button-next"></div>
         </Swiper>
       </Container>
     </section>
