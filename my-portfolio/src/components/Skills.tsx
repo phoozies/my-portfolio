@@ -22,7 +22,7 @@ const Skills = () => {
     setCurrentSlide((prev) => (prev - 1 + skillCategories.length) % skillCategories.length)
   }
 
-  const goToSlide = (index: number) => {-
+  const goToSlide = (index: number) => {
     setCurrentSlide(index)
   }
 
