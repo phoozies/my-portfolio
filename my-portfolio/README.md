@@ -78,36 +78,6 @@ This command will:
 2. Commit your changes to the `main` branch
 3. Run `npm run deploy` to update the live site
 
-## 🛠️ Built With
-
-### **Core Technologies**
-- **React 19** - Frontend library
-- **TypeScript**
-- **Vite** - Build tool and dev server
-
-### **UI & Styling**
-- **Material-UI (MUI)** - Component library for modals
-- **CSS3**
-- **CSS Grid & Flexbox**
-
-### **Development Tools**
-- **ESLint** - Code linting and quality
-- **gh-pages** - GitHub Pages deployment
-- **Intersection Observer API** - Scroll-triggered animations
-
-## 🎨 Design System
-
-### **Color Palette**
-- **Primary Purple**: `#a855f7` (Constellation theme)
-- **Secondary Purple**: `#e879f9` (Accent color)
-- **Text Gray**: `#4a5568` (Readable text)
-- **Background**: Dark gradients with purple accents
-
-### **Typography**
-- Modern sans-serif fonts
-- Consistent spacing and hierarchy
-- Responsive font sizes
-
 ## 🤝 Contributing
 
 While this is a personal portfolio, I welcome feedback and suggestions!
