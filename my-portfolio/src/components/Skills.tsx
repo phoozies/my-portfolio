@@ -52,11 +52,11 @@ const Skills = () => {
     {
       title: "Technologies",
       skills: [
-        { name: "Microsoft 365", logo: "./microsoft-logo.svg" },
+        { name: "Microsoft 365", logo: "./ms365-logo.svg" },
         { name: "AWS", logo: "./aws-logo.svg" },
         { name: "Git", logo: "./git-logo.svg" },
         { name: "GitHub", logo: "./github-logo.svg" },
-        { name: "Azure DevOps", logo: "./azure-devops-logo.svg" },
+        { name: "Azure DevOps", logo: "./ado-logo.svg" },
         { name: "Postman", logo: "./postman-logo.svg" },
         { name: "Neo4J", logo: "./neo4j-logo.svg" },
         { name: "Docker", logo: "./docker-logo.svg" },
@@ -72,7 +72,7 @@ const Skills = () => {
         { name: "PowerBI", logo: "./powerbi-logo.svg" },
         { name: "Alteryx", logo: "./alteryx-logo.svg" },
         { name: "DataDog", logo: "./datadog-logo.svg" },
-        { name: "ArgoCD", logo: "./argocd-logo.svg" },
+        { name: "ArgoCD", logo: "./argo-logo.svg" },
         { name: "Kong", logo: "./kong-logo.svg" },
         { name: "Figma", logo: "./figma-logo.svg" }
       ]
