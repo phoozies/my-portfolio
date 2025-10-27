@@ -20,10 +20,12 @@ const Skills = () => {
     {
       title: "Programming Languages",
       skills: [
+        { name: "C#", logo: "./csharp-logo.svg" },
         { name: "TypeScript", logo: "./typescript-logo.svg" },
         { name: "JavaScript", logo: "./javascript-logo.svg" },
-        { name: "C#", logo: "./csharp-logo.svg" },
         { name: "Python", logo: "./python-logo.svg" },
+        { name: "Java", logo: "./java-logo.svg" },
+        { name: "C++", logo: "./cpp-logo.svg" },
         { name: "SQL", logo: "./sql-logo.svg" },
         { name: "PHP", logo: "./php-logo.svg" }
       ]
@@ -31,33 +33,47 @@ const Skills = () => {
     {
       title: "Frameworks & Libraries",
       skills: [
+        { name: "ASP.NET Core", logo: "./dotnet-logo.svg" },
         { name: "React", logo: "./react-logo.svg" },
         { name: "Next.js", logo: "./nextjs-logo.svg" },
-        { name: "Node.js", logo: "./nodejs-logo.svg" },
-        { name: ".NET", logo: "./dotnet-logo.svg" }
+        { name: "FastAPI", logo: "./fastapi-logo.svg" },
+        { name: "Nest.js", logo: "./nestjs-logo.svg" },
+        { name: "Vue.js", logo: "./vue-logo.svg" }
       ]
     },
     {
-      title: "Cloud & DevOps",
+      title: "Testing",
       skills: [
+        { name: "Jest", logo: "./jest-logo.svg" },
+        { name: "Pytest", logo: "./pytest-logo.svg" },
+        { name: "xUnit.net", logo: "./xunit-logo.svg" }
+      ]
+    },
+    {
+      title: "Technologies",
+      skills: [
+        { name: "Microsoft 365", logo: "./microsoft-logo.svg" },
         { name: "AWS", logo: "./aws-logo.svg" },
+        { name: "Git", logo: "./git-logo.svg" },
+        { name: "GitHub", logo: "./github-logo.svg" },
+        { name: "Azure DevOps", logo: "./azure-devops-logo.svg" },
+        { name: "Postman", logo: "./postman-logo.svg" },
+        { name: "Neo4J", logo: "./neo4j-logo.svg" },
         { name: "Docker", logo: "./docker-logo.svg" },
-        { name: "Kubernetes", logo: "./kubernetes-logo.svg" }
+        { name: "Kubernetes", logo: "./kubernetes-logo.svg" },
+        { name: "Firebase", logo: "./firebase-logo.svg" },
+        { name: "Linux", logo: "./linux-logo.svg" },
+        { name: "PowerShell", logo: "./powershell-logo.svg" }
       ]
     },
     {
-      title: "Data & Analytics",
+      title: "Tools & Platforms",
       skills: [
-        { name: "DataDog", logo: "./datadog-logo.svg" },
         { name: "PowerBI", logo: "./powerbi-logo.svg" },
-        { name: "Alteryx", logo: "./alteryx-logo.svg" }
-      ]
-    },
-    {
-      title: "Design & Tools",
-      skills: [
-        { name: "HTML", logo: "./html-logo.svg" },
-        { name: "CSS", logo: "./css-logo.svg" },
+        { name: "Alteryx", logo: "./alteryx-logo.svg" },
+        { name: "DataDog", logo: "./datadog-logo.svg" },
+        { name: "ArgoCD", logo: "./argocd-logo.svg" },
+        { name: "Kong", logo: "./kong-logo.svg" },
         { name: "Figma", logo: "./figma-logo.svg" }
       ]
     }
