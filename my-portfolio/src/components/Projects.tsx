@@ -1,4 +1,4 @@
-import { Container, Box, Typography, Chip } from '@mui/material'
+import { Container, Box, Typography, Chip, Button } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -10,39 +10,33 @@ interface Project {
   period: string
   description: string
   technologies: string[]
+  link?: string
+  image?: string
 }
 
 const Projects = () => {
   const projects: Project[] = [
     {
-      title: "WSU Senior Design Project - Electromech Technologies",
+      title: "TechReady - Interview Prep 🏆",
+      period: "OCT 2025 | K-State Hackathon 2025 Winner",
+      description: "AI-powered mock interview platform with live transcription (Deepgram), speech synthesis (ElevenLabs), and LLM feedback (Gemini). Features modular API routes for proctoring, audio, and interview orchestration with Firebase authentication and storage. Includes technical prompt and feedback pipelines with schema validation and rate limiting.",
+      technologies: ["Next.js", "Firebase", "Deepgram", "ElevenLabs", "Gemini API", "TypeScript"],
+      link: "https://techready.tech",
+      image: "./techready-screenshot.png"
+    },
+    {
+      title: "Meteor Madness 🏆",
+      period: "OCT 2025 | NASA Space Apps Challenge 2025 Winner",
+      description: "Interactive asteroid-impact simulator visualizing real-time planetary defense scenarios. Models impact physics (crater size, overpressure, blast radius) and mitigation strategies (kinetic impactor, gravity tractor) using live NASA NEO API data.",
+      technologies: ["Next.js", "CesiumJS", "react-leaflet", "NASA NEO API", "TypeScript"],
+      image: "./meteor-madness-screenshot.png"
+    },
+    {
+      title: "WSU Senior Design - Electromech Technologies",
       period: "JAN 2025 - Current",
-      description: "Full-stack project management application sponsored by Electromech Technologies, featuring task management, security, and team collaboration capabilities.",
-      technologies: ["ASP.NET Core", "React.js", "Docker", "Full-Stack Development", "Project Management"]
-    },
-    {
-      title: "INVISTA Assistant GenAI Platform",
-      period: "MAY 2025 – AUG 2025",
-      description: "Enhanced GenAI platform integrating multiple AI agents with new features that delivered significant business value.",
-      technologies: ["GenAI", "AI Agents", "Next.js", "Machine Learning", "User Experience"]
-    },
-    {
-      title: "Event-Driven Architecture Pipeline",
-      period: "MAY 2025 – AUG 2025",
-      description: "Automated telemetry data processing and error replay system using event-driven architecture.",
-      technologies: ["AWS S3", "Event-Driven Architecture", "Next.js", "PI Systems", "API Integration"]
-    },
-    {
-      title: "NIAR Legacy Application Replacement",
-      period: "MAY 2024 – MAY 2025",
-      description: "Full-stack internal web application replacing legacy system for data management and specimen tracking.",
-      technologies: ["Full-Stack Development", "NIST 800-171", "Authentication", "Data Management"]
-    },
-    {
-      title: "Microsoft Teams Notification System",
-      period: "MAY 2025 – AUG 2025",
-      description: "Event failure notification system with multi-channel routing and error response handling.",
-      technologies: ["Microsoft Teams API", "Event Handling", "Multi-channel Routing", "Error Handling"]
+      description: "Full-stack project management application with containerized architecture for modular and expandable codebase. Focuses on team collaboration, dynamic visualizations, task management, and security features.",
+      technologies: ["ASP.NET Core", "React.js", "Docker", "Entity Framework", "Azure DevOps"],
+      image: "./senior-design-screenshot.png"
     }
   ]
 
@@ -95,6 +89,28 @@ const Projects = () => {
                   py: { xs: 2, sm: 3, md: 4 }
                 }}
               >
+                {project.image && (
+                  <Box 
+                    sx={{ 
+                      mb: 3,
+                      borderRadius: 2,
+                      overflow: 'hidden',
+                      boxShadow: '0 4px 20px rgba(168, 85, 247, 0.2)',
+                      border: '1px solid rgba(168, 85, 247, 0.3)'
+                    }}
+                  >
+                    <img 
+                      src={project.image} 
+                      alt={`${project.title} screenshot`}
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        display: 'block',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  </Box>
+                )}
                 <Box className="project-content">
                   <Typography 
                     variant="h3" 
@@ -168,6 +184,36 @@ const Projects = () => {
                       ))}
                     </Box>
                   </Box>
+                  
+                  {project.link && (
+                    <Box sx={{ mt: 3, textAlign: 'center' }}>
+                      <Button
+                        variant="contained"
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                          color: 'white',
+                          px: 4,
+                          py: 1.25,
+                          borderRadius: 2,
+                          textTransform: 'none',
+                          fontSize: { xs: '0.9rem', md: '1rem' },
+                          fontWeight: 600,
+                          boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            background: 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 6px 20px rgba(102, 126, 234, 0.6)'
+                          }
+                        }}
+                      >
+                        Visit Live Site →
+                      </Button>
+                    </Box>
+                  )}
                 </Box>
               </Box>
             </SwiperSlide>
