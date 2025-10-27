@@ -29,7 +29,7 @@ const Projects = () => {
       period: "OCT 2025 | NASA Space Apps Challenge 2025 Winner",
       description: "Interactive asteroid-impact simulator visualizing real-time planetary defense scenarios. Models impact physics (crater size, overpressure, blast radius) and mitigation strategies (kinetic impactor, gravity tractor) using live NASA NEO API data.",
       technologies: ["Next.js", "CesiumJS", "react-leaflet", "NASA NEO API", "TypeScript"],
-      link: "https://nasa-meteor-madness-wine.vercel.app/ ",
+      link: "https://nasa-meteor-madness-wine.vercel.app/",
       image: "./meteor-madness-screenshot.png"
     },
     {
