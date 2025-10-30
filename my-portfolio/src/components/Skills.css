@@ -59,10 +59,11 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  background: var(--white-soft);
+  border: 2px solid var(--sakura-light);
+  border-radius: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   min-width: 0;
   overflow: hidden;
   height: 100%;
@@ -70,7 +71,7 @@
 
 .skill-item:hover {
   background: linear-gradient(135deg, var(--sakura-accent) 0%, var(--sakura-deep) 100%);
-  color: white;
+  color: var(--white-soft);
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 8px 20px rgba(255, 139, 163, 0.4);
   animation: skillPulse 0.6s ease-in-out;
@@ -111,8 +112,8 @@
 }
 
 .skill-name {
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 550;
   color: var(--neutral-dark);
   white-space: nowrap;
   overflow: hidden;
@@ -121,7 +122,7 @@
 }
 
 .skill-item:hover .skill-name {
-  color: var(--sakura-accent);
+  color: var(--white-soft);
   font-weight: 700;
 }
 

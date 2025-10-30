@@ -163,7 +163,11 @@ const Skills = () => {
                         </Box>
                       )}
                       <Box className="skill-info">
-                        <Typography component="span" className="skill-name">
+                        <Typography 
+                          component="span" 
+                          className="skill-name"
+                          sx={{ fontWeight: 550 }}
+                        >
                           {skill.name}
                         </Typography>
                       </Box>

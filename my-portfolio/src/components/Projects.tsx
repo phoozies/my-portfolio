@@ -176,8 +176,8 @@ const Projects = () => {
                             color: 'var(--neutral-dark)',
                             border: '2px solid var(--sakura-light)',
                             borderRadius: 0,
-                            fontSize: { xs: '0.7rem', md: '0.8rem' },
-                            fontWeight: 500,
+                            fontSize: { xs: '0.8rem', md: '0.9rem' },
+                            fontWeight: 550,
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
                               backgroundColor: 'var(--sakura-accent)',
