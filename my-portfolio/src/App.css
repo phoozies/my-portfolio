@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
 }
 
 section {
@@ -49,9 +50,9 @@ section:nth-child(6) { animation-delay: 1s; }
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  color: #e879f9;
+  color: var(--sakura-accent);
   position: relative;
-  text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  letter-spacing: -0.5px;
 }
 
 .section-title::after {
@@ -61,10 +62,9 @@ section:nth-child(6) { animation-delay: 1s; }
   left: 50%;
   transform: translateX(-50%);
   width: 60px;
-  height: 4px;
-  background: linear-gradient(135deg, #a855f7 0%, #e879f9 100%);
-  border-radius: 2px;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  height: 3px;
+  background: linear-gradient(90deg, var(--sakura-deep) 0%, var(--sakura-pink) 100%);
+  border-radius: 0;
 }
 
 .text-center {

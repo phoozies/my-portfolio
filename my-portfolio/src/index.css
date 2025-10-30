@@ -6,6 +6,19 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Sakura Cherry Blossom Theme - Sharp & Modern */
+  --sakura-pink: #FFB7C5;
+  --sakura-deep: #FF8FA3;
+  --sakura-light: #FFD7E0;
+  --sakura-accent: #FF6B88;
+  --neutral-warm: #F5F1ED;
+  --neutral-grey: #8B8680;
+  --neutral-dark: #2B2826;
+  --neutral-deeper: #1A1816;
+  --white-soft: #FEFCFB;
+  --shadow-sakura: rgba(255, 139, 163, 0.3);
+  --shadow-soft: rgba(43, 40, 38, 0.15);
 }
 
 * {
@@ -25,8 +38,8 @@ body {
   min-height: 100vh;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   line-height: 1.6;
-  color: #e5e7eb;
-  background-color: #0f0f0f;
+  color: var(--neutral-dark);
+  background-color: var(--neutral-warm);
 }
 
 #root {

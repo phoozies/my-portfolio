@@ -1,7 +1,7 @@
 .experience {
-  background: linear-gradient(180deg, #1a0f2e 0%, #0f0f0f 100%);
+  background: linear-gradient(180deg, var(--white-soft) 0%, var(--neutral-warm) 100%);
   padding: 100px 20px;
-  color: white;
+  color: var(--neutral-dark);
 }
 
 .experience-timeline {
@@ -19,9 +19,9 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  background: linear-gradient(180deg, #a855f7 0%, #e879f9 100%);
-  border-radius: 2px;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  background: linear-gradient(180deg, var(--sakura-accent) 0%, var(--sakura-pink) 100%);
+  border-radius: 0;
+  box-shadow: 0 0 10px rgba(255, 139, 163, 0.5);
 }
 
 .experience-item {
@@ -96,18 +96,20 @@
   transform: translateX(-50%);
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 3;
-  border: 4px solid white;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  border: 3px solid var(--sakura-accent);
+  background: var(--white-soft);
+  box-shadow: 4px 4px 0 var(--sakura-pink);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .experience-item.animate-in .experience-marker {
-  transform: translateX(-50%) scale(1.1);
+  transform: translateX(-50%) translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--sakura-pink);
 }
 
 .experience-item.animate-out .experience-marker {
@@ -118,26 +120,26 @@
 .marker-dot {
   width: 24px;
   height: 24px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background: var(--sakura-accent);
+  border-radius: 0;
+  box-shadow: 0 0 10px rgba(255, 139, 163, 0.4);
 }
 
 .experience-content {
-  background: white;
+  background: var(--white-soft);
   padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  transition: all 0.4s ease;
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--sakura-light);
+  border: 2px solid var(--sakura-accent);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex: 1;
   max-width: 500px;
   position: relative;
 }
 
 .experience-content:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--sakura-light);
 }
 
 /* Speech bubble arrows */
@@ -149,7 +151,7 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-left: 15px solid white;
+  border-left: 15px solid var(--white-soft);
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
@@ -162,7 +164,7 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-right: 15px solid white;
+  border-right: 15px solid var(--white-soft);
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
@@ -173,9 +175,10 @@
 
 .experience-title {
   font-size: 1.5rem;
-  font-weight: 600;
-  color: #2d3748;
+  font-weight: 700;
+  color: var(--sakura-accent);
   margin-bottom: 0.5rem;
+  letter-spacing: 0.3px;
 }
 
 .experience-meta {
@@ -183,21 +186,22 @@
   flex-wrap: wrap;
   gap: 1rem;
   font-size: 0.9rem;
-  color: #718096;
+  color: var(--neutral-grey);
 }
 
 .company {
   font-weight: 600;
-  color: #667eea;
+  color: var(--sakura-deep);
 }
 
 .period {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--sakura-accent);
+  color: var(--white-soft);
   padding: 0.25rem 0.75rem;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
+  box-shadow: 2px 2px 0 var(--sakura-pink);
 }
 
 .location::before {
@@ -213,8 +217,8 @@
 
 .achievements li {
   padding: 0.75rem 0;
-  border-bottom: 1px solid #e2e8f0;
-  color: #4a5568;
+  border-bottom: 1px solid var(--sakura-light);
+  color: var(--neutral-grey);
   line-height: 1.6;
   position: relative;
   padding-left: 1.5rem;
@@ -228,16 +232,16 @@
   content: '▶';
   position: absolute;
   left: 0;
-  color: #667eea;
+  color: var(--sakura-accent);
   font-size: 0.8rem;
 }
 
 .technologies h4 {
   font-size: 1rem;
   font-weight: 600;
-  color: #e879f9;
+  color: var(--sakura-accent);
   margin-bottom: 0.75rem;
-  text-shadow: 0 0 5px rgba(232, 121, 249, 0.3);
+  letter-spacing: 0.5px;
 }
 
 .tech-tags {
@@ -247,30 +251,31 @@
 }
 
 .tech-tag {
-  color: #4a5568 !important;
+  color: var(--neutral-dark) !important;
   padding: 0.25rem 0.75rem;
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 16px;
+  border: 2px solid var(--sakura-light);
+  border-radius: 0;
   font-size: 0.8rem;
   font-weight: 500;
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
+  background: var(--white-soft);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tech-tag:hover {
-  background: linear-gradient(135deg, #a855f7 0%, #e879f9 100%);
-  color: white !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
-  border: none;
+  background: var(--sakura-accent);
+  color: var(--white-soft) !important;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--sakura-pink);
+  border-color: var(--sakura-accent);
 }
 
 .experience-summary {
   margin-top: 4rem;
   padding: 2rem;
-  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
+  background: var(--sakura-light);
+  border-radius: 0;
+  border: 2px solid var(--sakura-accent);
+  box-shadow: 4px 4px 0 var(--sakura-pink);
 }
 
 .summary-stats {
@@ -283,12 +288,12 @@
 .stat-item h3 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #667eea;
+  color: var(--sakura-accent);
   margin-bottom: 0.5rem;
 }
 
 .stat-item p {
-  color: #4a5568;
+  color: var(--neutral-grey);
   font-weight: 500;
 }
 

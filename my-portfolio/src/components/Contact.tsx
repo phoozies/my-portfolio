@@ -11,19 +11,19 @@ const Contact = () => {
 
   const contactInfo: ContactInfo[] = [
     {
-      icon: '📧',
+      icon: './email-logo.svg',
       label: 'Email',
       value: 'tpvo.business@gmail.com',
       link: 'mailto:tpvo.business@gmail.com'
     },
     {
-      icon: '💼',
+      icon: './linkedin-bw-logo.svg',
       label: 'LinkedIn',
       value: 'linkedin.com/in/thinhpvo',
       link: 'https://www.linkedin.com/in/thinhpvo/'
     },
     {
-      icon: '💻',
+      icon: './github-logo.svg',
       label: 'GitHub',
       value: 'github.com/phoozies',
       link: 'https://github.com/phoozies'
@@ -54,7 +54,9 @@ const Contact = () => {
                   target={info.link.startsWith('http') ? '_blank' : '_self'}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                 >
-                  <div className="contact-icon">{info.icon}</div>
+                  <div className="contact-icon">
+                    <img src={info.icon} alt={`${info.label} icon`} className="contact-icon-img" />
+                  </div>
                   <div className="contact-text">
                     <span className="contact-label">{info.label}</span>
                     <span className="contact-value">{info.value}</span>

@@ -84,6 +84,14 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
               {item.label}
             </a>
           ))}
+          <a
+            href="./THINH_VO_RESUME.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link resume-link"
+          >
+            Resume
+          </a>
         </nav>
 
         <button

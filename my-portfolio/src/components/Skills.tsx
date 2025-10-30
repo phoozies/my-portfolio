@@ -89,7 +89,7 @@ const Skills = () => {
           sx={{ 
             textAlign: 'center',
             mb: 4,
-            color: 'white',
+            color: 'var(--neutral-dark)',
             fontSize: { xs: '2rem', md: '2.5rem' }
           }}
         >

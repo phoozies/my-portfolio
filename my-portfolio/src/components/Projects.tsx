@@ -51,7 +51,7 @@ const Projects = () => {
           sx={{ 
             textAlign: 'center',
             mb: 4,
-            color: 'white',
+            color: 'var(--neutral-dark)',
             fontSize: { xs: '2rem', md: '2.5rem' }
           }}
         >
@@ -94,10 +94,10 @@ const Projects = () => {
                   <Box 
                     sx={{ 
                       mb: 3,
-                      borderRadius: 2,
+                      borderRadius: 0,
                       overflow: 'hidden',
-                      boxShadow: '0 4px 20px rgba(168, 85, 247, 0.2)',
-                      border: '1px solid rgba(168, 85, 247, 0.3)'
+                      boxShadow: '4px 4px 0 var(--sakura-light)',
+                      border: '2px solid var(--sakura-accent)'
                     }}
                   >
                     <img 
@@ -129,11 +129,12 @@ const Projects = () => {
                     component="span" 
                     className="project-period"
                     sx={{ 
-                      color: '#c084fc',
+                      color: 'var(--sakura-deep)',
                       fontSize: { xs: '0.8rem', md: '0.9rem' },
                       display: 'block',
                       textAlign: 'center',
-                      mb: 3
+                      mb: 3,
+                      fontWeight: 600
                     }}
                   >
                     {project.period}
@@ -157,8 +158,9 @@ const Projects = () => {
                       sx={{ 
                         fontSize: { xs: '0.95rem', md: '1rem' },
                         mb: 2,
-                        color: '#e879f9',
-                        textAlign: 'center'
+                        color: 'var(--sakura-accent)',
+                        textAlign: 'center',
+                        fontWeight: 600
                       }}
                     >
                       Technologies:
@@ -170,15 +172,19 @@ const Projects = () => {
                           label={tech}
                           size="small"
                           sx={{
-                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
-                            color: '#e5e7eb',
-                            border: '1px solid rgba(168, 85, 247, 0.3)',
+                            backgroundColor: 'var(--white-soft)',
+                            color: 'var(--neutral-dark)',
+                            border: '2px solid var(--sakura-light)',
+                            borderRadius: 0,
                             fontSize: { xs: '0.7rem', md: '0.8rem' },
-                            transition: 'all 0.3s ease',
+                            fontWeight: 500,
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
-                              backgroundColor: '#a855f7',
-                              color: 'white',
-                              transform: 'translateY(-2px)'
+                              backgroundColor: 'var(--sakura-accent)',
+                              color: 'var(--white-soft)',
+                              borderColor: 'var(--sakura-accent)',
+                              transform: 'translate(2px, 2px)',
+                              boxShadow: '2px 2px 0 var(--sakura-pink)'
                             }
                           }}
                         />
@@ -194,20 +200,22 @@ const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         sx={{
-                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                          color: 'white',
+                          background: 'var(--sakura-accent)',
+                          color: 'var(--white-soft)',
                           px: 4,
                           py: 1.25,
-                          borderRadius: 2,
+                          borderRadius: 0,
+                          border: '2px solid var(--sakura-accent)',
                           textTransform: 'none',
                           fontSize: { xs: '0.9rem', md: '1rem' },
                           fontWeight: 600,
-                          boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
-                          transition: 'all 0.3s ease',
+                          boxShadow: '4px 4px 0 var(--sakura-pink)',
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                           '&:hover': {
-                            background: 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)',
-                            transform: 'translateY(-2px)',
-                            boxShadow: '0 6px 20px rgba(102, 126, 234, 0.6)'
+                            background: 'var(--sakura-deep)',
+                            borderColor: 'var(--sakura-deep)',
+                            transform: 'translate(2px, 2px)',
+                            boxShadow: '2px 2px 0 var(--sakura-pink)'
                           }
                         }}
                       >

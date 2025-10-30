@@ -107,17 +107,6 @@ const Experience = () => {
     }
   ]
 
-  const getTypeColor = (type: Experience['type']): string => {
-    switch (type) {
-      case 'internship':
-        return '#667eea'
-      case 'student-assistant':
-        return '#764ba2'
-      default:
-        return '#4a5568'
-    }
-  }
-
   return (
     <section id="experience" className="experience">
       <div className="container-fullwidth">
@@ -129,7 +118,7 @@ const Experience = () => {
               className={`experience-item ${index % 2 === 0 ? 'left' : 'right'}`}
               ref={(el) => { itemRefs.current[index] = el }}
             >
-              <div className="experience-marker" style={{ background: getTypeColor(exp.type) }}>
+              <div className="experience-marker">
                 <div className="marker-dot"></div>
               </div>
               

@@ -2,6 +2,7 @@ import { useState, Suspense, lazy } from 'react'
 import './App.css'
 import Header from './components/Header.tsx'
 import Landing from './components/Landing.tsx'
+import CherryPetals from './components/CherryPetals.tsx'
 
 // Lazy load components that are not immediately visible
 const About = lazy(() => import('./components/About.tsx'))
@@ -19,14 +20,14 @@ const SectionLoader = () => (
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#e879f9'
+    color: '#FF8FA3'
   }}>
     <div style={{
       width: '40px',
       height: '40px',
-      border: '4px solid rgba(168, 85, 247, 0.3)',
-      borderTop: '4px solid #e879f9',
-      borderRadius: '50%',
+      border: '4px solid rgba(255, 183, 197, 0.3)',
+      borderTop: '4px solid #FF8FA3',
+      borderRadius: '0',
       animation: 'spin 1s linear infinite'
     }} />
   </div>
@@ -37,6 +38,7 @@ function App() {
 
   return (
     <div className="App">
+      <CherryPetals />
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
       <main>
         <Landing />

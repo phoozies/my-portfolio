@@ -1,6 +1,6 @@
 .contact {
-  background: linear-gradient(135deg, #0f0f0f 0%, #2d1b4e 50%, #4a1a5c 100%);
-  color: white;
+  background: linear-gradient(135deg, #FFF5F7 0%, var(--neutral-warm) 50%, var(--white-soft) 100%);
+  color: var(--neutral-dark);
   padding: 100px 0;
   position: relative;
   overflow: hidden;
@@ -13,16 +13,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="90" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-  opacity: 0.3;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="rgba(255,139,163,0.15)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,183,197,0.15)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,107,136,0.15)"/><circle cx="10" cy="90" r="0.5" fill="rgba(255,183,197,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.4;
 }
 
 .contact .section-title {
-  color: white;
+  color: var(--sakura-accent);
 }
 
 .contact .section-title::after {
-  background: white;
+  background: linear-gradient(90deg, var(--sakura-deep) 0%, var(--sakura-pink) 100%);
 }
 
 .contact-content {
@@ -54,7 +54,7 @@
 .contact-intro p {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--neutral-grey);
 }
 
 .contact-details {
@@ -72,33 +72,52 @@
   text-align: center;
   gap: 1rem;
   padding: 2rem 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  background: var(--white-soft);
+  border-radius: 0;
   text-decoration: none;
-  color: white;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--neutral-dark);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid var(--sakura-accent);
+  box-shadow: 4px 4px 0 var(--sakura-pink);
   min-height: 160px;
   justify-content: center;
 }
 
 .contact-item:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  background: var(--sakura-light);
+  border-color: var(--sakura-deep);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--sakura-pink);
 }
 
 .contact-icon {
-  font-size: 2.5rem;
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
+  background: var(--sakura-light);
+  border-radius: 0;
   margin-bottom: 0.5rem;
+  border: 2px solid var(--sakura-accent);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-icon-img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) saturate(100%) invert(14%) sepia(11%) saturate(1026%) hue-rotate(330deg) brightness(95%) contrast(89%);
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover .contact-icon {
+  background: var(--sakura-accent);
+  transform: scale(1.05);
+}
+
+.contact-item:hover .contact-icon-img {
+  filter: brightness(0) saturate(100%) invert(49%) sepia(64%) saturate(2269%) hue-rotate(313deg) brightness(102%) contrast(101%);
+  transform: scale(1.1);
 }
 
 .contact-text {
@@ -109,15 +128,25 @@
 
 .contact-label {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.25rem;
+  color: var(--sakura-accent);
+  letter-spacing: 0.5px;
 }
 
 .contact-value {
   font-size: 0.9rem;
   font-weight: 500;
-  opacity: 0.9;
+  color: var(--neutral-grey);
   word-break: break-word;
+}
+
+.contact-item:hover .contact-label {
+  color: var(--sakura-deep);
+}
+
+.contact-item:hover .contact-value {
+  color: var(--neutral-dark);
 }
 
 
@@ -143,9 +172,13 @@
   }
 
   .contact-icon {
-    font-size: 2rem;
     width: 50px;
     height: 50px;
+  }
+
+  .contact-icon-img {
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -164,9 +197,13 @@
   }
 
   .contact-icon {
-    font-size: 1.75rem;
     width: 45px;
     height: 45px;
+  }
+
+  .contact-icon-img {
+    width: 24px;
+    height: 24px;
   }
 
   .contact-label {
