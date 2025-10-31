@@ -1,0 +1,69 @@
+.back-button {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--pixel-bg);
+  color: var(--pixel-cyan);
+  border: 4px solid var(--pixel-cyan);
+  box-shadow: 6px 6px 0 var(--pixel-purple);
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  letter-spacing: 2px;
+}
+
+.back-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 var(--pixel-purple);
+  background: var(--pixel-cyan);
+  color: var(--pixel-dark);
+}
+
+.back-button:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 var(--pixel-purple);
+}
+
+.back-arrow {
+  font-size: 1.2rem;
+  animation: arrowBlink 1.5s infinite;
+}
+
+.back-text {
+  font-size: 1rem;
+}
+
+@keyframes arrowBlink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.3;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .back-button {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .back-arrow {
+    font-size: 1rem;
+  }
+
+  .back-text {
+    font-size: 0.875rem;
+  }
+}

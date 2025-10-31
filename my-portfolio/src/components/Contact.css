@@ -1,28 +1,20 @@
 .contact {
-  background: linear-gradient(135deg, #FFF5F7 0%, var(--neutral-warm) 50%, var(--white-soft) 100%);
-  color: var(--neutral-dark);
+  background: var(--pixel-dark);
+  color: var(--pixel-light);
   padding: 100px 0;
   position: relative;
   overflow: hidden;
 }
 
-.contact::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="rgba(255,139,163,0.15)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,183,197,0.15)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,107,136,0.15)"/><circle cx="10" cy="90" r="0.5" fill="rgba(255,183,197,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-  opacity: 0.4;
-}
-
 .contact .section-title {
-  color: var(--sakura-accent);
+  color: var(--pixel-yellow);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 3px 3px 0 var(--pixel-purple);
 }
 
 .contact .section-title::after {
-  background: linear-gradient(90deg, var(--sakura-deep) 0%, var(--sakura-pink) 100%);
+  background: var(--pixel-cyan);
 }
 
 .contact-content {
@@ -54,7 +46,7 @@
 .contact-intro p {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: var(--neutral-grey);
+  color: var(--pixel-light);
 }
 
 .contact-details {
@@ -72,22 +64,22 @@
   text-align: center;
   gap: 1rem;
   padding: 2rem 1.5rem;
-  background: var(--white-soft);
+  background: var(--pixel-bg);
   border-radius: 0;
   text-decoration: none;
-  color: var(--neutral-dark);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid var(--sakura-accent);
-  box-shadow: 4px 4px 0 var(--sakura-pink);
+  color: var(--pixel-light);
+  transition: none;
+  border: 4px solid var(--pixel-cyan);
+  box-shadow: 8px 8px 0 var(--pixel-purple);
   min-height: 160px;
   justify-content: center;
 }
 
 .contact-item:hover {
-  background: var(--sakura-light);
-  border-color: var(--sakura-deep);
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--sakura-pink);
+  background: var(--pixel-blue);
+  border-color: var(--pixel-cyan);
+  transform: translate(4px, 4px);
+  box-shadow: 4px 4px 0 var(--pixel-purple);
 }
 
 .contact-icon {
@@ -96,28 +88,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--sakura-light);
+  background: var(--pixel-darker);
   border-radius: 0;
   margin-bottom: 0.5rem;
-  border: 2px solid var(--sakura-accent);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 4px solid var(--pixel-blue);
+  transition: none;
 }
 
 .contact-icon-img {
   width: 32px;
   height: 32px;
-  filter: brightness(0) saturate(100%) invert(14%) sepia(11%) saturate(1026%) hue-rotate(330deg) brightness(95%) contrast(89%);
-  transition: all 0.3s ease;
+  filter: brightness(0) saturate(100%) invert(100%);
+  transition: none;
 }
 
 .contact-item:hover .contact-icon {
-  background: var(--sakura-accent);
-  transform: scale(1.05);
+  background: var(--pixel-cyan);
+  border-color: var(--pixel-yellow);
+  transform: none;
 }
 
 .contact-item:hover .contact-icon-img {
-  filter: brightness(0) saturate(100%) invert(49%) sepia(64%) saturate(2269%) hue-rotate(313deg) brightness(102%) contrast(101%);
-  transform: scale(1.1);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(8%) saturate(3127%) hue-rotate(212deg) brightness(93%) contrast(97%);
+  transform: none;
 }
 
 .contact-text {
@@ -130,23 +123,24 @@
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
-  color: var(--sakura-accent);
-  letter-spacing: 0.5px;
+  color: var(--pixel-yellow);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .contact-value {
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--neutral-grey);
+  color: var(--pixel-light);
   word-break: break-word;
 }
 
 .contact-item:hover .contact-label {
-  color: var(--sakura-deep);
+  color: var(--pixel-yellow);
 }
 
 .contact-item:hover .contact-value {
-  color: var(--neutral-dark);
+  color: var(--pixel-light);
 }
 
 

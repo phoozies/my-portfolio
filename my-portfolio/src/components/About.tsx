@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 import './About.css'
 import { useTypingAnimation } from '../hooks/useTypingAnimation'
+import { useSectionVisibility } from '../hooks/useSectionVisibility'
 
-const About = () => {
+interface AboutProps {
+  unlockAchievement: (sectionId: string) => void;
+}
+
+const About = ({ unlockAchievement }: AboutProps) => {
   const [isVisible, setIsVisible] = useState(false)
   const aboutRef = useRef<HTMLDivElement>(null)
+  
+  const achievementRef = useSectionVisibility({
+    threshold: 0.3,
+    onVisible: () => unlockAchievement('about')
+  })
 
   const aboutText = "Driven by the belief that technology should make life better, I'm a full-stack developer committed to building solutions that matter. I'm constantly exploring new technologies and methodologies; I'm always asking myself, \"how can we do this better?\" Beyond development, I like to unwind through playing video games such as Valorant and Roblox as well as spending quality time with friends!"
 
@@ -47,7 +57,10 @@ const About = () => {
   }, [isVisible])
 
   return (
-    <section id="about" className="about" ref={aboutRef}>
+    <section id="about" className="about" ref={(el) => {
+      aboutRef.current = el as HTMLDivElement | null;
+      (achievementRef as any).current = el;
+    }}>
       <div className="container">
         <h2 className="section-title">About Me</h2>
         <div className="about-content">

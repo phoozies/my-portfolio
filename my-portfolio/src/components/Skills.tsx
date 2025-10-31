@@ -4,6 +4,7 @@ import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import './Skills.css'
+import { useSectionVisibility } from '../hooks/useSectionVisibility'
 
 interface Skill {
   name: string
@@ -15,7 +16,15 @@ interface SkillCategory {
   skills: Skill[]
 }
 
-const Skills = () => {
+interface SkillsProps {
+  unlockAchievement: (sectionId: string) => void;
+}
+
+const Skills = ({ unlockAchievement }: SkillsProps) => {
+  const sectionRef = useSectionVisibility({
+    threshold: 0.3,
+    onVisible: () => unlockAchievement('skills')
+  });
   const skillCategories: SkillCategory[] = [
     {
       title: "Programming Languages",
@@ -80,7 +89,7 @@ const Skills = () => {
   ]
 
   return (
-    <section id="skills" className="skills">
+    <section id="skills" className="skills" ref={sectionRef}>
       <Container maxWidth="xl" sx={{ py: { xs: 6, md: 12 } }}>
         <Typography 
           variant="h2" 

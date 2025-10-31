@@ -1,10 +1,20 @@
 ﻿import { useEffect, useState } from 'react';
 import './Landing.css';
+import { useSectionVisibility } from '../hooks/useSectionVisibility';
 
-const Landing = () => {
+interface LandingProps {
+  unlockAchievement: (sectionId: string) => void;
+}
+
+const Landing = ({ unlockAchievement }: LandingProps) => {
   const [displayedName, setDisplayedName] = useState('');
   const [displayedTitle, setDisplayedTitle] = useState('');
   const [showCursor, setShowCursor] = useState(true);
+  
+  const sectionRef = useSectionVisibility({
+    threshold: 0.3,
+    onVisible: () => unlockAchievement('landing')
+  });
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
@@ -47,14 +57,7 @@ const Landing = () => {
   }, []);
 
   return (
-    <section id="home" className="hero">
-      <div className="cherry-tree-container">
-        <img 
-          src="./cherry-tree.png" 
-          alt="Cherry Blossom Tree" 
-          className="cherry-tree"
-        />
-      </div>
+    <section id="home" className="hero" ref={sectionRef}>
       <div className="hero-content">
         <div className="hero-text">
           <h1 className="hero-title">

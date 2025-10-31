@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './Experience.css'
+import { useSectionVisibility } from '../hooks/useSectionVisibility'
 
 interface Experience {
   title: string
@@ -11,8 +12,16 @@ interface Experience {
   type: 'internship' | 'student-assistant' | 'full-time'
 }
 
-const Experience = () => {
+interface ExperienceProps {
+  unlockAchievement: (sectionId: string) => void;
+}
+
+const Experience = ({ unlockAchievement }: ExperienceProps) => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sectionRef = useSectionVisibility({
+    threshold: 0.3,
+    onVisible: () => unlockAchievement('experience')
+  })
 
   useEffect(() => {
     // Check for reduced motion preference
@@ -108,7 +117,7 @@ const Experience = () => {
   ]
 
   return (
-    <section id="experience" className="experience">
+    <section id="experience" className="experience" ref={sectionRef}>
       <div className="container-fullwidth">
         <h2 className="section-title">Professional Experience</h2>
         <div className="experience-timeline">

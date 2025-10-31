@@ -1,9 +1,10 @@
 .skills {
-  background: linear-gradient(135deg, var(--white-soft) 0%, #FFF5F7 50%, var(--neutral-warm) 100%);
-  color: var(--neutral-dark);
+  background: var(--pixel-dark);
+  color: var(--pixel-light);
   min-height: 100vh;
   display: flex;
   align-items: center;
+  padding: 0rem;
 }
 
 .skills-swiper {
@@ -11,12 +12,12 @@
 }
 
 .skill-category-card {
-  background: var(--white-soft);
+  background: var(--pixel-bg);
   padding: 2.5rem 2.75rem;
   border-radius: 0;
-  box-shadow: 8px 8px 0 var(--sakura-light);
-  border: 2px solid var(--sakura-accent);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 8px 8px 0 var(--pixel-purple);
+  border: 4px solid var(--pixel-cyan);
+  transition: none;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -34,18 +35,20 @@
 
 .skill-category-card:hover {
   transform: translate(4px, 4px);
-  box-shadow: 4px 4px 0 var(--sakura-light);
+  box-shadow: 4px 4px 0 var(--pixel-purple);
 }
 
 .category-title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--sakura-accent);
+  color: var(--pixel-yellow);
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--sakura-accent);
+  border-bottom: 4px solid var(--pixel-cyan);
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 var(--pixel-purple);
 }
 
 .category-skills {
@@ -60,21 +63,21 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--white-soft);
-  border: 2px solid var(--sakura-light);
+  background: var(--pixel-darker);
+  border: 4px solid var(--pixel-blue);
   border-radius: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: none;
   min-width: 0;
   overflow: hidden;
   height: 100%;
 }
 
 .skill-item:hover {
-  background: linear-gradient(135deg, var(--sakura-accent) 0%, var(--sakura-deep) 100%);
-  color: var(--white-soft);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(255, 139, 163, 0.4);
-  animation: skillPulse 0.6s ease-in-out;
+  background: var(--pixel-blue);
+  color: var(--pixel-light);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--pixel-purple);
+  border-color: var(--pixel-cyan);
 }
 
 .skill-logo {
@@ -141,25 +144,26 @@
 .swiper-pagination-bullet {
   width: 12px !important;
   height: 12px !important;
-  background: var(--sakura-light) !important;
+  background: var(--pixel-bg) !important;
   border-radius: 0 !important;
   margin: 0 6px !important;
   cursor: pointer !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: none !important;
   opacity: 1 !important;
-  border: 2px solid var(--sakura-pink) !important;
+  border: 3px solid var(--pixel-cyan) !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: var(--sakura-accent) !important;
+  background: var(--pixel-yellow) !important;
   transform: scale(1.2) !important;
-  border: 2px solid var(--sakura-accent) !important;
+  border: 3px solid var(--pixel-yellow) !important;
+  box-shadow: 0 0 10px var(--pixel-yellow);
 }
 
 .swiper-pagination-bullet:hover {
-  background: var(--sakura-pink) !important;
+  background: var(--pixel-green) !important;
   transform: scale(1.1) !important;
-  border: 2px solid var(--sakura-deep) !important;
+  border: 3px solid var(--pixel-green) !important;
 }
 
 @media (max-width: 768px) {

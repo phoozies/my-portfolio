@@ -1,0 +1,111 @@
+.pacman-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  cursor: none;
+}
+
+.score-display {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: var(--pixel-darker);
+  border: 4px solid var(--pixel-yellow);
+  padding: 1rem 1.5rem;
+  z-index: 10000;
+  font-family: 'Courier New', monospace;
+  box-shadow: 6px 6px 0 var(--pixel-purple);
+  min-width: 200px;
+}
+
+.score-label {
+  color: var(--pixel-cyan);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.score-value {
+  color: var(--pixel-yellow);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-shadow: 3px 3px 0 var(--pixel-purple);
+  animation: scoreGlow 2s ease-in-out infinite;
+}
+
+.power-mode-indicator {
+  margin-top: 0.75rem;
+  color: var(--pixel-cyan);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  animation: powerPulse 0.3s ease-in-out infinite;
+  text-align: center;
+  text-shadow: 2px 2px 0 var(--pixel-purple);
+  background: var(--pixel-blue);
+  padding: 0.5rem;
+  border: 2px solid var(--pixel-cyan);
+}
+
+.combo-display {
+  margin-top: 0.75rem;
+  color: var(--pixel-green);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  animation: comboPulse 0.5s ease-in-out infinite;
+  text-align: center;
+  text-shadow: 2px 2px 0 var(--pixel-orange);
+}
+
+@keyframes powerPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes scoreGlow {
+  0%, 100% {
+    text-shadow: 3px 3px 0 var(--pixel-purple);
+  }
+  50% {
+    text-shadow: 3px 3px 0 var(--pixel-purple), 0 0 20px var(--pixel-yellow);
+  }
+}
+
+@keyframes comboPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .score-display {
+    bottom: 10px;
+    left: 10px;
+    padding: 0.75rem 1rem;
+    min-width: 150px;
+  }
+  
+  .score-value {
+    font-size: 1.5rem;
+  }
+  
+  .combo-display {
+    font-size: 0.85rem;
+  }
+}

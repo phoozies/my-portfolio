@@ -1,4 +1,5 @@
 import './Contact.css'
+import { useSectionVisibility } from '../hooks/useSectionVisibility'
 
 interface ContactInfo {
   icon: string
@@ -7,7 +8,15 @@ interface ContactInfo {
   link: string
 }
 
-const Contact = () => {
+interface ContactProps {
+  unlockAchievement: (sectionId: string) => void;
+}
+
+const Contact = ({ unlockAchievement }: ContactProps) => {
+  const sectionRef = useSectionVisibility({
+    threshold: 0.3,
+    onVisible: () => unlockAchievement('contact')
+  });
 
   const contactInfo: ContactInfo[] = [
     {
@@ -31,7 +40,7 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="contact">
+    <section id="contact" className="contact" ref={sectionRef}>
       <div className="container">
         <h2 className="section-title">Let's Connect!</h2>
         <div className="contact-content">

@@ -1,24 +1,27 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Courier New', 'Press Start 2P', monospace;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
+  image-rendering: pixelated;
   
-  /* Sakura Cherry Blossom Theme - Sharp & Modern */
-  --sakura-pink: #FFB7C5;
-  --sakura-deep: #FF8FA3;
-  --sakura-light: #FFD7E0;
-  --sakura-accent: #FF6B88;
-  --neutral-warm: #F5F1ED;
-  --neutral-grey: #8B8680;
-  --neutral-dark: #2B2826;
-  --neutral-deeper: #1A1816;
-  --white-soft: #FEFCFB;
-  --shadow-sakura: rgba(255, 139, 163, 0.3);
-  --shadow-soft: rgba(43, 40, 38, 0.15);
+  /* 8-Bit Retro Video Game Theme */
+  --pixel-blue: #5B6EE1;
+  --pixel-purple: #AC3232;
+  --pixel-pink: #D95763;
+  --pixel-orange: #F6AA61;
+  --pixel-yellow: #FBF236;
+  --pixel-green: #99E550;
+  --pixel-cyan: #5FCDE4;
+  --pixel-dark: #1A1C2C;
+  --pixel-darker: #0D0E14;
+  --pixel-light: #FFFFFF;
+  --pixel-grey: #6F6776;
+  --pixel-bg: #2D2E42;
+  --shadow-pixel: rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -36,10 +39,17 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Courier New', 'Press Start 2P', monospace;
   line-height: 1.6;
-  color: var(--neutral-dark);
-  background-color: var(--neutral-warm);
+  color: var(--pixel-light);
+  background-color: var(--pixel-dark);
+  image-rendering: pixelated;
+  cursor: none !important;
+}
+
+/* Show pointer cursor on interactive elements */
+button, a, input, textarea, select, .nav-link, .social-link, .contact-item {
+  cursor: pointer !important;
 }
 
 #root {
