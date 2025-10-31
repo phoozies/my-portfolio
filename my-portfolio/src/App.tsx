@@ -19,9 +19,11 @@ function App() {
     hideAchievement
   } = useAchievements()
 
+  const routerBase = (import.meta as any).env?.BASE_URL || '/'
+
   return (
     <ThemeProvider theme={pixelTheme}>
-      <Router>
+      <Router basename={routerBase}>
         <div className="App">
           <PacManGame />
           
