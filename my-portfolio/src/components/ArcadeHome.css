@@ -1,10 +1,11 @@
 .arcade-home {
-  height: 100vh;
+  min-height: 100vh;
   background: var(--pixel-dark);
   color: var(--pixel-light);
   padding: 1rem;
   font-family: 'Courier New', monospace;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -57,34 +58,22 @@
   font-weight: 700;
   color: var(--pixel-yellow);
   text-shadow: 
-    4px 4px 0 var(--pixel-purple),
-    -2px -2px 0 var(--pixel-cyan);
-  letter-spacing: 6px;
+    4px 4px 0 var(--pixel-purple);
+  letter-spacing: 8px;
   margin: 0;
-  animation: glitchAnimation 3s infinite;
-}
-
-@keyframes glitchAnimation {
-  0%, 90%, 100% {
-    transform: translate(0);
-  }
-  92% {
-    transform: translate(-4px, 2px);
-  }
-  94% {
-    transform: translate(4px, -2px);
-  }
-  96% {
-    transform: translate(-2px, -4px);
-  }
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .subtitle {
   font-size: 1rem;
   color: var(--pixel-cyan);
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   margin-top: 0.25rem;
   text-shadow: 2px 2px 0 var(--pixel-purple);
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
 }
 
 .header-actions {
@@ -150,16 +139,8 @@
   color: var(--pixel-yellow);
   font-weight: 700;
   text-shadow: 3px 3px 0 var(--pixel-orange);
-  animation: coinPulse 1s infinite;
-}
-
-@keyframes coinPulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
 }
 
 .arcade-instruction {
@@ -171,24 +152,17 @@
 .arcade-instruction p {
   font-size: 1rem;
   color: var(--pixel-green);
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   margin: 0.25rem 0;
-  animation: blink 2s infinite;
+  animation: pixelBlink 1s step-end infinite;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
 }
 
 .instruction-hint {
   font-size: 0.7rem !important;
   color: var(--pixel-grey) !important;
   animation: none !important;
-}
-
-@keyframes blink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0.3;
-  }
 }
 
 .arcade-grid {
@@ -208,51 +182,18 @@
   cursor: pointer;
   transition: none;
   position: relative;
-  animation: cardFloat 3s ease-in-out infinite;
+  box-shadow: 8px 8px 0 var(--pixel-dark);
 }
 
-.arcade-card:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.arcade-card:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.arcade-card:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-.arcade-card:nth-child(4) {
-  animation-delay: 0.6s;
-}
-
-.arcade-card:nth-child(5) {
-  animation-delay: 0.8s;
-}
-
-@keyframes cardFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+.arcade-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 var(--pixel-dark);
 }
 
 .arcade-card.selected {
   border-color: var(--card-color);
-  box-shadow: 0 0 30px var(--card-color), 8px 8px 0 var(--pixel-purple);
-  animation: cardPulse 0.5s ease-in-out infinite, cardFloat 3s ease-in-out infinite;
-}
-
-@keyframes cardPulse {
-  0%, 100% {
-    transform: scale(1) translateY(-10px);
-  }
-  50% {
-    transform: scale(1.03) translateY(-10px);
-  }
+  box-shadow: 8px 8px 0 var(--pixel-purple);
+  transform: none;
 }
 
 .card-screen {
@@ -268,54 +209,28 @@
   overflow: hidden;
 }
 
-.screen-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    circle at center,
-    var(--card-color) 0%,
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.arcade-card.selected .screen-glow {
-  opacity: 0.2;
+.arcade-card.selected .card-screen {
+  background: var(--pixel-bg);
+  border-bottom-color: var(--card-color);
 }
 
 .card-icon {
   font-size: 5rem;
   margin-bottom: 1rem;
   filter: drop-shadow(4px 4px 0 var(--pixel-purple));
-  animation: iconBounce 2s ease-in-out infinite;
-}
-
-@keyframes iconBounce {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-15px) rotate(-5deg);
-  }
-  75% {
-    transform: translateY(-15px) rotate(5deg);
-  }
 }
 
 .arcade-card.selected .card-icon {
-  animation: iconSpin 0.8s ease-in-out infinite;
+  filter: drop-shadow(4px 4px 0 var(--card-color));
+  animation: pixelBlink 0.5s step-end infinite;
 }
 
-@keyframes iconSpin {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
+@keyframes pixelBlink {
+  0%, 50% {
+    opacity: 1;
   }
-  50% {
-    transform: scale(1.2) rotate(10deg);
+  51%, 100% {
+    opacity: 0.7;
   }
 }
 
@@ -323,24 +238,17 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--pixel-yellow);
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   margin-bottom: 0.5rem;
   text-shadow: 3px 3px 0 var(--pixel-purple);
   text-align: center;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
 }
 
 .arcade-card.selected .card-title {
   color: var(--card-color);
-  animation: titleGlow 1s ease-in-out infinite;
-}
-
-@keyframes titleGlow {
-  0%, 100% {
-    text-shadow: 3px 3px 0 var(--pixel-purple);
-  }
-  50% {
-    text-shadow: 3px 3px 0 var(--pixel-purple), 0 0 20px var(--card-color);
-  }
+  text-shadow: 3px 3px 0 var(--pixel-dark);
 }
 
 .card-description {
@@ -358,33 +266,14 @@
   padding: 0.5rem 1rem;
   border: 3px solid var(--pixel-green);
   background: var(--pixel-dark);
-  animation: insertCoinBlink 1.5s infinite;
+  animation: pixelBlink 1s step-end infinite;
 }
 
 .arcade-card.selected .insert-coin {
   color: var(--card-color);
   border-color: var(--card-color);
-  animation: insertCoinPulse 0.5s infinite;
-}
-
-@keyframes insertCoinBlink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0.4;
-  }
-}
-
-@keyframes insertCoinPulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.8;
-  }
+  background: var(--pixel-darker);
+  animation: pixelBlink 0.5s step-end infinite;
 }
 
 .card-base {
@@ -443,11 +332,13 @@
   gap: 2rem;
   font-size: 1rem;
   color: var(--pixel-light);
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
 }
 
 .blinking {
-  animation: blink 2s infinite;
+  animation: pixelBlink 1s step-end infinite;
 }
 
 .separator {

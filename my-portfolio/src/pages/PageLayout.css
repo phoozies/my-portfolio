@@ -13,3 +13,29 @@
   width: 100%;
   max-width: 100%;
 }
+
+/* Mobile and tablet responsive */
+@media (max-width: 1024px) {
+  .page-layout-fixed {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+    overflow: visible;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-layout {
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .page-layout-fixed {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+    overflow: visible;
+    overflow-y: auto;
+  }
+}
