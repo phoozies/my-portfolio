@@ -1,12 +1,6 @@
 import './Contact.css'
 import { useSectionVisibility } from '../hooks/useSectionVisibility'
-
-interface ContactInfo {
-  icon: string
-  label: string
-  value: string
-  link: string
-}
+import { CONTACT_INFO } from '../constants'
 
 interface ContactProps {
   unlockAchievement: (sectionId: string) => void;
@@ -17,27 +11,6 @@ const Contact = ({ unlockAchievement }: ContactProps) => {
     threshold: 0.3,
     onVisible: () => unlockAchievement('contact')
   });
-
-  const contactInfo: ContactInfo[] = [
-    {
-      icon: './email-logo.svg',
-      label: 'Email',
-      value: 'tpvo.business@gmail.com',
-      link: 'mailto:tpvo.business@gmail.com'
-    },
-    {
-      icon: './linkedin-bw-logo.svg',
-      label: 'LinkedIn',
-      value: 'linkedin.com/in/thinhpvo',
-      link: 'https://www.linkedin.com/in/thinhpvo/'
-    },
-    {
-      icon: './github-logo.svg',
-      label: 'GitHub',
-      value: 'github.com/phoozies',
-      link: 'https://github.com/phoozies'
-    }
-  ]
 
   return (
     <section id="contact" className="contact" ref={sectionRef}>
@@ -55,7 +28,7 @@ const Contact = ({ unlockAchievement }: ContactProps) => {
             </div>
             
             <div className="contact-details">
-              {contactInfo.map((info, index) => (
+              {CONTACT_INFO.map((info, index) => (
                 <a 
                   key={index} 
                   href={info.link} 

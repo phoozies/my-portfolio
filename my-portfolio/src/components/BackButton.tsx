@@ -1,4 +1,5 @@
 import './BackButton.css'
+import PixelButton from './shared/PixelButton/PixelButton'
 
 interface BackButtonProps {
   onClick: () => void
@@ -6,10 +7,16 @@ interface BackButtonProps {
 
 const BackButton = ({ onClick }: BackButtonProps) => {
   return (
-    <button className="back-button" onClick={onClick} aria-label="Back to arcade">
-      <span className="back-arrow">◀</span>
-      <span className="back-text">BACK</span>
-    </button>
+    <div className="back-button-wrapper">
+      <PixelButton 
+        onClick={onClick}
+        variant="primary"
+        icon={<span className="back-arrow">◀</span>}
+        aria-label="Back to arcade"
+      >
+        BACK
+      </PixelButton>
+    </div>
   )
 }
 

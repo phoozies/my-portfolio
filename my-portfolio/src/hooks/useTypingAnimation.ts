@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { ANIMATION_SPEEDS } from '../constants'
 
 interface UseTypingAnimationProps {
   text: string
@@ -8,7 +9,7 @@ interface UseTypingAnimationProps {
 
 export const useTypingAnimation = ({ 
   text, 
-  speed = 50, 
+  speed = ANIMATION_SPEEDS.TYPING_SPEED, 
   startDelay = 0 
 }: UseTypingAnimationProps) => {
   const [displayedText, setDisplayedText] = useState('')

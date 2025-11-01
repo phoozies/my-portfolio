@@ -1,0 +1,153 @@
+/* Shared CSS utilities and mixins */
+
+/* Pixel art rendering */
+.pixel-perfect {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+/* Common animations */
+@keyframes pixelBlink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pixel button base styles */
+.pixel-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--pixel-bg);
+  color: var(--pixel-cyan);
+  border: 4px solid var(--pixel-cyan);
+  box-shadow: 6px 6px 0 var(--pixel-purple);
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+.pixel-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 var(--pixel-purple);
+  background: var(--pixel-cyan);
+  color: var(--pixel-dark);
+}
+
+.pixel-button:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 var(--pixel-purple);
+}
+
+/* Pixel card base styles */
+.pixel-card {
+  background: var(--pixel-bg);
+  border: 6px solid var(--pixel-grey);
+  box-shadow: 8px 8px 0 var(--pixel-dark);
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.pixel-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 var(--pixel-dark);
+}
+
+/* Container utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.container-fullwidth {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+
+/* Text utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-pixel {
+  font-family: 'Courier New', monospace;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+}
+
+/* Spacing utilities */
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .pixel-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .pixel-card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

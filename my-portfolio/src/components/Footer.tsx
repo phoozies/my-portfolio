@@ -1,31 +1,14 @@
 import './Footer.css'
+import { SOCIAL_LINKS } from '../constants'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
-  
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      url: 'https://github.com/phoozies',
-      logo: './github-logo.svg'
-    },
-    {
-      name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/thinhpvo/',
-      logo: './linkedin-bw-logo.svg'
-    },
-    {
-      name: 'Email',
-      url: 'mailto:tpvo.business@gmail.com',
-      logo: './email-logo.svg'
-    }
-  ]
 
   return (
     <footer className="footer">
       <div className="footer-content">
         <div className="social-links">
-          {socialLinks.map((link, index) => (
+          {SOCIAL_LINKS.map((link, index) => (
             <a
               key={index}
               href={link.url}

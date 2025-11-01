@@ -1,14 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
-
-export interface Achievement {
-  id: string
-  title: string
-  description: string
-  icon: string
-  unlocked?: boolean
-}
-
-const ACHIEVEMENTS_KEY = 'portfolio-achievements'
+import { Achievement } from '../types'
+import { ACHIEVEMENTS_KEY } from '../constants'
+import { storage } from '../utils/storage'
 
 export const SECTION_ACHIEVEMENTS: Record<string, Achievement> = {
   landing: {
@@ -54,22 +47,15 @@ export const useAchievements = () => {
   const [currentAchievement, setCurrentAchievement] = useState<Achievement | null>(null)
   const [showAchievement, setShowAchievement] = useState(false)
 
-  // Load unlocked achievements from localStorage
+  // Load unlocked achievements from storage
   useEffect(() => {
-    const stored = localStorage.getItem(ACHIEVEMENTS_KEY)
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored)
-        setUnlockedAchievements(new Set(parsed))
-      } catch (e) {
-        console.error('Failed to parse achievements:', e)
-      }
-    }
+    const stored = storage.get<string[]>(ACHIEVEMENTS_KEY, [])
+    setUnlockedAchievements(new Set(stored))
   }, [])
 
-  // Save to localStorage whenever achievements change
+  // Save to storage whenever achievements change
   const saveAchievements = useCallback((achievements: Set<string>) => {
-    localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(Array.from(achievements)))
+    storage.set(ACHIEVEMENTS_KEY, Array.from(achievements))
   }, [])
 
   const unlockAchievement = useCallback((sectionId: string) => {
@@ -96,7 +82,7 @@ export const useAchievements = () => {
 
   const resetAchievements = useCallback(() => {
     setUnlockedAchievements(new Set())
-    localStorage.removeItem(ACHIEVEMENTS_KEY)
+    storage.remove(ACHIEVEMENTS_KEY)
   }, [])
 
   return {

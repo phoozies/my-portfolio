@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './PacManGame.css'
+import { PACMAN_CONFIG, ITEM_TYPES, GHOST_COLORS, FRUIT_TYPES } from '../constants'
+import { getWeightedRandomItem, getRandomItem, checkCircleCollision } from '../utils/helpers'
 
 interface FallingItem {
   id: number
@@ -29,54 +31,13 @@ const PacManGame = () => {
   const comboTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const nextIdRef = useRef(0)
 
-  const GHOST_COLORS = [
-    '#AC3232', // Red (Blinky)
-    '#FF8FA3', // Pink (Pinky)
-    '#5FCDE4', // Cyan (Inky)
-    '#F6AA61', // Orange (Clyde)
-    '#D95763', // Dark Red
-    '#99E550', // Green
-    '#8B4789', // Purple
-    '#FFD93D', // Yellow
-    '#00E8FC', // Light Blue
-    '#FF6B9D'  // Hot Pink
-  ]
-
-  const FRUIT_TYPES = [
-    { name: 'cherry', color: '#AC3232', secondaryColor: '#99E550' },
-    { name: 'strawberry', color: '#F6AA61', secondaryColor: '#99E550' },
-    { name: 'orange', color: '#F6AA61', secondaryColor: '#FFD93D' },
-    { name: 'apple', color: '#AC3232', secondaryColor: '#8B4789' },
-    { name: 'melon', color: '#99E550', secondaryColor: '#FFD93D' },
-    { name: 'bell', color: '#FFD93D', secondaryColor: '#F6AA61' },
-    { name: 'key', color: '#5FCDE4', secondaryColor: '#00E8FC' }
-  ]
-
-  const ITEM_TYPES = [
-    { type: 'pellet' as const, color: '#FBF236', size: 32, points: 10, weight: 50 },
-    { type: 'power-pellet' as const, color: '#99E550', size: 64, points: 50, weight: 15 },
-    { type: 'ghost' as const, color: '', size: 24, points: -50, weight: 15 },
-    { type: 'fruit' as const, color: '#F6AA61', size: 20, points: 100, weight: 20 }
-  ]
-
-  const getRandomItemType = () => {
-    const totalWeight = ITEM_TYPES.reduce((sum, type) => sum + type.weight, 0)
-    let random = Math.random() * totalWeight
-    
-    for (const itemType of ITEM_TYPES) {
-      random -= itemType.weight
-      if (random <= 0) return itemType
-    }
-    return ITEM_TYPES[0]
-  }
-
   const spawnItem = (canvasWidth: number) => {
-    const itemType = getRandomItemType()
+    const itemType = getWeightedRandomItem(ITEM_TYPES)
     const isGhost = itemType.type === 'ghost'
     const isFruit = itemType.type === 'fruit'
     
     // Select random fruit type if spawning fruit
-    const randomFruit = isFruit ? FRUIT_TYPES[Math.floor(Math.random() * FRUIT_TYPES.length)] : undefined
+    const randomFruit = isFruit ? getRandomItem([...FRUIT_TYPES]) : undefined
     
     const newItem: FallingItem = {
       id: nextIdRef.current++,
@@ -85,7 +46,7 @@ const PacManGame = () => {
       speed: 0.5 + Math.random() * 1.5,
       type: itemType.type,
       color: isGhost 
-        ? GHOST_COLORS[Math.floor(Math.random() * GHOST_COLORS.length)] 
+        ? getRandomItem([...GHOST_COLORS])
         : (isFruit && randomFruit ? randomFruit.color : itemType.color),
       size: itemType.size,
       eaten: false,
@@ -97,7 +58,8 @@ const PacManGame = () => {
   }
 
   const drawPacMan = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const pixelSize = 3
+    const pixelSize = PACMAN_CONFIG.PIXEL_SIZE
+    const gridSize = PACMAN_CONFIG.GRID_SIZE
     const mouthOpen = Math.floor(pacmanMouthRef.current / 10) % 2 === 0
     
     // Calculate direction based on mouse movement
@@ -111,7 +73,7 @@ const PacManGame = () => {
     ctx.save()
     ctx.translate(x, y)
     
-    // Determine rotation (0, 90, 180, 270 degrees only - 8-bit style)
+    // Determine rotation
     let rotation = 0
     if (Math.abs(pacmanDirectionRef.current.x) > Math.abs(pacmanDirectionRef.current.y)) {
       rotation = pacmanDirectionRef.current.x > 0 ? 0 : Math.PI
@@ -122,7 +84,7 @@ const PacManGame = () => {
     
     ctx.fillStyle = '#FBF236'
     
-    // Draw pixelated Pac-Man body (14x14 grid for bigger, rounder shape)
+    // Draw pixelated Pac-Man body
     const pixels = [
       [0,0,0,0,1,1,1,1,1,1,0,0,0,0],
       [0,0,1,1,1,1,1,1,1,1,1,1,0,0],
@@ -157,12 +119,12 @@ const PacManGame = () => {
       [0,0,0,0,1,1,1,1,1,1,0,0,0,0]
     ] : pixels
     
-    for (let row = 0; row < 14; row++) {
-      for (let col = 0; col < 14; col++) {
+    for (let row = 0; row < gridSize; row++) {
+      for (let col = 0; col < gridSize; col++) {
         if (mouthPixels[row][col]) {
           ctx.fillRect(
-            (col - 7) * pixelSize,
-            (row - 7) * pixelSize,
+            (col - gridSize / 2) * pixelSize,
+            (row - gridSize / 2) * pixelSize,
             pixelSize,
             pixelSize
           )
@@ -183,8 +145,10 @@ const PacManGame = () => {
 
   const drawPellet = (ctx: CanvasRenderingContext2D, item: FallingItem) => {
     ctx.fillStyle = item.color
-    const pixelSize = 3
-    const gridSize = item.type === 'power-pellet' ? 6 : 3
+    const pixelSize = PACMAN_CONFIG.PELLET_PIXEL_SIZE
+    const gridSize = item.type === 'power-pellet' 
+      ? PACMAN_CONFIG.POWER_PELLET_GRID_SIZE 
+      : PACMAN_CONFIG.PELLET_GRID_SIZE
     
     // Draw pixelated square pellet
     for (let row = 0; row < gridSize; row++) {
@@ -203,7 +167,7 @@ const PacManGame = () => {
     const pixelSize = 2
     const isVulnerable = item.vulnerable
     
-    // 8-bit ghost sprite (12x12 pixels)
+    // Ghost sprite
     const ghostPixels = [
       [0,0,0,1,1,1,1,1,1,0,0,0],
       [0,0,1,1,1,1,1,1,1,1,0,0],
@@ -359,11 +323,14 @@ const PacManGame = () => {
   }
 
   const checkCollision = (x: number, y: number, item: FallingItem): boolean => {
-    const dx = x - item.x
-    const dy = y - item.y
-    const distance = Math.sqrt(dx * dx + dy * dy)
-    // Adjusted for pixelated Pac-Man size (14 pixels * 3 pixel size = 42px radius)
-    return distance < (42 + item.size)
+    return checkCircleCollision(
+      x, 
+      y, 
+      PACMAN_CONFIG.COLLISION_RADIUS, 
+      item.x, 
+      item.y, 
+      item.size
+    )
   }
 
   useEffect(() => {
@@ -395,7 +362,7 @@ const PacManGame = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       // Spawn new items
-      if (timestamp - lastSpawnRef.current > 800) {
+      if (timestamp - lastSpawnRef.current > PACMAN_CONFIG.SPAWN_INTERVAL) {
         spawnItem(canvas.width)
         lastSpawnRef.current = timestamp
       }
