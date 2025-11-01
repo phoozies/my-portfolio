@@ -19,7 +19,7 @@ interface ExperienceProps {
 const Experience = ({ unlockAchievement }: ExperienceProps) => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
   const sectionRef = useSectionVisibility({
-    threshold: 0.3,
+    threshold: 0.1,
     onVisible: () => unlockAchievement('experience')
   })
 

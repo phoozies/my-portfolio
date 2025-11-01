@@ -1,8 +1,8 @@
 .achievement-container {
   position: fixed;
-  top: 100px;
+  top: 20px;
   right: 20px;
-  z-index: 10001;
+  z-index: 99999;
   font-family: 'Courier New', monospace;
   pointer-events: none;
 }
