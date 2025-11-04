@@ -1,7 +1,89 @@
 import { useEffect, useRef, useState } from 'react'
-import './PacManGame.css'
+import { Box, keyframes } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { PACMAN_CONFIG, ITEM_TYPES, GHOST_COLORS, FRUIT_TYPES } from '../constants'
 import { getWeightedRandomItem, getRandomItem, checkCircleCollision } from '../utils/helpers'
+
+const pixelPulse = keyframes`
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.8;
+  }
+`
+
+const PacmanCanvas = styled('canvas')({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  pointerEvents: 'none',
+  zIndex: 9999,
+  cursor: 'none',
+})
+
+const ScoreDisplay = styled(Box)({
+  position: 'fixed',
+  bottom: '20px',
+  left: '20px',
+  background: 'var(--pixel-darker)',
+  border: '4px solid var(--pixel-yellow)',
+  padding: '1rem 1.5rem',
+  zIndex: 10000,
+  fontFamily: "'Courier New', monospace",
+  boxShadow: '6px 6px 0 var(--pixel-purple)',
+  minWidth: '200px',
+
+  '@media (max-width: 768px)': {
+    bottom: '10px',
+    left: '10px',
+    padding: '0.75rem 1rem',
+    minWidth: '150px',
+  },
+})
+
+const ScoreLabel = styled('div')({
+  color: 'var(--pixel-cyan)',
+  fontSize: '0.8rem',
+  fontWeight: 700,
+  letterSpacing: '3px',
+  marginBottom: '0.5rem',
+  imageRendering: 'pixelated',
+  WebkitFontSmoothing: 'none',
+})
+
+const ScoreValue = styled('div')({
+  color: 'var(--pixel-yellow)',
+  fontSize: '2rem',
+  fontWeight: 700,
+  letterSpacing: '5px',
+  textShadow: '3px 3px 0 var(--pixel-purple)',
+  imageRendering: 'pixelated',
+  WebkitFontSmoothing: 'none',
+
+  '@media (max-width: 768px)': {
+    fontSize: '1.5rem',
+  },
+})
+
+const ComboDisplay = styled('div')({
+  marginTop: '0.75rem',
+  color: 'var(--pixel-green)',
+  fontSize: '1rem',
+  fontWeight: 700,
+  letterSpacing: '2px',
+  textAlign: 'center',
+  textShadow: '2px 2px 0 var(--pixel-orange)',
+  imageRendering: 'pixelated',
+  WebkitFontSmoothing: 'none',
+  animation: `${pixelPulse} 0.5s step-end infinite`,
+
+  '@media (max-width: 768px)': {
+    fontSize: '0.85rem',
+  },
+})
 
 interface FallingItem {
   id: number
@@ -442,16 +524,16 @@ const PacManGame = () => {
 
   return (
     <>
-      <canvas ref={canvasRef} className="pacman-canvas" />
-      <div className="score-display">
-        <div className="score-label">SCORE</div>
-        <div className="score-value">{score.toString().padStart(6, '0')}</div>
+      <PacmanCanvas ref={canvasRef} />
+      <ScoreDisplay>
+        <ScoreLabel>SCORE</ScoreLabel>
+        <ScoreValue>{score.toString().padStart(6, '0')}</ScoreValue>
         {combo > 1 && (
-          <div className="combo-display">
+          <ComboDisplay>
             COMBO x{Math.floor(combo / 5) + 1}!
-          </div>
+          </ComboDisplay>
         )}
-      </div>
+      </ScoreDisplay>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { ReactNode, RefObject } from 'react'
-import './SectionWrapper.css'
+import { Box } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 interface SectionWrapperProps {
   id: string
@@ -10,6 +11,21 @@ interface SectionWrapperProps {
   backgroundColor?: string
 }
 
+const StyledSection = styled('section')({
+  padding: '100px 0',
+  width: '100%',
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  '@media (max-width: 768px)': {
+    padding: '60px 0',
+  },
+  '@media (max-width: 480px)': {
+    padding: '40px 0',
+  },
+})
+
 const SectionWrapper = ({
   id,
   children,
@@ -18,19 +34,19 @@ const SectionWrapper = ({
   fullWidth = false,
   backgroundColor,
 }: SectionWrapperProps) => {
-  const containerClass = fullWidth ? 'container-fullwidth' : 'container'
-
   return (
-    <section
+    <StyledSection
       id={id}
-      className={`section-wrapper ${className}`.trim()}
+      className={className}
       ref={sectionRef}
       style={backgroundColor ? { background: backgroundColor } : undefined}
     >
-      <div className={containerClass}>
+      <Box
+        className={fullWidth ? 'container-fullwidth' : 'container'}
+      >
         {children}
-      </div>
-    </section>
+      </Box>
+    </StyledSection>
   )
 }
 

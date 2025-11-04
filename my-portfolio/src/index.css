@@ -6,7 +6,6 @@
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
-  image-rendering: pixelated;
   
   /* 8-Bit Retro Video Game Theme */
   --pixel-blue: #5B6EE1;
@@ -43,7 +42,6 @@ body {
   line-height: 1.6;
   color: var(--pixel-light);
   background-color: var(--pixel-dark);
-  image-rendering: pixelated;
   cursor: none !important;
 }
 

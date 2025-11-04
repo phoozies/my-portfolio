@@ -1,10 +1,201 @@
-import { Container, Box, Typography } from '@mui/material'
+import { Container, Box, Typography, keyframes } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import './Skills.css'
 import { useSectionVisibility } from '../hooks/useSectionVisibility'
+
+const skillPulse = keyframes`
+  to {
+    transform: scale(1.05);
+  }
+`
+
+const SkillsSection = styled('section')({
+  background: 'var(--pixel-dark)',
+  color: 'var(--pixel-light)',
+  minHeight: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  padding: 0,
+})
+
+const SkillsSwiper = styled(Swiper)({
+  padding: '2rem 0',
+  '& .swiper-pagination': {
+    position: 'relative !important',
+    marginTop: '2rem !important',
+    bottom: 'auto !important',
+  },
+  '& .swiper-pagination-bullet': {
+    width: '12px !important',
+    height: '12px !important',
+    background: 'var(--pixel-bg) !important',
+    borderRadius: '0 !important',
+    border: '2px solid var(--pixel-cyan) !important',
+    opacity: '1 !important',
+    transition: 'all 0.3s ease !important',
+  },
+  '& .swiper-pagination-bullet-active': {
+    background: 'var(--pixel-cyan) !important',
+    borderColor: 'var(--pixel-yellow) !important',
+    boxShadow: '0 0 10px var(--pixel-cyan) !important',
+  },
+  '& .swiper-pagination-bullet:hover': {
+    background: 'var(--pixel-yellow) !important',
+    borderColor: 'var(--pixel-yellow) !important',
+  },
+  '@media (max-width: 768px)': {
+    padding: '1rem 0',
+    '& .swiper-pagination': {
+      marginTop: '1rem !important',
+    },
+  },
+  '@media (prefers-reduced-motion: reduce)': {
+    '& .swiper-pagination-bullet': {
+      transition: 'none !important',
+    },
+  },
+})
+
+const SkillCategoryCard = styled(Box)({
+  background: 'var(--pixel-bg)',
+  padding: '2.5rem 2.75rem',
+  borderRadius: 0,
+  boxShadow: '8px 8px 0 var(--pixel-purple)',
+  border: '4px solid var(--pixel-cyan)',
+  minHeight: '70vh',
+  display: 'flex',
+  flexDirection: 'column',
+  willChange: 'transform',
+  margin: '0 auto',
+  maxWidth: '900px',
+
+  '&:hover': {
+    transform: 'translate(4px, 4px)',
+    boxShadow: '4px 4px 0 var(--pixel-purple)',
+  },
+
+  '@media (max-width: 599px)': {
+    padding: '2rem',
+  },
+
+  '@media (prefers-reduced-motion: reduce)': {
+    transition: 'none !important',
+    '&:hover': {
+      transform: 'none !important',
+    },
+  },
+})
+
+const CategoryTitle = styled(Typography)({
+  fontSize: '1.4rem',
+  fontWeight: 700,
+  color: 'var(--pixel-yellow)',
+  marginBottom: '1.5rem',
+  paddingBottom: '0.75rem',
+  borderBottom: '4px solid var(--pixel-cyan)',
+  textAlign: 'center',
+  letterSpacing: '2px',
+  textTransform: 'uppercase',
+  textShadow: '2px 2px 0 var(--pixel-purple)',
+})
+
+const CategorySkills = styled(Box)({
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+})
+
+const SkillItem = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  padding: '1rem 1.5rem',
+  background: 'var(--pixel-darker)',
+  border: '3px solid var(--pixel-blue)',
+  borderRadius: 0,
+  gap: '1.5rem',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  cursor: 'pointer',
+
+  '&:hover': {
+    background: 'var(--pixel-blue)',
+    borderColor: 'var(--pixel-cyan)',
+    transform: 'translateX(8px)',
+    boxShadow: '6px 6px 0 var(--pixel-purple)',
+    animation: `${skillPulse} 0.3s ease-out`,
+
+    '& .skill-logo': {
+      transform: 'scale(1.1) rotate(5deg)',
+    },
+
+    '& .skill-logo img': {
+      filter: 'brightness(1.2)',
+    },
+
+    '& .skill-name': {
+      color: 'var(--pixel-yellow)',
+      textShadow: '2px 2px 0 var(--pixel-purple)',
+    },
+  },
+
+  '@media (prefers-reduced-motion: reduce)': {
+    transition: 'none !important',
+    '&:hover': {
+      transform: 'none !important',
+      animation: 'none !important',
+    },
+    '& .skill-logo': {
+      transition: 'none !important',
+    },
+    '&:hover .skill-logo': {
+      transform: 'none !important',
+    },
+  },
+})
+
+const SkillLogo = styled(Box)({
+  width: '50px',
+  height: '50px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  transition: 'transform 0.3s ease',
+
+  '& img': {
+    width: '100%',
+    height: '100%',
+    objectFit: 'contain',
+    transition: 'filter 0.3s ease',
+  },
+
+  '@media (prefers-reduced-motion: reduce)': {
+    transition: 'none !important',
+    '& img': {
+      transition: 'none !important',
+    },
+  },
+})
+
+const SkillInfo = styled(Box)({
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+})
+
+const SkillName = styled(Typography)({
+  fontSize: '1.1rem',
+  fontWeight: 600,
+  color: 'var(--pixel-light)',
+  letterSpacing: '0.5px',
+  transition: 'all 0.3s ease',
+
+  '@media (prefers-reduced-motion: reduce)': {
+    transition: 'none !important',
+  },
+})
 
 interface Skill {
   name: string
@@ -89,23 +280,26 @@ const Skills = ({ unlockAchievement }: SkillsProps) => {
   ]
 
   return (
-    <section id="skills" className="skills" ref={sectionRef}>
+    <SkillsSection id="skills" ref={sectionRef}>
       <Container maxWidth="xl" sx={{ py: { xs: 6, md: 12 } }}>
         <Typography 
           variant="h2" 
-          component="h2" 
-          className="section-title" 
+          component="h2"
           sx={{ 
             textAlign: 'center',
             mb: 4,
-            color: 'var(--neutral-dark)',
-            fontSize: { xs: '2rem', md: '2.5rem' }
+            color: 'var(--pixel-yellow)',
+            fontSize: { xs: '2rem', md: '2.5rem' },
+            fontFamily: "'Courier New', monospace",
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            textShadow: '3px 3px 0 var(--pixel-purple)',
           }}
         >
           Skills & Technologies
         </Typography>
         
-        <Swiper
+        <SkillsSwiper
           modules={[Pagination]}
           spaceBetween={48}
           slidesPerView={1}
@@ -123,35 +317,15 @@ const Skills = ({ unlockAchievement }: SkillsProps) => {
               spaceBetween: 48,
             },
           }}
-          className="skills-swiper"
         >
           {skillCategories.map((category, categoryIndex) => (
             <SwiperSlide key={categoryIndex}>
-              <Box
-                className="skill-category-card"
-                sx={{
-                  flexShrink: 0,
-                  margin: '0 auto',
-                  maxWidth: '900px',
-                  px: { xs: 2, sm: 3, md: 4 },
-                  py: { xs: 2, sm: 3, md: 4 }
-                }}
-              >
-                <Typography 
-                  variant="h3" 
-                  component="h3" 
-                  className="category-title"
-                  sx={{ 
-                    fontSize: { xs: '1.2rem', md: '1.4rem' },
-                    textAlign: 'center',
-                    mb: 2
-                  }}
-                >
+              <SkillCategoryCard>
+                <CategoryTitle variant="h3">
                   {category.title}
-                </Typography>
+                </CategoryTitle>
                 
-                <Box 
-                  className="category-skills"
+                <CategorySkills
                   sx={{ 
                     display: 'grid',
                     gridTemplateColumns: { 
@@ -165,30 +339,26 @@ const Skills = ({ unlockAchievement }: SkillsProps) => {
                   }}
                 >
                   {category.skills.map((skill, skillIndex) => (
-                    <Box key={skillIndex} className="skill-item">
+                    <SkillItem key={skillIndex}>
                       {skill.logo && (
-                        <Box className="skill-logo">
+                        <SkillLogo className="skill-logo">
                           <img src={skill.logo} alt={`${skill.name} logo`} />
-                        </Box>
+                        </SkillLogo>
                       )}
-                      <Box className="skill-info">
-                        <Typography 
-                          component="span" 
-                          className="skill-name"
-                          sx={{ fontWeight: 550 }}
-                        >
+                      <SkillInfo className="skill-info">
+                        <SkillName className="skill-name">
                           {skill.name}
-                        </Typography>
-                      </Box>
-                    </Box>
+                        </SkillName>
+                      </SkillInfo>
+                    </SkillItem>
                   ))}
-                </Box>
-              </Box>
+                </CategorySkills>
+              </SkillCategoryCard>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </SkillsSwiper>
       </Container>
-    </section>
+    </SkillsSection>
   )
 }
 

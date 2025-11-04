@@ -1,10 +1,133 @@
 import { Container, Box, Typography, Chip, Button } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import './Projects.css'
 import { useSectionVisibility } from '../hooks/useSectionVisibility'
+
+const ProjectsSection = styled('section')({
+  background: 'var(--pixel-dark)',
+  color: 'var(--pixel-light)',
+  minHeight: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  padding: 0,
+})
+
+const ProjectsSwiper = styled(Swiper)({
+  padding: '0 0 2rem 0',
+  '& .swiper-pagination': {
+    position: 'relative !important',
+    marginTop: '2rem !important',
+    bottom: 'auto !important',
+  },
+  '& .swiper-pagination-bullet': {
+    width: '12px !important',
+    height: '12px !important',
+    background: 'var(--pixel-bg) !important',
+    borderRadius: '0 !important',
+    margin: '0 6px !important',
+    cursor: 'pointer !important',
+    transition: 'none !important',
+    opacity: '1 !important',
+    border: '3px solid var(--pixel-cyan) !important',
+    '&:hover': {
+      background: 'var(--pixel-green) !important',
+      transform: 'scale(1.1) !important',
+      border: '3px solid var(--pixel-green) !important',
+    },
+  },
+  '& .swiper-pagination-bullet-active': {
+    background: 'var(--pixel-yellow) !important',
+    transform: 'scale(1.2) !important',
+    border: '3px solid var(--pixel-yellow) !important',
+    boxShadow: '0 0 10px var(--pixel-yellow)',
+  },
+  '@media (max-width: 768px)': {
+    '& .swiper-pagination-bullet': {
+      width: '12px !important',
+      height: '12px !important',
+      margin: '0 4px !important',
+    },
+    '& .swiper-pagination-bullet-active': {
+      transform: 'scale(1.2) !important',
+    },
+  },
+  '@media (prefers-reduced-motion: reduce)': {
+    '& .swiper-wrapper': {
+      transition: 'none !important',
+    },
+    '& .swiper-pagination-bullet, & .swiper-pagination-bullet-active': {
+      transition: 'none !important',
+      transform: 'none !important',
+    },
+  },
+})
+
+const ProjectCard = styled(Box)({
+  background: 'var(--pixel-bg)',
+  padding: '1.5rem 2rem',
+  borderRadius: 0,
+  boxShadow: '8px 8px 0 var(--pixel-purple)',
+  border: '4px solid var(--pixel-cyan)',
+  transition: 'none',
+  maxHeight: '85vh',
+  display: 'flex',
+  flexDirection: 'column',
+  willChange: 'transform',
+  margin: '0 auto',
+  maxWidth: '900px',
+  overflowY: 'auto',
+  '&:hover': {
+    transform: 'translate(4px, 4px)',
+    boxShadow: '4px 4px 0 var(--pixel-purple)',
+  },
+  '@media (max-width: 599px)': {
+    padding: '1.25rem 1.25rem',
+    maxHeight: '70vh',
+  },
+  '@media (prefers-reduced-motion: reduce)': {
+    transition: 'none !important',
+    '&:hover': {
+      transform: 'none !important',
+    },
+  },
+})
+
+const ProjectTitle = styled(Typography)({
+  fontSize: '1.4rem',
+  fontWeight: 700,
+  color: 'var(--pixel-yellow)',
+  marginBottom: '1.5rem',
+  paddingBottom: '0.75rem',
+  borderBottom: '4px solid var(--pixel-cyan)',
+  lineHeight: 1.25,
+  textAlign: 'center',
+  letterSpacing: '2px',
+  textTransform: 'uppercase',
+  textShadow: '2px 2px 0 var(--pixel-purple)',
+  '@media (max-width: 599px)': {
+    fontSize: '1.2rem',
+  },
+})
+
+const ProjectDescription = styled(Typography)({
+  color: 'var(--pixel-light)',
+  lineHeight: 1.55,
+  marginBottom: '1.25rem',
+  textAlign: 'center',
+  '@media (max-width: 599px)': {
+    fontSize: '0.95rem',
+  },
+})
+
+const TechTags = styled(Box)({
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  gap: '0.6rem',
+})
 
 interface Project {
   title: string
@@ -51,12 +174,11 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
   ]
 
   return (
-    <section id="projects" className="projects" ref={sectionRef}>
+    <ProjectsSection id="projects" ref={sectionRef}>
       <Container maxWidth="xl" sx={{ py: { xs: 6, md: 12 } }}>
         <Typography 
           variant="h2" 
-          component="h2" 
-          className="section-title"
+          component="h2"
           sx={{ 
             textAlign: 'center',
             mb: 4,
@@ -70,7 +192,7 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
           Featured Projects
         </Typography>
         
-        <Swiper
+        <ProjectsSwiper
           modules={[Pagination]}
           spaceBetween={48}
           slidesPerView={1}
@@ -88,12 +210,10 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
               spaceBetween: 48,
             },
           }}
-          className="projects-swiper"
         >
           {projects.map((project, index) => (
             <SwiperSlide key={index}>
-              <Box
-                className="project-card"
+              <ProjectCard
                 sx={{
                   flexShrink: 0,
                   margin: '0 auto',
@@ -183,10 +303,8 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                     flexDirection: 'column',
                     justifyContent: 'center'
                   }}>
-                    <Typography 
-                      variant="h3" 
-                      component="h3" 
-                      className="project-title"
+                    <ProjectTitle 
+                      variant="h3"
                       sx={{ 
                         fontSize: { xs: '1.2rem', md: '1.4rem' },
                         textAlign: 'center',
@@ -194,7 +312,7 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                       }}
                     >
                       {project.title}
-                    </Typography>
+                    </ProjectTitle>
                     <Typography 
                       component="span" 
                       className="project-period"
@@ -211,8 +329,7 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                     >
                       {project.period}
                     </Typography>
-                    <Typography 
-                      className="project-description"
+                    <ProjectDescription
                       sx={{ 
                         mb: 3,
                         fontSize: { xs: '0.85rem', md: '0.95rem' },
@@ -221,7 +338,7 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                       }}
                     >
                       {project.description}
-                    </Typography>
+                    </ProjectDescription>
                     
                     <Box className="project-technologies">
                       <Typography 
@@ -239,7 +356,7 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                       >
                         Technologies:
                       </Typography>
-                      <Box className="tech-tags">
+                      <TechTags>
                         {project.technologies.map((tech, techIndex) => (
                           <Chip
                             key={techIndex}
@@ -265,16 +382,16 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                             }}
                           />
                         ))}
-                      </Box>
+                      </TechTags>
                     </Box>
                   </Box>
                 </Box>
-              </Box>
+              </ProjectCard>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </ProjectsSwiper>
       </Container>
-    </section>
+    </ProjectsSection>
   )
 }
 
