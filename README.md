@@ -1,6 +1,0 @@
-- 👋 Hi, I’m @phoozies
-- 👀 I’m interested in: Software Architecture, GenAI Platforms, and Full-Stack Development!
-- 🌱 I’m currently learning: Personal projects for my school - I am mainly developing a project management application sponsored by a company.
-- 📫 How to reach me: tpvo.business@gmail.com
-- 😄 Pronouns: He/him
-- ⚡ Fun fact: I like to throw my friends' elo in VALORANT!
