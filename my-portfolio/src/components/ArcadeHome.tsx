@@ -28,13 +28,19 @@ const ArcadeContainer = styled(Box)({
   minHeight: '100vh',
   background: 'var(--pixel-dark)',
   color: 'var(--pixel-light)',
-  padding: '1rem',
+  padding: '2rem 1rem',
   fontFamily: "'Courier New', monospace",
-  overflow: 'auto',
+  overflowY: 'auto',
+  overflowX: 'hidden',
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-start',
+  gap: '3rem',
+  '@media (max-width: 768px)': {
+    padding: '1rem',
+    gap: '2rem',
+  },
   '&::before': {
     content: '""',
     position: 'fixed',
@@ -411,10 +417,12 @@ const ArcadeHome = () => {
 
       <Box
         sx={{
-          padding: '1rem',
+          padding: '1.5rem',
           textAlign: 'center',
-          borderTop: '8px solid var(--pixel-cyan)',
+          border: '8px solid var(--pixel-cyan)',
           background: 'var(--pixel-darker)',
+          boxShadow: '12px 12px 0 var(--pixel-purple)',
+          borderRadius: 0,
         }}
       >
         <Box

@@ -11,7 +11,7 @@ const ProjectsPage = ({ unlockAchievement }: ProjectsPageProps) => {
   const navigate = useNavigate()
 
   return (
-    <div className="page-layout page-layout-fixed">
+    <div className="page-layout">
       <BackButton onClick={() => navigate('/')} />
       <div className="page-content">
         <Projects unlockAchievement={unlockAchievement} />
