@@ -232,7 +232,13 @@ const ArcadeHome = () => {
   }
 
   const handleResumeClick = () => {
-    window.open('/THINH_VO_RESUME.pdf', '_blank')
+    const link = document.createElement('a')
+    link.href = `${import.meta.env.BASE_URL}THINH_VO_RESUME.pdf`
+    link.download = 'THINH_VO_RESUME.pdf'
+    link.target = '_blank'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
   return (

@@ -260,7 +260,8 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
             </NavLink>
           ))}
           <ResumeLink
-            href="./THINH_VO_RESUME.pdf"
+            href={`${import.meta.env.BASE_URL}THINH_VO_RESUME.pdf`}
+            download="THINH_VO_RESUME.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
