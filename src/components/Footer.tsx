@@ -3,10 +3,10 @@ import { styled } from '@mui/material/styles'
 import { SOCIAL_LINKS } from '../constants'
 
 const FooterContainer = styled('footer')({
-  background: 'linear-gradient(180deg, var(--neutral-warm) 0%, var(--white-soft) 100%)',
-  color: 'var(--neutral-dark)',
-  padding: '1rem 0 1rem',
-  borderTop: '2px solid var(--sakura-light)',
+  background: 'var(--terminal-bg)',
+  color: 'var(--terminal-text)',
+  padding: '2rem 0',
+  borderTop: '1px solid var(--terminal-border)',
 })
 
 const FooterContent = styled(Box)({
@@ -15,57 +15,66 @@ const FooterContent = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '1rem',
+  gap: '1.5rem',
 
   '@media (max-width: 768px)': {
     padding: '0 1rem',
+    gap: '1rem',
   },
 })
 
 const SocialLinks = styled(Box)({
   display: 'flex',
-  gap: '2rem',
+  gap: '1.5rem',
   justifyContent: 'center',
   alignItems: 'center',
   margin: '0 auto',
+
+  '@media (max-width: 480px)': {
+    gap: '1rem',
+  },
 })
 
 const SocialLink = styled('a')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '50px',
-  height: '50px',
-  background: 'var(--white-soft)',
-  borderRadius: 0,
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  border: '2px solid var(--sakura-accent)',
-  position: 'relative',
-  boxShadow: '3px 3px 0 var(--sakura-pink)',
+  width: '40px',
+  height: '40px',
+  background: 'transparent',
+  transition: 'all 0.2s ease',
+  border: '1px solid var(--terminal-border)',
 
   '&:hover': {
-    background: 'var(--sakura-light)',
-    borderColor: 'var(--sakura-deep)',
-    transform: 'translate(3px, 3px)',
-    boxShadow: '0 0 0 var(--sakura-pink)',
+    background: 'var(--terminal-surface)',
+    borderColor: 'var(--terminal-text)',
 
     '& img': {
-      filter: 'brightness(0) saturate(100%) invert(49%) sepia(64%) saturate(2269%) hue-rotate(313deg) brightness(102%) contrast(101%)',
-      transform: 'scale(1.1)',
+      opacity: 1,
     },
+  },
+
+  '@media (max-width: 480px)': {
+    width: '36px',
+    height: '36px',
   },
 })
 
 const SocialIcon = styled('img')({
-  width: '24px',
-  height: '24px',
-  filter: 'brightness(0) saturate(100%) invert(14%) sepia(11%) saturate(1026%) hue-rotate(330deg) brightness(95%) contrast(89%)',
-  transition: 'all 0.3s ease',
+  width: '20px',
+  height: '20px',
+  opacity: 0.7,
+  transition: 'all 0.2s ease',
+
+  '@media (max-width: 480px)': {
+    width: '18px',
+    height: '18px',
+  },
 })
 
 const FooterBottom = styled(Box)({
   paddingTop: '1rem',
-  borderTop: '1px solid var(--sakura-light)',
+  borderTop: '1px solid var(--terminal-border)',
 })
 
 const FooterBottomContent = styled(Box)({
@@ -78,12 +87,24 @@ const FooterBottomContent = styled(Box)({
   gap: '0.5rem',
 
   '& p': {
-    color: 'var(--neutral-grey)',
+    color: 'var(--pixel-cyan)',
     fontSize: '0.9rem',
+    fontFamily: "'Courier New', monospace",
+    letterSpacing: '2px',
   },
+
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  fontSize: '0.875rem',
+  color: 'var(--terminal-text-dim)',
 
   '@media (max-width: 768px)': {
     padding: '0 1rem',
+  },
+
+  '@media (max-width: 480px)': {
+    '& p': {
+      fontSize: '0.75rem',
+    },
   },
 })
 

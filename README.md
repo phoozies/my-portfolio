@@ -3,25 +3,6 @@
 
 Visit the live portfolio: [https://phoozies.github.io/phoozies/](https://phoozies.github.io/phoozies/)
 
-## 🏗️ Project Structure
-
-```
-src/
-├── components/           # React components
-│   ├── About.tsx        
-│   ├── Experience.tsx   
-│   ├── Footer.tsx       
-│   ├── Landing.tsx      
-│   ├── Projects.tsx     
-│   ├── Skills.tsx       
-│   └── ResumeModal.tsx  
-├── hooks/               
-│   └── useTypingAnimation.ts  
-├── assets/              
-│   └── logos/          
-└── styles/             
-```
-
 ## 🚀 Getting Started
 
 ### Prerequisites

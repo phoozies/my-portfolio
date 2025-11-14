@@ -41,9 +41,8 @@ const BackButton = ({ onClick }: BackButtonProps) => {
         onClick={onClick}
         variant="primary"
         icon={<Arrow>◀</Arrow>}
-        aria-label="Back to arcade"
       >
-        BACK
+        cd ../
       </PixelButton>
     </ButtonWrapper>
   )

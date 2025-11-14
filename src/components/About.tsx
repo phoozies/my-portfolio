@@ -2,11 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Box, keyframes } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useTypingAnimation } from '../hooks/useTypingAnimation'
-import { useSectionVisibility } from '../hooks/useSectionVisibility'
-
-interface AboutProps {
-  unlockAchievement: (sectionId: string) => void;
-}
+import { BREAKPOINTS } from '../constants'
 
 const blink = keyframes`
   0%, 50% {
@@ -18,60 +14,109 @@ const blink = keyframes`
 `
 
 const AboutSection = styled('section')({
-  background: 'linear-gradient(180deg, var(--neutral-warm) 0%, var(--white-soft) 100%)',
-  padding: '100px 0',
-  color: 'var(--neutral-dark)',
+  background: 'var(--terminal-bg)',
+  padding: '4rem 0',
+  color: 'var(--terminal-text)',
+  minHeight: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  scrollSnapAlign: 'start',
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    padding: '3rem 0',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    padding: '2rem 0',
+  },
 })
 
 const Container = styled(Box)({
   maxWidth: '1200px',
   margin: '0 auto',
   padding: '0 2rem',
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    padding: '0 1.5rem',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    padding: '0 1rem',
+  },
 })
 
 const SectionTitle = styled('h2')({
-  fontSize: '2.5rem',
-  fontWeight: 700,
-  marginBottom: '3rem',
+  fontSize: '2rem',
+  fontWeight: 400,
+  marginBottom: '2rem',
   textAlign: 'center',
-  color: 'var(--neutral-dark)',
-  fontFamily: "'Courier New', monospace",
-  letterSpacing: '2px',
-  textTransform: 'uppercase',
+  color: 'var(--terminal-text)',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  letterSpacing: '0.05em',
+
+  '&::before': {
+    content: '"$ "',
+    color: 'var(--terminal-text-dim)',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    fontSize: '1.75rem',
+    marginBottom: '1.5rem',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    fontSize: '1.5rem',
+  },
 })
 
 const AboutContent = styled(Box)({
   display: 'grid',
-  gridTemplateColumns: '548px 1fr',
-  gap: '4rem',
-  alignItems: 'center',
+  gridTemplateColumns: '300px 1fr',
+  gap: '3rem',
+  alignItems: 'start',
+  minHeight: '280px',
 
-  '@media (max-width: 768px)': {
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
     gridTemplateColumns: '1fr',
     gap: '2rem',
+    minHeight: 'auto',
   },
 })
 
 const AboutText = styled(Box)({
-  fontSize: '1.1rem',
-  lineHeight: 1.8,
-  color: 'var(--neutral-grey)',
-  minHeight: '280px',
+  fontSize: '1rem',
+  lineHeight: 1.6,
+  color: 'var(--terminal-text)',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  letterSpacing: '0.02em',
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    fontSize: '0.95rem',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    fontSize: '0.9rem',
+  },
 })
 
 const AboutIntro = styled('p')({
-  fontSize: '1.3rem',
-  fontWeight: 500,
-  color: 'var(--neutral-dark)',
-  marginBottom: '1.5rem',
-  letterSpacing: '0.3px',
+  fontSize: '1rem',
+  fontWeight: 400,
+  color: 'var(--terminal-text)',
+  marginBottom: '1rem',
+  letterSpacing: '0.02em',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    fontSize: '0.9rem',
+  },
 })
 
 const TypingCursor = styled('span')<{ isTyping: boolean }>(({ isTyping }) => ({
-  color: 'var(--sakura-accent)',
+  color: 'var(--terminal-text)',
   fontWeight: 'bold',
   marginLeft: '2px',
-  animation: isTyping ? `${blink} 1s infinite` : 'none',
+  animation: isTyping ? `${blink} 0.8s infinite` : 'none',
   opacity: isTyping ? 1 : 0,
 
   '@media (prefers-reduced-motion: reduce)': {
@@ -83,31 +128,35 @@ const TypingCursor = styled('span')<{ isTyping: boolean }>(({ isTyping }) => ({
 const HeroImage = styled(Box)({
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: 'flex-start',
 })
 
 const ProfileImage = styled(Box)({
-  width: '300px',
-  height: '300px',
-  borderRadius: 0,
+  width: '280px',
+  height: '280px',
+  borderRadius: '50%',
   overflow: 'hidden',
   position: 'relative',
-  border: '3px solid var(--sakura-accent)',
-  boxShadow: '8px 8px 0 var(--sakura-pink)',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  willChange: 'transform',
+  border: '2px solid var(--terminal-border)',
+  transition: 'all 0.2s ease',
+  flexShrink: 0,
 
   '&:hover': {
-    transform: 'translate(4px, 4px)',
-    boxShadow: '4px 4px 0 var(--sakura-pink)',
+    borderColor: 'var(--terminal-text)',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    width: '240px',
+    height: '240px',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    width: '200px',
+    height: '200px',
   },
 
   '@media (prefers-reduced-motion: reduce)': {
     transition: 'none !important',
-    '&:hover': {
-      transform: 'none !important',
-      boxShadow: '0 8px 32px rgba(168, 85, 247, 0.3) !important',
-    },
   },
 })
 
@@ -118,16 +167,11 @@ const Headshot = styled('img')({
   borderRadius: '50%',
 })
 
-const About = ({ unlockAchievement }: AboutProps) => {
+const About = () => {
   const [isVisible, setIsVisible] = useState(false)
   const aboutRef = useRef<HTMLDivElement>(null)
-  
-  const achievementRef = useSectionVisibility({
-    threshold: 0.3,
-    onVisible: () => unlockAchievement('about')
-  })
 
-  const aboutText = "Driven by the belief that technology should make life better, I'm a full-stack developer committed to building solutions that matter. I'm constantly exploring new technologies and methodologies; I'm always asking myself, \"how can we do this better?\" Beyond development, I like to unwind through playing video games such as Valorant and Roblox as well as spending quality time with friends!"
+  const aboutText = "Hi there! I'm Thinh Vo. Driven by the belief that technology should make life better, I'm a full-stack software engineer committed to building solutions that matter. I'm constantly exploring new technologies and methodologies; I'm always asking myself, \"how can we do this better?\" Beyond development, I like to unwind through playing video games and hanging out with friends!"
 
   const { displayedText, isTyping, fastComplete } = useTypingAnimation({
     text: isVisible ? aboutText : '',
@@ -168,23 +212,10 @@ const About = ({ unlockAchievement }: AboutProps) => {
   }, [isVisible])
 
   return (
-    <AboutSection id="about" ref={(el) => {
-      aboutRef.current = el as HTMLDivElement | null;
-      (achievementRef as any).current = el;
-    }}>
+    <AboutSection id="about" ref={aboutRef}>
       <Container>
         <SectionTitle>About Me</SectionTitle>
         <AboutContent>
-          <AboutText>
-            <AboutIntro 
-              onDoubleClick={handleDoubleClick}
-              style={{ cursor: isTyping ? 'pointer' : 'default' }}
-              title={isTyping ? 'Double-click to fast-track' : ''}
-            >
-              {displayedText}
-              <TypingCursor isTyping={isTyping}>|</TypingCursor>
-            </AboutIntro>
-          </AboutText>
           <HeroImage>
             <ProfileImage>
               <Headshot 
@@ -198,6 +229,16 @@ const About = ({ unlockAchievement }: AboutProps) => {
               />
             </ProfileImage>
           </HeroImage>
+          <AboutText>
+            <AboutIntro 
+              onDoubleClick={handleDoubleClick}
+              style={{ cursor: isTyping ? 'pointer' : 'default' }}
+              title={isTyping ? 'Double-click to fast-track' : ''}
+            >
+              {displayedText}
+              <TypingCursor isTyping={isTyping}>|</TypingCursor>
+            </AboutIntro>
+          </AboutText>
         </AboutContent>
       </Container>
     </AboutSection>

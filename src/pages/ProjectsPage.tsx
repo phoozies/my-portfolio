@@ -3,18 +3,14 @@ import BackButton from '../components/BackButton'
 import Projects from '../components/Projects'
 import './PageLayout.css'
 
-interface ProjectsPageProps {
-  unlockAchievement: (sectionId: string) => void
-}
-
-const ProjectsPage = ({ unlockAchievement }: ProjectsPageProps) => {
+const ProjectsPage = () => {
   const navigate = useNavigate()
 
   return (
     <div className="page-layout">
       <BackButton onClick={() => navigate('/')} />
       <div className="page-content">
-        <Projects unlockAchievement={unlockAchievement} />
+        <Projects />
       </div>
     </div>
   )

@@ -3,18 +3,14 @@ import BackButton from '../components/BackButton'
 import Skills from '../components/Skills'
 import './PageLayout.css'
 
-interface SkillsPageProps {
-  unlockAchievement: (sectionId: string) => void
-}
-
-const SkillsPage = ({ unlockAchievement }: SkillsPageProps) => {
+const SkillsPage = () => {
   const navigate = useNavigate()
 
   return (
     <div className="page-layout">
       <BackButton onClick={() => navigate('/')} />
       <div className="page-content">
-        <Skills unlockAchievement={unlockAchievement} />
+        <Skills />
       </div>
     </div>
   )

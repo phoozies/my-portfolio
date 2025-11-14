@@ -1,50 +1,55 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import './App.css'
-import PacManGame from './components/PacManGame.tsx'
-import Achievement from './components/Achievement.tsx'
-import { useAchievements } from './hooks/useAchievements.ts'
+import ErrorBoundary from './components/ErrorBoundary.tsx'
 import { pixelTheme } from './theme.ts'
-import ArcadeHome from './components/ArcadeHome.tsx'
-import AboutPage from './pages/AboutPage.tsx'
+import TerminalHome from './components/Home.tsx'
+import MyInfoPage from './pages/MyInfoPage.tsx'
 import SkillsPage from './pages/SkillsPage.tsx'
 import ExperiencePage from './pages/ExperiencePage.tsx'
 import ProjectsPage from './pages/ProjectsPage.tsx'
+import MouseTrail from './components/MouseTrail.tsx'
 
 function App() {
-  const { 
-    currentAchievement, 
-    showAchievement, 
-    unlockAchievement, 
-    hideAchievement
-  } = useAchievements()
-
   const routerBase = (import.meta as any).env?.BASE_URL || '/'
 
   return (
     <ThemeProvider theme={pixelTheme}>
       <Router basename={routerBase}>
-        <div className="App">
-          <PacManGame />
-          
-          {currentAchievement && (
-            <Achievement
-              title={currentAchievement.title}
-              description={currentAchievement.description}
-              icon={currentAchievement.icon}
-              show={showAchievement}
-              onHide={hideAchievement}
-            />
-          )}
-          
-          <Routes>
-          <Route path="/" element={<ArcadeHome />} />
-          <Route path="/about" element={<AboutPage unlockAchievement={unlockAchievement} />} />
-          <Route path="/skills" element={<SkillsPage unlockAchievement={unlockAchievement} />} />
-          <Route path="/experience" element={<ExperiencePage unlockAchievement={unlockAchievement} />} />
-          <Route path="/projects" element={<ProjectsPage unlockAchievement={unlockAchievement} />} />
-          </Routes>
-        </div>
+        <ErrorBoundary>
+          <div className="App">
+            <main id="main-content">
+              <MouseTrail />
+              <Routes>
+                <Route path="/" element={
+                  <ErrorBoundary>
+                    <TerminalHome />
+                  </ErrorBoundary>
+                } />
+                <Route path="/myinfo" element={
+                  <ErrorBoundary>
+                    <MyInfoPage />
+                  </ErrorBoundary>
+                } />
+                <Route path="/skills" element={
+                  <ErrorBoundary>
+                    <SkillsPage />
+                  </ErrorBoundary>
+                } />
+                <Route path="/experience" element={
+                  <ErrorBoundary>
+                    <ExperiencePage />
+                  </ErrorBoundary>
+                } />
+                <Route path="/projects" element={
+                  <ErrorBoundary>
+                    <ProjectsPage />
+                  </ErrorBoundary>
+                } />
+              </Routes>
+            </main>
+          </div>
+        </ErrorBoundary>
       </Router>
     </ThemeProvider>
   )

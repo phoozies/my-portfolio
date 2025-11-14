@@ -1,20 +1,28 @@
 import { useEffect, useRef, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { useSectionVisibility } from '../hooks/useSectionVisibility'
+import { BREAKPOINTS } from '../constants'
 
 const ExperienceSection = styled('section')({
-  background: 'var(--pixel-dark)',
-  padding: '100px 20px',
-  color: 'var(--pixel-light)',
-  '@media (max-width: 768px)': {
-    padding: '80px 15px',
+  background: 'var(--terminal-bg)',
+  padding: '4rem 1.25rem',
+  color: 'var(--terminal-text)',
+  minHeight: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    padding: '3rem 1rem',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    padding: '2rem 1rem',
   },
 })
 
 const ExperienceTimeline = styled(Box)({
   position: 'relative',
-  maxWidth: '1400px',
+  maxWidth: '1200px',
   margin: '0 auto',
   '&::before': {
     content: '""',
@@ -23,43 +31,42 @@ const ExperienceTimeline = styled(Box)({
     transform: 'translateX(-50%)',
     top: 0,
     bottom: 0,
-    width: '4px',
-    background: 'var(--pixel-cyan)',
-    borderRadius: 0,
-    boxShadow: '0 0 10px var(--pixel-cyan)',
+    width: '1px',
+    background: 'var(--terminal-border)',
   },
-  '@media (max-width: 768px)': {
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
     '&::before': {
-      left: '30px',
+      left: '24px',
       transform: 'none',
     },
   },
-  '@media (max-width: 480px)': {
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
     '&::before': {
-      left: '20px',
+      left: '16px',
     },
   },
 })
 
 const ExperienceItem = styled(Box)<{ side: 'left' | 'right'; isAnimatedIn?: boolean; isAnimatedOut?: boolean }>(({ side, isAnimatedIn, isAnimatedOut }) => ({
   position: 'relative',
-  marginBottom: '4rem',
+  marginBottom: '3rem',
   display: 'flex',
   alignItems: 'center',
   width: '100%',
   opacity: isAnimatedIn ? 1 : isAnimatedOut ? 0 : 0,
-  transform: isAnimatedIn ? 'translateY(0)' : isAnimatedOut ? 'translateY(30px) scale(0.95)' : 'translateY(50px)',
-  transition: 'all 0.6s ease',
+  transform: isAnimatedIn ? 'translateY(0)' : isAnimatedOut ? 'translateY(20px)' : 'translateY(30px)',
+  transition: 'all 0.3s ease',
   justifyContent: side === 'left' ? 'flex-end' : 'flex-start',
-  paddingRight: side === 'left' ? 'calc(50% + 40px)' : 0,
-  paddingLeft: side === 'right' ? 'calc(50% + 40px)' : 0,
-  '@media (max-width: 768px)': {
+  paddingRight: side === 'left' ? 'calc(50% + 32px)' : 0,
+  paddingLeft: side === 'right' ? 'calc(50% + 32px)' : 0,
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
     justifyContent: 'flex-start !important',
-    paddingLeft: '80px !important',
+    paddingLeft: '64px !important',
     paddingRight: '0 !important',
   },
-  '@media (max-width: 480px)': {
-    paddingLeft: '60px !important',
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    paddingLeft: '48px !important',
+    marginBottom: '2rem',
   },
   '@media (prefers-reduced-motion: reduce)': {
     animation: 'none !important',
@@ -70,189 +77,148 @@ const ExperienceItem = styled(Box)<{ side: 'left' | 'right'; isAnimatedIn?: bool
 const ExperienceMarker = styled(Box)<{ isAnimatedIn?: boolean; isAnimatedOut?: boolean }>(({ isAnimatedIn, isAnimatedOut }) => ({
   position: 'absolute',
   left: '50%',
-  transform: isAnimatedIn ? 'translateX(-50%) translate(3px, 3px)' : isAnimatedOut ? 'translateX(-50%) scale(0.8)' : 'translateX(-50%)',
-  width: '80px',
-  height: '80px',
-  borderRadius: 0,
+  transform: 'translateX(-50%)',
+  width: '12px',
+  height: '12px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   zIndex: 3,
-  border: '4px solid var(--pixel-cyan)',
-  background: 'var(--pixel-bg)',
-  boxShadow: isAnimatedIn ? '3px 3px 0 var(--pixel-purple)' : '6px 6px 0 var(--pixel-purple)',
+  border: '2px solid var(--terminal-text)',
+  background: isAnimatedIn ? 'var(--terminal-text)' : 'var(--terminal-bg)',
   opacity: isAnimatedOut ? 0.3 : 1,
-  transition: 'none',
-  '@media (max-width: 768px)': {
-    left: '30px',
-    transform: 'translateX(-50%)',
-    width: '60px',
-    height: '60px',
-    borderWidth: '3px',
+  transition: 'all 0.3s ease',
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    left: '24px',
+    width: '10px',
+    height: '10px',
   },
-  '@media (max-width: 480px)': {
-    left: '20px',
-    width: '40px',
-    height: '40px',
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    left: '16px',
+    width: '8px',
+    height: '8px',
   },
 }))
 
-const MarkerDot = styled(Box)({
-  width: '24px',
-  height: '24px',
-  background: 'var(--pixel-yellow)',
-  borderRadius: 0,
-  boxShadow: '0 0 10px var(--pixel-yellow)',
-  '@media (max-width: 768px)': {
-    width: '18px',
-    height: '18px',
-  },
-  '@media (max-width: 480px)': {
-    width: '12px',
-    height: '12px',
-  },
-})
-
 const ExperienceContent = styled(Box)<{ side: 'left' | 'right'; isAnimatedIn?: boolean; isAnimatedOut?: boolean }>(({ side, isAnimatedIn, isAnimatedOut }) => ({
-  background: 'var(--pixel-bg)',
-  padding: '2.5rem',
-  borderRadius: 0,
-  boxShadow: '8px 8px 0 var(--pixel-purple)',
-  border: '4px solid var(--pixel-cyan)',
-  transition: 'none',
+  background: 'var(--terminal-surface)',
+  padding: '1.5rem',
+  border: '1px solid var(--terminal-border)',
+  transition: 'all 0.2s ease',
   flex: 1,
   maxWidth: '500px',
   position: 'relative',
-  marginRight: side === 'left' ? '2rem' : 0,
-  marginLeft: side === 'right' ? '2rem' : 0,
+  marginRight: side === 'left' ? '1rem' : 0,
+  marginLeft: side === 'right' ? '1rem' : 0,
   transform: isAnimatedIn 
     ? 'translateX(0)' 
     : isAnimatedOut 
-      ? `translateX(${side === 'left' ? '-50px' : '50px'}) scale(0.9)` 
-      : `translateX(${side === 'left' ? '-30px' : '30px'})`,
+      ? `translateX(${side === 'left' ? '-20px' : '20px'})` 
+      : `translateX(${side === 'left' ? '-15px' : '15px'})`,
   opacity: isAnimatedOut ? 0 : 1,
   '&:hover': {
-    transform: 'translate(4px, 4px)',
-    boxShadow: '4px 4px 0 var(--pixel-purple)',
+    background: 'var(--terminal-bg)',
+    borderColor: 'var(--terminal-text)',
   },
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    ...(side === 'left' ? {
-      right: '-15px',
-      borderLeft: '15px solid var(--pixel-bg)',
-    } : {
-      left: '-15px',
-      borderRight: '15px solid var(--pixel-bg)',
-    }),
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: 0,
-    height: 0,
-    borderTop: '15px solid transparent',
-    borderBottom: '15px solid transparent',
-  },
-  '@media (max-width: 768px)': {
-    marginLeft: '1.5rem',
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    marginLeft: '1rem',
     marginRight: 0,
     maxWidth: 'none',
-    padding: '2rem',
-    transform: isAnimatedIn ? 'translateX(0) !important' : isAnimatedOut ? 'translateX(-20px) scale(0.95) !important' : 'translateX(-30px)',
-    '&::after': {
-      display: 'none',
-    },
+    padding: '1.25rem',
+    transform: isAnimatedIn ? 'translateX(0) !important' : isAnimatedOut ? 'translateX(-15px) !important' : 'translateX(-20px)',
   },
-  '@media (max-width: 480px)': {
-    marginLeft: '1rem',
-    padding: '1.5rem',
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    marginLeft: '0.75rem',
+    padding: '1rem',
   },
 }))
 
 const ExperienceHeader = styled(Box)({
-  marginBottom: '1.5rem',
+  marginBottom: '1rem',
 })
 
 const ExperienceTitle = styled(Typography)({
-  fontSize: '1.5rem',
-  fontWeight: 700,
-  color: 'var(--pixel-yellow)',
+  fontSize: '1.1rem',
+  fontWeight: 400,
+  color: 'var(--terminal-text)',
   marginBottom: '0.5rem',
-  letterSpacing: '1px',
-  textTransform: 'uppercase',
-  textShadow: '2px 2px 0 var(--pixel-purple)',
-  '@media (max-width: 768px)': {
-    fontSize: '1.3rem',
+  letterSpacing: '0.02em',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+
+  '&::before': {
+    content: '"> "',
+    color: 'var(--terminal-text-dim)',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    fontSize: '1rem',
   },
 })
 
 const ExperienceMeta = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '1rem',
-  fontSize: '0.9rem',
-  color: 'var(--pixel-light)',
-  '@media (max-width: 768px)': {
+  gap: '0.75rem',
+  fontSize: '0.875rem',
+  color: 'var(--terminal-text-dim)',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
     flexDirection: 'column',
-    gap: '0.5rem',
+    gap: '0.25rem',
   },
 })
 
 const Company = styled('span')({
-  fontWeight: 600,
-  color: 'var(--pixel-cyan)',
-  textTransform: 'uppercase',
+  fontWeight: 400,
+  color: 'var(--terminal-text)',
 })
 
 const Period = styled('span')({
-  background: 'var(--pixel-blue)',
-  color: 'var(--pixel-light)',
-  padding: '0.25rem 0.75rem',
-  borderRadius: 0,
-  fontSize: '0.8rem',
-  fontWeight: 600,
-  boxShadow: '2px 2px 0 var(--pixel-purple)',
-  border: '2px solid var(--pixel-cyan)',
+  color: 'var(--terminal-text-dim)',
+  fontSize: '0.875rem',
 })
 
 const Location = styled('span')({
-  '&::before': {
-    content: '"📍 "',
-    marginRight: '0.25rem',
-  },
+  color: 'var(--terminal-text-dim)',
 })
 
 const Achievements = styled('ul')({
   listStyle: 'none',
   padding: 0,
-  marginBottom: '1.5rem',
+  marginBottom: '1rem',
   '& li': {
-    padding: '0.75rem 0',
-    borderBottom: '2px solid var(--pixel-darker)',
-    color: 'var(--pixel-light)',
+    padding: '0.5rem 0',
+    color: 'var(--terminal-text-dim)',
     lineHeight: 1.6,
     position: 'relative',
-    paddingLeft: '1.5rem',
+    paddingLeft: '1rem',
+    fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+    fontSize: '0.875rem',
     '&:last-child': {
-      borderBottom: 'none',
+      paddingBottom: 0,
     },
     '&::before': {
-      content: '"▶"',
+      content: '"• "',
       position: 'absolute',
       left: 0,
-      color: 'var(--pixel-cyan)',
-      fontSize: '0.8rem',
+      color: 'var(--terminal-text)',
     },
   },
 })
 
 const Technologies = styled(Box)({
   '& h4': {
-    fontSize: '1rem',
-    fontWeight: 600,
-    color: 'var(--pixel-yellow)',
-    marginBottom: '0.75rem',
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
+    fontSize: '0.875rem',
+    fontWeight: 400,
+    color: 'var(--terminal-text)',
+    marginBottom: '0.5rem',
+    letterSpacing: '0.02em',
+    fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+    '&::before': {
+      content: '"[tech] "',
+      color: 'var(--terminal-text-dim)',
+    },
   },
 })
 
@@ -263,22 +229,21 @@ const TechTags = styled(Box)({
 })
 
 const TechTag = styled('span')({
-  color: 'var(--pixel-light) !important',
-  padding: '0.25rem 0.75rem',
-  border: '3px solid var(--pixel-blue)',
-  borderRadius: 0,
-  fontSize: '0.8rem',
-  fontWeight: 550,
-  background: 'var(--pixel-darker)',
-  transition: 'none',
-  textTransform: 'uppercase',
-  letterSpacing: '0.5px',
+  color: 'var(--terminal-text-dim)',
+  padding: '0.25rem 0.5rem',
+  border: '1px solid var(--terminal-border)',
+  fontSize: '0.75rem',
+  fontWeight: 400,
+  background: 'var(--terminal-bg)',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  transition: 'all 0.2s ease',
   '&:hover': {
-    background: 'var(--pixel-blue)',
-    color: 'var(--pixel-light) !important',
-    transform: 'translate(-2px, -2px)',
-    boxShadow: '4px 4px 0 var(--pixel-purple)',
-    borderColor: 'var(--pixel-cyan)',
+    background: 'var(--terminal-surface)',
+    borderColor: 'var(--terminal-text)',
+    color: 'var(--terminal-text)',
+  },
+  '@media (prefers-reduced-motion: reduce)': {
+    transition: 'none !important',
   },
 })
 
@@ -292,17 +257,9 @@ interface Experience {
   type: 'internship' | 'student-assistant' | 'full-time'
 }
 
-interface ExperienceProps {
-  unlockAchievement: (sectionId: string) => void;
-}
-
-const Experience = ({ unlockAchievement }: ExperienceProps) => {
+const Experience = () => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
   const [animationStates, setAnimationStates] = useState<{ [key: number]: 'in' | 'out' | 'none' }>({})
-  const sectionRef = useSectionVisibility({
-    threshold: 0.1,
-    onVisible: () => unlockAchievement('experience')
-  })
 
   useEffect(() => {
     // Check for reduced motion preference
@@ -397,22 +354,25 @@ const Experience = ({ unlockAchievement }: ExperienceProps) => {
   ]
 
   return (
-    <ExperienceSection id="experience" ref={sectionRef}>
+    <ExperienceSection id="experience">
       <Box className="container-fullwidth">
         <Typography 
           variant="h2"
           sx={{
             textAlign: 'center',
             mb: 4,
-            color: 'var(--pixel-yellow)',
-            fontSize: { xs: '2rem', md: '2.5rem' },
-            fontFamily: "'Courier New', monospace",
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            textShadow: '3px 3px 0 var(--pixel-purple)',
+            color: 'var(--terminal-text)',
+            fontSize: { xs: '1.5rem', md: '1.75rem' },
+            fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+            fontWeight: 400,
+            letterSpacing: '0.05em',
+            '&::before': {
+              content: '"$ "',
+              color: 'var(--terminal-text-dim)',
+            },
           }}
         >
-          Professional Experience
+          Work Experience
         </Typography>
         <ExperienceTimeline>
           {experiences.map((exp, index) => {
@@ -433,9 +393,7 @@ const Experience = ({ unlockAchievement }: ExperienceProps) => {
                 <ExperienceMarker 
                   isAnimatedIn={isAnimatedIn} 
                   isAnimatedOut={isAnimatedOut}
-                >
-                  <MarkerDot />
-                </ExperienceMarker>
+                />
                 
                 <ExperienceContent 
                   side={side}

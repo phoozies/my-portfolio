@@ -1,57 +1,56 @@
+import { useState } from 'react'
 import { Container, Box, Typography, Chip, Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
+import { Pagination, Navigation } from 'swiper/modules'
+import type { Swiper as SwiperType } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { useSectionVisibility } from '../hooks/useSectionVisibility'
+import 'swiper/css/navigation'
+import { BREAKPOINTS } from '../constants'
 
 const ProjectsSection = styled('section')({
-  background: 'var(--pixel-dark)',
-  color: 'var(--pixel-light)',
+  background: 'var(--terminal-bg)',
+  color: 'var(--terminal-text)',
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
-  padding: 0,
+  padding: '4rem 0',
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    padding: '3rem 0',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    padding: '2rem 0',
+  },
 })
 
 const ProjectsSwiper = styled(Swiper)({
-  padding: '0 0 2rem 0',
+  padding: '2rem 0',
   '& .swiper-pagination': {
     position: 'relative !important',
     marginTop: '2rem !important',
     bottom: 'auto !important',
   },
   '& .swiper-pagination-bullet': {
-    width: '12px !important',
-    height: '12px !important',
-    background: 'var(--pixel-bg) !important',
-    borderRadius: '0 !important',
-    margin: '0 6px !important',
-    cursor: 'pointer !important',
-    transition: 'none !important',
+    width: '8px !important',
+    height: '8px !important',
+    background: 'var(--terminal-grey-dark) !important',
+    borderRadius: '50% !important',
     opacity: '1 !important',
-    border: '3px solid var(--pixel-cyan) !important',
-    '&:hover': {
-      background: 'var(--pixel-green) !important',
-      transform: 'scale(1.1) !important',
-      border: '3px solid var(--pixel-green) !important',
-    },
+    transition: 'all 0.2s ease !important',
   },
   '& .swiper-pagination-bullet-active': {
-    background: 'var(--pixel-yellow) !important',
-    transform: 'scale(1.2) !important',
-    border: '3px solid var(--pixel-yellow) !important',
-    boxShadow: '0 0 10px var(--pixel-yellow)',
+    background: 'var(--terminal-text) !important',
   },
-  '@media (max-width: 768px)': {
-    '& .swiper-pagination-bullet': {
-      width: '12px !important',
-      height: '12px !important',
-      margin: '0 4px !important',
-    },
-    '& .swiper-pagination-bullet-active': {
-      transform: 'scale(1.2) !important',
+  '& .swiper-pagination-bullet:hover': {
+    background: 'var(--terminal-text) !important',
+  },
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    padding: '1rem 0',
+    '& .swiper-pagination': {
+      marginTop: '1rem !important',
     },
   },
   '@media (prefers-reduced-motion: reduce)': {
@@ -60,65 +59,69 @@ const ProjectsSwiper = styled(Swiper)({
     },
     '& .swiper-pagination-bullet, & .swiper-pagination-bullet-active': {
       transition: 'none !important',
-      transform: 'none !important',
     },
   },
 })
 
 const ProjectCard = styled(Box)({
-  background: 'var(--pixel-bg)',
-  padding: '1.5rem 2rem',
-  borderRadius: 0,
-  boxShadow: '8px 8px 0 var(--pixel-purple)',
-  border: '4px solid var(--pixel-cyan)',
-  transition: 'none',
-  maxHeight: '85vh',
+  background: 'var(--terminal-surface)',
+  padding: '2rem',
+  border: '1px solid var(--terminal-border)',
+  maxHeight: '75vh',
   display: 'flex',
   flexDirection: 'column',
-  willChange: 'transform',
   margin: '0 auto',
   maxWidth: '900px',
   overflowY: 'auto',
+  transition: 'all 0.2s ease',
+  
   '&:hover': {
-    transform: 'translate(4px, 4px)',
-    boxShadow: '4px 4px 0 var(--pixel-purple)',
+    background: 'var(--terminal-bg)',
+    borderColor: 'var(--terminal-text)',
   },
-  '@media (max-width: 599px)': {
-    padding: '1.25rem 1.25rem',
-    maxHeight: '70vh',
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    padding: '1.5rem',
+    maxHeight: '65vh',
   },
+  
   '@media (prefers-reduced-motion: reduce)': {
     transition: 'none !important',
-    '&:hover': {
-      transform: 'none !important',
-    },
   },
 })
 
 const ProjectTitle = styled(Typography)({
-  fontSize: '1.4rem',
-  fontWeight: 700,
-  color: 'var(--pixel-yellow)',
-  marginBottom: '1.5rem',
-  paddingBottom: '0.75rem',
-  borderBottom: '4px solid var(--pixel-cyan)',
+  fontSize: '1.1rem',
+  fontWeight: 400,
+  color: 'var(--terminal-text)',
+  marginBottom: '1rem',
+  paddingBottom: '0.5rem',
+  borderBottom: '1px solid var(--terminal-border)',
   lineHeight: 1.25,
   textAlign: 'center',
-  letterSpacing: '2px',
-  textTransform: 'uppercase',
-  textShadow: '2px 2px 0 var(--pixel-purple)',
-  '@media (max-width: 599px)': {
-    fontSize: '1.2rem',
+  letterSpacing: '0.05em',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+
+  '&::before': {
+    content: '"[project] "',
+    color: 'var(--terminal-text-dim)',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    fontSize: '1rem',
   },
 })
 
 const ProjectDescription = styled(Typography)({
-  color: 'var(--pixel-light)',
-  lineHeight: 1.55,
-  marginBottom: '1.25rem',
+  color: 'var(--terminal-text-dim)',
+  lineHeight: 1.6,
+  marginBottom: '1rem',
   textAlign: 'center',
-  '@media (max-width: 599px)': {
-    fontSize: '0.95rem',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  fontSize: '0.875rem',
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    fontSize: '0.8125rem',
   },
 })
 
@@ -126,7 +129,56 @@ const TechTags = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'center',
-  gap: '0.6rem',
+  gap: '0.5rem',
+})
+
+const NavButton = styled(Box)({
+  position: 'absolute',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  zIndex: 10,
+  width: '40px',
+  height: '40px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: 'var(--terminal-surface)',
+  border: '1px solid var(--terminal-border)',
+  color: 'var(--terminal-text)',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  fontSize: '1.2rem',
+  userSelect: 'none',
+  '&:hover': {
+    background: 'var(--terminal-bg)',
+    borderColor: 'var(--terminal-text)',
+    color: 'var(--terminal-text)',
+  },
+  '&.swiper-button-disabled': {
+    opacity: 0.3,
+    cursor: 'not-allowed',
+    pointerEvents: 'none',
+  },
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    width: '32px',
+    height: '32px',
+    fontSize: '1rem',
+  },
+})
+
+const PrevButton = styled(NavButton)({
+  left: '10px',
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    left: '5px',
+  },
+})
+
+const NextButton = styled(NavButton)({
+  right: '10px',
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    right: '5px',
+  },
 })
 
 interface Project {
@@ -138,18 +190,12 @@ interface Project {
   image?: string
 }
 
-interface ProjectsProps {
-  unlockAchievement: (sectionId: string) => void;
-}
+const Projects = () => {
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
 
-const Projects = ({ unlockAchievement }: ProjectsProps) => {
-  const sectionRef = useSectionVisibility({
-    threshold: 0.3,
-    onVisible: () => unlockAchievement('projects')
-  });
   const projects: Project[] = [
     {
-      title: "TechReady - Interview Prep 🏆",
+      title: "TechReady - Interview Prep",
       period: "OCT 2025 | K-State Hackathon 2025 Winner",
       description: "AI-powered mock interview platform with live transcription (Deepgram), speech synthesis (ElevenLabs), and LLM feedback (Gemini). Features modular API routes for proctoring, audio, and interview orchestration with Firebase authentication and storage. Includes technical prompt and feedback pipelines with schema validation and rate limiting.",
       technologies: ["Next.js", "Firebase", "Deepgram", "ElevenLabs", "Gemini API", "TypeScript"],
@@ -157,7 +203,7 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
       image: "./techready-screenshot.png"
     },
     {
-      title: "Meteor Madness 🏆",
+      title: "Meteor Madness",
       period: "OCT 2025 | NASA Space Apps Challenge 2025 Winner",
       description: "Interactive asteroid-impact simulator visualizing real-time planetary defense scenarios. Models impact physics (crater size, overpressure, blast radius) and mitigation strategies (kinetic impactor, gravity tractor) using live NASA NEO API data.",
       technologies: ["Next.js", "CesiumJS", "react-leaflet", "NASA NEO API", "TypeScript"],
@@ -174,7 +220,7 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
   ]
 
   return (
-    <ProjectsSection id="projects" ref={sectionRef}>
+    <ProjectsSection id="projects">
       <Container maxWidth="xl" sx={{ py: { xs: 6, md: 12 } }}>
         <Typography 
           variant="h2" 
@@ -182,35 +228,47 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
           sx={{ 
             textAlign: 'center',
             mb: 4,
-            color: 'var(--pixel-yellow)',
-            fontSize: { xs: '2rem', md: '2.5rem' },
-            textTransform: 'uppercase',
-            letterSpacing: '3px',
-            textShadow: '3px 3px 0 var(--pixel-purple)'
+            color: 'var(--terminal-text)',
+            fontSize: { xs: '1.5rem', md: '1.75rem' },
+            fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+            fontWeight: 400,
+            letterSpacing: '0.05em',
+            '&::before': {
+              content: '"$ "',
+              color: 'var(--terminal-text-dim)',
+            },
           }}
         >
-          Featured Projects
+          Projects
         </Typography>
         
-        <ProjectsSwiper
-          modules={[Pagination]}
-          spaceBetween={48}
-          slidesPerView={1}
-          pagination={{
-            clickable: true,
-          }}
-          loop={true}
-          breakpoints={{
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 40,
-            },
-            768: {
-              slidesPerView: 1,
-              spaceBetween: 48,
-            },
-          }}
-        >
+        <Box sx={{ position: 'relative' }}>
+          <PrevButton onClick={() => swiperInstance?.slidePrev()}>
+            ←
+          </PrevButton>
+          <NextButton onClick={() => swiperInstance?.slideNext()}>
+            →
+          </NextButton>
+          <ProjectsSwiper
+            modules={[Pagination, Navigation]}
+            spaceBetween={48}
+            slidesPerView={1}
+            pagination={{
+              clickable: true,
+            }}
+            loop={true}
+            onSwiper={setSwiperInstance}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 40,
+              },
+              768: {
+                slidesPerView: 1,
+                spaceBetween: 48,
+              },
+            }}
+          >
           {projects.map((project, index) => (
             <SwiperSlide key={index}>
               <ProjectCard
@@ -238,15 +296,13 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                     {project.image && (
                       <Box 
                         sx={{ 
-                          borderRadius: 0,
                           overflow: 'hidden',
-                          boxShadow: '4px 4px 0 var(--pixel-purple)',
-                          border: '4px solid var(--pixel-cyan)',
+                          border: '1px solid var(--terminal-border)',
                           flex: 1,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          backgroundColor: 'var(--pixel-darker)'
+                          backgroundColor: 'var(--terminal-bg)'
                         }}
                       >
                         <img 
@@ -264,33 +320,29 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                     {project.link && (
                       <Box sx={{ textAlign: 'center' }}>
                         <Button
-                          variant="contained"
+                          variant="outlined"
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
                           sx={{
-                            background: 'var(--pixel-blue)',
-                            color: 'var(--pixel-light)',
-                            px: 4,
-                            py: 1.25,
-                            borderRadius: 0,
-                            border: '4px solid var(--pixel-blue)',
-                            textTransform: 'uppercase',
-                            fontSize: { xs: '0.9rem', md: '1rem' },
-                            fontWeight: 700,
-                            letterSpacing: '1px',
-                            boxShadow: '6px 6px 0 var(--pixel-purple)',
-                            transition: 'none',
+                            background: 'transparent',
+                            color: 'var(--terminal-text)',
+                            px: 3,
+                            py: 1,
+                            border: '1px solid var(--terminal-border)',
+                            fontSize: { xs: '0.875rem', md: '0.95rem' },
+                            fontWeight: 400,
+                            letterSpacing: '0.02em',
+                            fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+                            transition: 'all 0.2s ease',
                             width: '100%',
                             '&:hover': {
-                              background: 'var(--pixel-cyan)',
-                              borderColor: 'var(--pixel-cyan)',
-                              transform: 'translate(2px, 2px)',
-                              boxShadow: '4px 4px 0 var(--pixel-purple)'
+                              background: 'var(--terminal-surface)',
+                              borderColor: 'var(--terminal-text)',
                             }
                           }}
                         >
-                          Visit Live Site →
+                          → view project
                         </Button>
                       </Box>
                     )}
@@ -317,14 +369,14 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                       component="span" 
                       className="project-period"
                       sx={{ 
-                        color: 'var(--pixel-cyan)',
-                        fontSize: { xs: '0.8rem', md: '0.9rem' },
+                        color: 'var(--terminal-text-dim)',
+                        fontSize: { xs: '0.75rem', md: '0.875rem' },
                         display: 'block',
                         textAlign: 'center',
                         mb: 2,
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        letterSpacing: '1px'
+                        fontWeight: 400,
+                        letterSpacing: '0.02em',
+                        fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace"
                       }}
                     >
                       {project.period}
@@ -345,16 +397,20 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                         variant="h4" 
                         component="h4"
                         sx={{ 
-                          fontSize: { xs: '0.95rem', md: '1rem' },
-                          mb: 2,
-                          color: 'var(--pixel-yellow)',
+                          fontSize: { xs: '0.875rem', md: '0.95rem' },
+                          mb: 1.5,
+                          color: 'var(--terminal-text)',
                           textAlign: 'center',
-                          fontWeight: 700,
-                          textTransform: 'uppercase',
-                          letterSpacing: '1px'
+                          fontWeight: 400,
+                          letterSpacing: '0.02em',
+                          fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+                          '&::before': {
+                            content: '"[tech] "',
+                            color: 'var(--terminal-text-dim)',
+                          },
                         }}
                       >
-                        Technologies:
+                        Stack
                       </Typography>
                       <TechTags>
                         {project.technologies.map((tech, techIndex) => (
@@ -363,21 +419,17 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
                             label={tech}
                             size="small"
                             sx={{
-                              backgroundColor: 'var(--pixel-darker)',
-                              color: 'var(--pixel-light)',
-                              border: '3px solid var(--pixel-blue)',
-                              borderRadius: 0,
-                              fontSize: { xs: '0.8rem', md: '0.9rem' },
-                              fontWeight: 550,
-                              transition: 'none',
-                              textTransform: 'uppercase',
-                              letterSpacing: '0.5px',
+                              backgroundColor: 'var(--terminal-bg)',
+                              color: 'var(--terminal-text-dim)',
+                              border: '1px solid var(--terminal-border)',
+                              fontSize: { xs: '0.75rem', md: '0.8125rem' },
+                              fontWeight: 400,
+                              fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+                              transition: 'all 0.2s ease',
                               '&:hover': {
-                                backgroundColor: 'var(--pixel-blue)',
-                                color: 'var(--pixel-light)',
-                                borderColor: 'var(--pixel-cyan)',
-                                transform: 'translate(-2px, -2px)',
-                                boxShadow: '4px 4px 0 var(--pixel-purple)'
+                                backgroundColor: 'var(--terminal-surface)',
+                                color: 'var(--terminal-text)',
+                                borderColor: 'var(--terminal-text)',
                               }
                             }}
                           />
@@ -390,6 +442,7 @@ const Projects = ({ unlockAchievement }: ProjectsProps) => {
             </SwiperSlide>
           ))}
         </ProjectsSwiper>
+        </Box>
       </Container>
     </ProjectsSection>
   )

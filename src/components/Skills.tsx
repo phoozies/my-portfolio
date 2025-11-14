@@ -1,24 +1,29 @@
-import { Container, Box, Typography, keyframes } from '@mui/material'
+import { useState } from 'react'
+import { Container, Box, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
+import { Pagination, Navigation } from 'swiper/modules'
+import type { Swiper as SwiperType } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { useSectionVisibility } from '../hooks/useSectionVisibility'
-
-const skillPulse = keyframes`
-  to {
-    transform: scale(1.05);
-  }
-`
+import 'swiper/css/navigation'
+import { BREAKPOINTS } from '../constants'
 
 const SkillsSection = styled('section')({
-  background: 'var(--pixel-dark)',
-  color: 'var(--pixel-light)',
+  background: 'var(--terminal-bg)',
+  color: 'var(--terminal-text)',
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
-  padding: 0,
+  padding: '4rem 0',
+
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
+    padding: '3rem 0',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    padding: '2rem 0',
+  },
 })
 
 const SkillsSwiper = styled(Swiper)({
@@ -29,24 +34,20 @@ const SkillsSwiper = styled(Swiper)({
     bottom: 'auto !important',
   },
   '& .swiper-pagination-bullet': {
-    width: '12px !important',
-    height: '12px !important',
-    background: 'var(--pixel-bg) !important',
-    borderRadius: '0 !important',
-    border: '2px solid var(--pixel-cyan) !important',
+    width: '8px !important',
+    height: '8px !important',
+    background: 'var(--terminal-grey-dark) !important',
+    borderRadius: '50% !important',
     opacity: '1 !important',
-    transition: 'all 0.3s ease !important',
+    transition: 'all 0.2s ease !important',
   },
   '& .swiper-pagination-bullet-active': {
-    background: 'var(--pixel-cyan) !important',
-    borderColor: 'var(--pixel-yellow) !important',
-    boxShadow: '0 0 10px var(--pixel-cyan) !important',
+    background: 'var(--terminal-text) !important',
   },
   '& .swiper-pagination-bullet:hover': {
-    background: 'var(--pixel-yellow) !important',
-    borderColor: 'var(--pixel-yellow) !important',
+    background: 'var(--terminal-text) !important',
   },
-  '@media (max-width: 768px)': {
+  [`@media (max-width: ${BREAKPOINTS.TABLET}px)`]: {
     padding: '1rem 0',
     '& .swiper-pagination': {
       marginTop: '1rem !important',
@@ -60,122 +61,97 @@ const SkillsSwiper = styled(Swiper)({
 })
 
 const SkillCategoryCard = styled(Box)({
-  background: 'var(--pixel-bg)',
-  padding: '2.5rem 2.75rem',
-  borderRadius: 0,
-  boxShadow: '8px 8px 0 var(--pixel-purple)',
-  border: '4px solid var(--pixel-cyan)',
-  minHeight: '70vh',
+  background: 'var(--terminal-surface)',
+  padding: '2rem',
+  border: '1px solid var(--terminal-border)',
+  minHeight: '60vh',
   display: 'flex',
   flexDirection: 'column',
-  willChange: 'transform',
   margin: '0 auto',
   maxWidth: '900px',
 
-  '&:hover': {
-    transform: 'translate(4px, 4px)',
-    boxShadow: '4px 4px 0 var(--pixel-purple)',
-  },
-
-  '@media (max-width: 599px)': {
-    padding: '2rem',
-  },
-
-  '@media (prefers-reduced-motion: reduce)': {
-    transition: 'none !important',
-    '&:hover': {
-      transform: 'none !important',
-    },
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    padding: '1.5rem',
+    minHeight: '50vh',
   },
 })
 
 const CategoryTitle = styled(Typography)({
-  fontSize: '1.4rem',
-  fontWeight: 700,
-  color: 'var(--pixel-yellow)',
+  fontSize: '1.25rem',
+  fontWeight: 400,
+  color: 'var(--terminal-text)',
   marginBottom: '1.5rem',
   paddingBottom: '0.75rem',
-  borderBottom: '4px solid var(--pixel-cyan)',
+  borderBottom: '1px solid var(--terminal-border)',
   textAlign: 'center',
-  letterSpacing: '2px',
-  textTransform: 'uppercase',
-  textShadow: '2px 2px 0 var(--pixel-purple)',
+  letterSpacing: '0.05em',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+
+  '&::before': {
+    content: '"# "',
+    color: 'var(--terminal-text-dim)',
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    fontSize: '1.1rem',
+  },
 })
 
 const CategorySkills = styled(Box)({
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
-  gap: '1rem',
+  gap: '0.75rem',
 })
 
 const SkillItem = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  padding: '1rem 1.5rem',
-  background: 'var(--pixel-darker)',
-  border: '3px solid var(--pixel-blue)',
-  borderRadius: 0,
-  gap: '1.5rem',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  padding: '0.75rem 1rem',
+  background: 'var(--terminal-bg)',
+  border: '1px solid var(--terminal-border)',
+  gap: '1rem',
+  transition: 'all 0.2s ease',
   cursor: 'pointer',
 
   '&:hover': {
-    background: 'var(--pixel-blue)',
-    borderColor: 'var(--pixel-cyan)',
-    transform: 'translateX(8px)',
-    boxShadow: '6px 6px 0 var(--pixel-purple)',
-    animation: `${skillPulse} 0.3s ease-out`,
-
-    '& .skill-logo': {
-      transform: 'scale(1.1) rotate(5deg)',
-    },
-
-    '& .skill-logo img': {
-      filter: 'brightness(1.2)',
-    },
+    background: 'var(--terminal-surface)',
+    borderColor: 'var(--terminal-text)',
 
     '& .skill-name': {
-      color: 'var(--pixel-yellow)',
-      textShadow: '2px 2px 0 var(--pixel-purple)',
+      color: 'var(--terminal-text)',
     },
+  },
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    padding: '0.5rem 0.75rem',
+    gap: '0.75rem',
   },
 
   '@media (prefers-reduced-motion: reduce)': {
     transition: 'none !important',
     '&:hover': {
       transform: 'none !important',
-      animation: 'none !important',
-    },
-    '& .skill-logo': {
-      transition: 'none !important',
-    },
-    '&:hover .skill-logo': {
-      transform: 'none !important',
     },
   },
 })
 
 const SkillLogo = styled(Box)({
-  width: '50px',
-  height: '50px',
+  width: '32px',
+  height: '32px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  transition: 'transform 0.3s ease',
 
   '& img': {
     width: '100%',
     height: '100%',
     objectFit: 'contain',
-    transition: 'filter 0.3s ease',
   },
 
-  '@media (prefers-reduced-motion: reduce)': {
-    transition: 'none !important',
-    '& img': {
-      transition: 'none !important',
-    },
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    width: '28px',
+    height: '28px',
   },
 })
 
@@ -186,14 +162,68 @@ const SkillInfo = styled(Box)({
 })
 
 const SkillName = styled(Typography)({
-  fontSize: '1.1rem',
-  fontWeight: 600,
-  color: 'var(--pixel-light)',
-  letterSpacing: '0.5px',
-  transition: 'all 0.3s ease',
+  fontSize: '0.95rem',
+  fontWeight: 400,
+  color: 'var(--terminal-text-dim)',
+  letterSpacing: '0.02em',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  transition: 'color 0.2s ease',
+
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    fontSize: '0.875rem',
+  },
 
   '@media (prefers-reduced-motion: reduce)': {
     transition: 'none !important',
+  },
+})
+
+const NavButton = styled(Box)({
+  position: 'absolute',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  zIndex: 10,
+  width: '40px',
+  height: '40px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: 'var(--terminal-surface)',
+  border: '1px solid var(--terminal-border)',
+  color: 'var(--terminal-text)',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  fontSize: '1.2rem',
+  userSelect: 'none',
+  '&:hover': {
+    background: 'var(--terminal-bg)',
+    borderColor: 'var(--terminal-text)',
+    color: 'var(--terminal-text)',
+  },
+  '&.swiper-button-disabled': {
+    opacity: 0.3,
+    cursor: 'not-allowed',
+    pointerEvents: 'none',
+  },
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    width: '32px',
+    height: '32px',
+    fontSize: '1rem',
+  },
+})
+
+const PrevButton = styled(NavButton)({
+  left: '10px',
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    left: '5px',
+  },
+})
+
+const NextButton = styled(NavButton)({
+  right: '10px',
+  [`@media (max-width: ${BREAKPOINTS.MOBILE}px)`]: {
+    right: '5px',
   },
 })
 
@@ -207,15 +237,9 @@ interface SkillCategory {
   skills: Skill[]
 }
 
-interface SkillsProps {
-  unlockAchievement: (sectionId: string) => void;
-}
+const Skills = () => {
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
 
-const Skills = ({ unlockAchievement }: SkillsProps) => {
-  const sectionRef = useSectionVisibility({
-    threshold: 0.3,
-    onVisible: () => unlockAchievement('skills')
-  });
   const skillCategories: SkillCategory[] = [
     {
       title: "Programming Languages",
@@ -280,44 +304,55 @@ const Skills = ({ unlockAchievement }: SkillsProps) => {
   ]
 
   return (
-    <SkillsSection id="skills" ref={sectionRef}>
-      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 12 } }}>
+    <SkillsSection id="skills">
+      <Container maxWidth="xl" sx={{ py: { xs: 4, md: 8 } }}>
         <Typography 
           variant="h2" 
           component="h2"
           sx={{ 
             textAlign: 'center',
             mb: 4,
-            color: 'var(--pixel-yellow)',
-            fontSize: { xs: '2rem', md: '2.5rem' },
-            fontFamily: "'Courier New', monospace",
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            textShadow: '3px 3px 0 var(--pixel-purple)',
+            color: 'var(--terminal-text)',
+            fontSize: { xs: '1.5rem', md: '1.75rem' },
+            fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+            fontWeight: 400,
+            letterSpacing: '0.05em',
+            '&::before': {
+              content: '"$ "',
+              color: 'var(--terminal-text-dim)',
+            },
           }}
         >
-          Skills & Technologies
+          Technical Skills
         </Typography>
         
-        <SkillsSwiper
-          modules={[Pagination]}
-          spaceBetween={48}
-          slidesPerView={1}
-          pagination={{
-            clickable: true,
-          }}
-          loop={true}
-          breakpoints={{
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 40,
-            },
-            768: {
-              slidesPerView: 1,
-              spaceBetween: 48,
-            },
-          }}
-        >
+        <Box sx={{ position: 'relative' }}>
+          <PrevButton onClick={() => swiperInstance?.slidePrev()}>
+            ←
+          </PrevButton>
+          <NextButton onClick={() => swiperInstance?.slideNext()}>
+            →
+          </NextButton>
+          <SkillsSwiper
+            modules={[Pagination, Navigation]}
+            spaceBetween={48}
+            slidesPerView={1}
+            pagination={{
+              clickable: true,
+            }}
+            loop={true}
+            onSwiper={setSwiperInstance}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 40,
+              },
+              768: {
+                slidesPerView: 1,
+                spaceBetween: 48,
+              },
+            }}
+          >
           {skillCategories.map((category, categoryIndex) => (
             <SwiperSlide key={categoryIndex}>
               <SkillCategoryCard>
@@ -357,6 +392,7 @@ const Skills = ({ unlockAchievement }: SkillsProps) => {
             </SwiperSlide>
           ))}
         </SkillsSwiper>
+        </Box>
       </Container>
     </SkillsSection>
   )

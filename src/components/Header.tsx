@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Box, keyframes } from '@mui/material'
+import { Box } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 interface HeaderProps {
@@ -12,43 +12,24 @@ interface NavItem {
   label: string
 }
 
-const slideDown = keyframes`
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`
-
-const pixelShake = keyframes`
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-2px, 2px); }
-  50% { transform: translate(2px, -2px); }
-  75% { transform: translate(-2px, -2px); }
-`
-
 const HeaderContainer = styled('header')<{ isScrolled: boolean }>(({ isScrolled }) => ({
   position: 'fixed',
   top: 0,
   left: 0,
   right: 0,
-  background: isScrolled ? 'var(--pixel-dark)' : 'var(--pixel-darker)',
+  background: 'var(--terminal-bg)',
   zIndex: 1000,
-  borderBottom: isScrolled ? '6px solid var(--pixel-pink)' : '6px solid var(--pixel-cyan)',
+  borderBottom: `1px solid ${isScrolled ? 'var(--terminal-text)' : 'var(--terminal-border)'}`,
   transform: 'translateY(0)',
-  animation: `${slideDown} 0.3s ease-out`,
-  boxShadow: isScrolled ? '0 6px 0 var(--pixel-purple)' : '0 4px 0 var(--pixel-purple)',
+  transition: 'border-color 0.2s ease',
 }))
 
 const ScrollProgressBar = styled(Box)({
   position: 'absolute',
   bottom: 0,
   left: 0,
-  height: '6px',
-  background: 'repeating-linear-gradient(90deg, var(--pixel-yellow) 0px, var(--pixel-yellow) 20px, var(--pixel-green) 20px, var(--pixel-green) 40px, var(--pixel-cyan) 40px, var(--pixel-cyan) 60px)',
+  height: '2px',
+  background: 'var(--terminal-text)',
   transition: 'width 0.05s linear',
 })
 
@@ -56,33 +37,35 @@ const HeaderInner = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '1rem 2rem 1rem 2rem',
+  padding: '1rem 2rem',
 
   '@media (max-width: 768px)': {
-    padding: '1rem',
+    padding: '0.75rem 1rem',
   },
 })
 
 const Logo = styled('div')({
-  fontFamily: "'Courier New', monospace",
-  fontSize: '1.5rem',
-  fontWeight: 700,
-  color: 'var(--pixel-yellow)',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  fontSize: '1rem',
+  fontWeight: 400,
+  color: 'var(--terminal-text)',
   cursor: 'pointer',
-  letterSpacing: '2px',
+  letterSpacing: '0.02em',
   flexShrink: 0,
-  textShadow: '3px 3px 0px var(--pixel-purple)',
-  textTransform: 'uppercase',
+
+  '&::before': {
+    content: '"$ "',
+    color: 'var(--terminal-text-dim)',
+  },
 
   '&:hover': {
-    color: 'var(--pixel-green)',
-    animation: `${pixelShake} 0.3s ease`,
+    color: 'var(--terminal-text)',
   },
 })
 
 const Nav = styled('nav')<{ isOpen: boolean }>(({ isOpen }) => ({
   display: 'flex',
-  gap: '2rem',
+  gap: '1.5rem',
   alignItems: 'center',
 
   '@media (max-width: 768px)': {
@@ -90,78 +73,61 @@ const Nav = styled('nav')<{ isOpen: boolean }>(({ isOpen }) => ({
     top: '100%',
     left: 0,
     right: 0,
-    background: 'linear-gradient(135deg, #0f0f0f 0%, #1a0f2e 100%)',
+    background: 'var(--terminal-bg)',
     flexDirection: 'column',
-    padding: '2rem',
-    gap: '1rem',
-    boxShadow: '0 5px 20px rgba(168, 85, 247, 0.3)',
-    border: '1px solid rgba(168, 85, 247, 0.2)',
+    padding: '1rem',
+    gap: '0.5rem',
+    borderBottom: '1px solid var(--terminal-border)',
     transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
     opacity: isOpen ? 1 : 0,
     visibility: isOpen ? 'visible' : 'hidden',
-    transition: 'all 0.3s ease',
+    transition: 'all 0.2s ease',
   },
 }))
 
 const NavLink = styled('a')<{ isActive: boolean }>(({ isActive }) => ({
   textDecoration: 'none',
-  color: isActive ? 'var(--pixel-yellow)' : 'var(--pixel-light)',
-  fontWeight: 700,
+  color: isActive ? 'var(--terminal-text)' : 'var(--terminal-text-dim)',
+  fontWeight: 400,
   position: 'relative',
-  padding: '0.5rem 1rem',
-  letterSpacing: '1px',
-  fontFamily: "'Courier New', monospace",
-  textTransform: 'uppercase',
-  fontSize: '0.9rem',
-  background: isActive ? 'var(--pixel-bg)' : 'transparent',
+  padding: '0.25rem 0.5rem',
+  letterSpacing: '0.02em',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  fontSize: '0.875rem',
+  borderBottom: isActive ? '1px solid var(--terminal-text)' : '1px solid transparent',
+  transition: 'all 0.2s ease',
 
   '&:hover': {
-    color: 'var(--pixel-cyan)',
-    background: 'var(--pixel-bg)',
+    color: 'var(--terminal-text)',
+    borderColor: 'var(--terminal-text)',
   },
 
-  '&::after': isActive ? {
-    content: '""',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: '4px',
-    background: 'var(--pixel-yellow)',
-    borderRadius: 0,
-  } : {},
-
   '@media (max-width: 768px)': {
-    fontSize: '1.1rem',
-    padding: '0.75rem 0',
+    fontSize: '0.95rem',
+    padding: '0.5rem 0',
   },
 }))
 
 const ResumeLink = styled('a')({
   textDecoration: 'none',
-  background: 'var(--pixel-green) !important',
-  color: 'var(--pixel-dark) !important',
-  padding: '0.5rem 1.25rem !important',
-  borderRadius: 0,
-  border: '4px solid var(--pixel-light) !important',
-  boxShadow: '4px 4px 0 var(--pixel-purple)',
-  fontWeight: '700 !important',
-  letterSpacing: '1px',
-  fontFamily: "'Courier New', monospace",
-  textTransform: 'uppercase',
-  fontSize: '0.9rem',
+  background: 'transparent',
+  color: 'var(--terminal-text)',
+  padding: '0.25rem 0.75rem',
+  border: '1px solid var(--terminal-border)',
+  fontWeight: 400,
+  letterSpacing: '0.02em',
+  fontFamily: "'Courier New', 'SF Mono', 'Monaco', monospace",
+  fontSize: '0.875rem',
+  transition: 'all 0.2s ease',
 
   '&:hover': {
-    background: 'var(--pixel-yellow) !important',
-    borderColor: 'var(--pixel-light) !important',
-    transform: 'translate(4px, 4px)',
-    boxShadow: '0 0 0 var(--pixel-purple)',
-    color: 'var(--pixel-dark) !important',
+    background: 'var(--terminal-surface)',
+    borderColor: 'var(--terminal-text)',
   },
 
   '@media (max-width: 768px)': {
-    fontSize: '1.1rem',
-    padding: '0.75rem 0 !important',
+    fontSize: '0.95rem',
+    padding: '0.5rem 0.75rem',
   },
 })
 
@@ -172,13 +138,12 @@ const MobileMenuButton = styled('button')({
   border: 'none',
   cursor: 'pointer',
   padding: '0.5rem',
-  gap: '4px',
+  gap: '3px',
 
   '& span': {
-    width: '25px',
-    height: '2px',
-    background: 'var(--pixel-light)',
-    borderRadius: 0,
+    width: '20px',
+    height: '1px',
+    background: 'var(--terminal-text)',
   },
 
   '@media (max-width: 768px)': {
@@ -228,7 +193,7 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
 
   const navItems: NavItem[] = [
     { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
+    { id: 'myinfo', label: 'My Info' },
     { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
@@ -260,12 +225,12 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
             </NavLink>
           ))}
           <ResumeLink
-            href={`${import.meta.env.BASE_URL}THINH_VO_RESUME.pdf`}
+            href="/THINH_VO_RESUME.pdf"
             download="THINH_VO_RESUME.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Resume
+            resume
           </ResumeLink>
         </Nav>
 

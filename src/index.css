@@ -1,26 +1,44 @@
 :root {
-  font-family: 'Courier New', 'Press Start 2P', monospace;
-  line-height: 1.5;
+  font-family: 'Courier New', 'SF Mono', 'Monaco', 'Consolas', monospace;
+  line-height: 1.6;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-  /* 8-Bit Retro Video Game Theme */
-  --pixel-blue: #5B6EE1;
-  --pixel-purple: #AC3232;
-  --pixel-pink: #D95763;
-  --pixel-orange: #F6AA61;
-  --pixel-yellow: #FBF236;
-  --pixel-green: #99E550;
-  --pixel-cyan: #5FCDE4;
-  --pixel-dark: #1A1C2C;
-  --pixel-darker: #0D0E14;
-  --pixel-light: #FFFFFF;
-  --pixel-grey: #6F6776;
-  --pixel-bg: #2D2E42;
-  --shadow-pixel: rgba(0, 0, 0, 0.5);
+  /* Terminal Theme - Clean & Minimal */
+  --terminal-bg: #0a0a0a;
+  --terminal-bg-alt: #111111;
+  --terminal-surface: #1a1a1a;
+  --terminal-border: #2a2a2a;
+  
+  --terminal-text: #00ff00;
+  --terminal-text-dim: #00aa00;
+  --terminal-text-bright: #00ff00;
+  --terminal-cursor: #00ff00;
+  
+  --terminal-white: #ffffff;
+  --terminal-grey: #888888;
+  --terminal-grey-dark: #444444;
+  
+  --terminal-success: #00ff00;
+  --terminal-error: #ff0000;
+  --terminal-warning: #ffaa00;
+  --terminal-info: #00aaff;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Breakpoints for media queries */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-large: 1200px;
 }
 
 * {
@@ -38,16 +56,16 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  font-family: 'Courier New', 'Press Start 2P', monospace;
+  font-family: 'Courier New', 'SF Mono', 'Monaco', 'Consolas', monospace;
   line-height: 1.6;
-  color: var(--pixel-light);
-  background-color: var(--pixel-dark);
-  cursor: none !important;
+  color: var(--terminal-text);
+  background-color: var(--terminal-bg);
+  cursor: default;
 }
 
 /* Show pointer cursor on interactive elements */
 button, a, input, textarea, select, .nav-link, .social-link, .contact-item {
-  cursor: pointer !important;
+  cursor: pointer;
 }
 
 #root {

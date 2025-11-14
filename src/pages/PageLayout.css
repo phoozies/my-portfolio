@@ -3,6 +3,8 @@
   background: var(--pixel-darker);
   overflow-y: auto;
   overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 .page-layout-fixed {

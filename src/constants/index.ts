@@ -1,13 +1,31 @@
 // Application-wide constants
 
+// Terminal Theme Colors
+export const TERMINAL_COLORS = {
+  BG: '#0a0a0a',
+  BG_ALT: '#111111',
+  SURFACE: '#1a1a1a',
+  BORDER: '#2a2a2a',
+  TEXT: '#00ff00',
+  TEXT_DIM: '#00aa00',
+  TEXT_BRIGHT: '#00ff00',
+  CURSOR: '#00ff00',
+  WHITE: '#ffffff',
+  GREY: '#888888',
+  GREY_DARK: '#444444',
+  SUCCESS: '#00ff00',
+  ERROR: '#ff0000',
+  WARNING: '#ffaa00',
+  INFO: '#00aaff',
+} as const
+
 // Animation speeds
 export const ANIMATION_SPEEDS = {
   TYPING_SPEED: 30,
   TYPING_DELAY: 500,
-  ACHIEVEMENT_DURATION: 4000,
-  ACHIEVEMENT_EXIT_DELAY: 500,
   CURSOR_BLINK: 500,
-  PACMAN_MOUTH_SPEED: 10,
+  FADE_IN: 300,
+  HOVER_TRANSITION: 200,
 } as const
 
 // Breakpoints
@@ -34,57 +52,10 @@ export const VISIBILITY_THRESHOLDS = {
   LENIENT: 0.1,
 } as const
 
-// PacMan game configuration
-export const PACMAN_CONFIG = {
-  SPAWN_INTERVAL: 800,
-  PIXEL_SIZE: 3,
-  GRID_SIZE: 14,
-  PELLET_PIXEL_SIZE: 3,
-  PELLET_GRID_SIZE: 3,
-  POWER_PELLET_GRID_SIZE: 6,
-  COLLISION_RADIUS: 42,
-} as const
-
-// Item types for PacMan game
-export const ITEM_TYPES = [
-  { type: 'pellet' as const, color: '#FBF236', size: 32, points: 10, weight: 50 },
-  { type: 'power-pellet' as const, color: '#99E550', size: 64, points: 50, weight: 15 },
-  { type: 'ghost' as const, color: '', size: 24, points: -50, weight: 15 },
-  { type: 'fruit' as const, color: '#F6AA61', size: 20, points: 100, weight: 20 },
-] as const
-
-// Ghost colors
-export const GHOST_COLORS = [
-  '#AC3232', 
-  '#FF8FA3', 
-  '#5FCDE4', 
-  '#F6AA61', 
-  '#D95763',
-  '#99E550', 
-  '#8B4789', 
-  '#FFD93D', 
-  '#00E8FC', 
-  '#FF6B9D', 
-] as const
-
-// Fruit types
-export const FRUIT_TYPES = [
-  { name: 'cherry', color: '#AC3232', secondaryColor: '#99E550' },
-  { name: 'strawberry', color: '#F6AA61', secondaryColor: '#99E550' },
-  { name: 'orange', color: '#F6AA61', secondaryColor: '#FFD93D' },
-  { name: 'apple', color: '#AC3232', secondaryColor: '#8B4789' },
-  { name: 'melon', color: '#99E550', secondaryColor: '#FFD93D' },
-  { name: 'bell', color: '#FFD93D', secondaryColor: '#F6AA61' },
-  { name: 'key', color: '#5FCDE4', secondaryColor: '#00E8FC' },
-] as const
-
-// Achievement storage key
-export const ACHIEVEMENTS_KEY = 'portfolio-achievements'
-
 // Routes
 export const ROUTES = {
   HOME: '/',
-  ABOUT: '/about',
+  MYINFO: '/myinfo',
   SKILLS: '/skills',
   EXPERIENCE: '/experience',
   PROJECTS: '/projects',
@@ -105,7 +76,7 @@ export const SOCIAL_LINKS = [
   },
   {
     name: 'Email',
-    url: 'mailto:tpvo.business@gmail.com',
+    url: 'tpvo.business@gmail.com',
     logo: './email-logo.svg',
   },
 ] as const
